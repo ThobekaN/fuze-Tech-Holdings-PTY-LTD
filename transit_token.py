@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# 🔄 DATA LAYER INTEGRATION LOOP
+# 🔄 AUTOMATED DATA LAYER INTEGRATION
 from database import MOCK_TRANSIT_TELEMETRY
 
 user_profile = st.session_state["user_data"]
@@ -11,6 +11,7 @@ st.title("🚌 LEGACY TRANSIT TOKEN — B2B TransitTech Platform")
 st.markdown(f"### *Multi-Tenant Transit Access Stream — Client Node: {active_id}*")
 st.divider()
 
+# Pull only the authenticated client's isolated transit data slice
 client_transit_logs = MOCK_TRANSIT_TELEMETRY.get(active_id, [])
 df_transit = pd.DataFrame(client_transit_logs)
 
@@ -33,7 +34,7 @@ with col_left:
     if simulate_screenshot_fraud and len(df_transit) > 0:
         new_scan = {"Scan_ID": "SCN-704", "Student_Staff_ID": "WITS-31185", "Transit_Route": "Main Campus -> Wits Junction", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 245, "Gate_Action": "CRITICAL ERROR - EXPIRED TOKEN"}
         df_transit = pd.concat([df_transit, pd.DataFrame([new_scan])], ignore_index=True)
-        st.error("🚨 CRITICAL ACCESS ALERT: Scan SCN-704 presented a static barcode token older than the 30-second rotation window! System flags screenshot fraud and locked the door turnstile.")
+        st.error("🚨 CRITICAL ACCESS ALERT: Scan SCN-704 presented a static barcode token older than the 30-second rotation window! System flags screenshot fraud and locked the door.")
     st.dataframe(df_transit, use_container_width=True, hide_index=True)
 
 with col_right:
