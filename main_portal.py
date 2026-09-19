@@ -1,14 +1,16 @@
 import streamlit as st
 import pandas as pd
+import random
 import time
+from datetime import datetime
 
 # 🔄 GLOBAL DATA LAYER IMPORT
 import database
 
-# Global Framework Page Configurations
+# 1. Global Framework Page Configurations
 st.set_page_config(page_title="Fuze Tech Holdings - Portal Gateway", layout="wide")
 
-# 🔐 STATE ENGINE ARCHITECTURE (Initializes data records inside active browser memory)
+# 2. 🔐 STATE ENGINE ARCHITECTURE (Initializes data records inside active browser memory)
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 if "user_data" not in st.session_state:
@@ -28,7 +30,7 @@ def handle_logout():
     st.session_state["user_data"] = None
     st.rerun()
 
-# --- VIEW 1: EXECUTIVE HOME DIRECTORY PANEL RENDER FUNCTION ---
+# 3. --- VIEW 1: EXECUTIVE HOME DIRECTORY PANEL RENDER FUNCTION ---
 def render_home_portal():
     user_profile = st.session_state["user_data"]
     active_id = user_profile["client_id"]
@@ -37,10 +39,11 @@ def render_home_portal():
     st.markdown("### *Central Infrastructure Control Center — Multi-Tenant Operating Hub*")
     st.divider()
     
+    # Session Status Validation Alert Bar
     if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile.get("is_cybertech_active", False)]):
         st.success(f"🔓 **Active Database Session Token Verified.** Custom permission matrix mapped to: **{user_profile['account_name']}**.")
     else:
-        st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` carries no active product tier licenses. Analytics routes are locked.")
+        st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` carries no active product tier licenses. All analytics sidebar routes are dynamically hidden.")
     
     # Portfolio Infrastructure Overview Data Metrics Block
     st.markdown("#### 📊 Real-Time Monitored Infrastructure Footprint")
@@ -56,15 +59,15 @@ def render_home_portal():
         
     st.divider()
     
-    # 🚀 REAL-WORLD API HANDSHAKE WORKSPACE BOARDS
+    # 🚀 SUPABASE AUTOMATED API HANDSHAKE TILES
     st.markdown("#### 🏢 Unified Platform Ecosystem & Subscription Status")
-    st.info("💡 *Live Demo Instructions:* Click an unsubscribed free trial module below. Paste the secure tracking provider API token from the hint box to simulate a real-world JSON telemetry fetch loop.")
+    st.info("💡 *Live Demo Instructions:* Click an unsubscribed free trial module below. Paste the secure tracking provider API token from the hint box to simulate a real-world Supabase JSON fetch and write loop.")
     st.write("")
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        # 🚚 1. LOGTECH AUTOMATED API ONBOARDING TILES
+        # 🚚 1. LOGTECH AUTOMATED API ONBOARDING CARD (SUPABASE DEMO)
         with st.container(border=True):
             st.markdown("##### 🚚 Legacy Freight Lines (LogTech)")
             st.markdown("*Automated 2026 BURS custom clearance checks and real-time fuel-siphoning derivative analysis.*")
@@ -74,26 +77,43 @@ def render_home_portal():
                 st.error("🔴 License Status: Unsubscribed")
                 with st.popover("🚀 Connect Third-Party Telematics API"):
                     st.markdown("### 📡 API Token Gateway Handshake")
-                    st.caption("Hint: Paste `cartrack_oauth2_token_881` to initiate automated json fetch.")
+                    st.caption("Presentation Hint: Paste `cartrack_oauth2_token_881` into the field below.")
                     input_token = st.text_input("Enter Telematics Provider Read-Token ID", key="tk_logtech")
                     
                     if st.button("Establish API Loop Link", key="btn_connect_logtech"):
                         if input_token in database.REMOTE_TRACKING_SERVERS_JSON:
-                            with st.spinner("Executing secure handshake... Fetching remote hardware JSON arrays..."):
-                                time.sleep(1.5) # Simulates network latency
                             
-                            # Real-World Simulation Loop: Grabs JSON dictionary array and writes straight to memory
+                            # LIVE SUPABASE LOG CONSOLE ANIMATION
+                            log_placeholder = st.empty()
+                            with log_placeholder.container():
+                                st.code("🔍 Initializing client handshake routing...", language="sql")
+                                time.sleep(0.5)
+                                st.code("⚡ Access token validated. Requesting raw telematics metadata payload...", language="sql")
+                                time.sleep(0.6)
+                                st.code("📦 JSON payload received from remote server tracking endpoints...", language="sql")
+                                time.sleep(0.5)
+                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
+                                time.sleep(0.4)
+                                st.code(f"📝 INSERT INTO vehicles (client_id, registration, driver, route) VALUES ('{active_id}', ...);", language="sql")
+                                time.sleep(0.5)
+                                st.code("✅ TRANSACTION COMMITTED. Supabase cache tables synchronized.", language="sql")
+                                time.sleep(0.4)
+                            
+                            log_placeholder.empty() # Clear log to reveal success frame
+                            
+                            # Real-World Simulation Loop: Grabs JSON data block and writes to memory state
                             fetched_json = database.REMOTE_TRACKING_SERVERS_JSON[input_token]
                             st.session_state["DB_LOGTECH"][active_id] = fetched_json
-                            st.session_state["user_data"]["is_logtech_active"] = True
                             
+                            # Mutate active user token state metrics
+                            st.session_state["user_data"]["is_logtech_active"] = True
                             for record in st.session_state["DB_CLIENTS"]:
                                 if record["client_id"] == active_id:
                                     record["is_logtech_active"] = True
                                     break
                                     
                             st.balloons()
-                            st.success("API Link Established! 3 Trucks successfully mapped via telemetry stream in 1.5s with zero manual input.")
+                            st.success("Supabase Link Secure! 3 Trucks successfully mapped via telemetry stream into your PostgreSQL instance in 2.9s.")
                             st.rerun()
                         else:
                             st.error("Connection Failed: Invalid or unauthorized API token string footprint.")
@@ -108,13 +128,13 @@ def render_home_portal():
             else:
                 st.error("🔴 License Status: Unsubscribed")
                 with st.popover("🚀 Connect Transit API"):
-                    if st.button("Link Student Portal Gateway", key="btn_confirm_transit"):
+                    if st.button("Establish Campus Network API Link", key="btn_confirm_transit"):
                         st.session_state["user_data"]["is_transittech_active"] = True
                         st.balloons()
                         st.rerun()
 
     with col2:
-        # ⚡ 2. GRIDTECH AUTOMATED API ONBOARDING TILES
+        # ⚡ 2. GRIDTECH AUTOMATED API ONBOARDING CARD (SUPABASE DEMO)
         with st.container(border=True):
             st.markdown("##### ⚡ Legacy Utility Labs (GridTech)")
             st.markdown("*Cross-referencing smart meters against sectional line current transformers to identify grid bypass fraud.*")
@@ -124,34 +144,50 @@ def render_home_portal():
                 st.error("🔴 License Status: Unsubscribed")
                 with st.popover("🚀 Connect Municipal Smart Grid API"):
                     st.markdown("### 📡 Municipal Grid Handshake Console")
-                    st.caption("Hint: Paste `city_power_grid_key_442` to pull local substation datasets.")
+                    st.caption("Presentation Hint: Paste `city_power_grid_key_442` into the field below.")
                     input_grid_token = st.text_input("Enter Smart Grid API Key", key="tk_grid")
                     
                     if st.button("Establish Grid Handshake Link", key="btn_connect_gridtech"):
                         if input_grid_token in database.REMOTE_MUNICIPAL_GRID_JSON:
-                            with st.spinner("Connecting municipal endpoints... Syncing transformer telemetry..."):
-                                time.sleep(1.5)
                             
-                            fetched_grid_json = database.REMOTE_MUNICIPAL_GRID_JSON[input_grid_token]
-                            st.session_state["DB_GRIDTECH"][active_id] = fetched_grid_json
-                            st.session_state["user_data"]["is_gridtech_active"] = True
+                            # LIVE SUPABASE LOG CONSOLE ANIMATION
+                            log_grid_placeholder = st.empty()
+                            with log_grid_placeholder.container():
+                                st.code("🔍 Resolving municipal current grid gateway address...", language="sql")
+                                time.sleep(0.5)
+                                st.code("📦 Fetching live sectional line transformer load objects...", language="sql")
+                                time.sleep(0.6)
+                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
+                                time.sleep(0.4)
+                                st.code(f"📝 INSERT INTO smart_meters (client_id, meter_id, location) VALUES ('{active_id}', ...);", language="sql")
+                                time.sleep(0.5)
+                                st.code("✅ TRANSACTION COMMITTED. Supabase database tables synchronized.", language="sql")
+                                time.sleep(0.4)
                             
-                            for record in st.session_state["DB_CLIENTS"]:
-                                if record["client_id"] == active_id:
-                                    record["is_gridtech_active"] = True
-                                    break
-                                    
-                            st.balloons()
-                            st.success("Grid Connection Secure! 3 Sectional meters balanced and live mapped.")
-                            st.rerun()
-                        else:
-                            st.error("Connection Failed: Remote utility endpoint handshake rejected.")
-        st.write("") 
+                            log_grid_placeholder.empty()
+                            
+                            # Save records dynamically to active memory array
+                        fetched_grid_json = database.REMOTE_MUNICIPAL_GRID_JSON[input_grid_token]
+                        st.session_state["DB_GRIDTECH"][active_id] = fetched_grid_json
+                        st.session_state["user_data"]["is_gridtech_active"] = True
+                        
+                        for record in st.session_state["DB_CLIENTS"]:
+                            if record["client_id"] == active_id:
+                                record["is_gridtech_active"] = True
+                                break
+                                
+                        st.balloons()
+                        st.success("Supabase Link Secure! 3 Sectional meters balanced and live mapped.")
+                        st.rerun()
+                    else:
+                        st.error("Connection Failed: Remote utility endpoint handshake rejected.")
+                        
+        st.write("")
         
         # 🏥 5. HEALTHTECH TILES
         with st.container(border=True):
             st.markdown("##### 🏥 Legacy Cold Chain (HealthTech)")
-            st.markdown("*Wireless temperature sensor analytics and predictive trajectory tracking inside clinical fridges.*")
+            st.markdown("Wireless temperature sensor analytics and predictive trajectory tracking inside clinical fridges.")
             if user_profile.get("is_healthtech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
@@ -166,7 +202,7 @@ def render_home_portal():
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
         with st.container(border=True):
             st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
-            st.markdown("*Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.*")
+            st.markdown("Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.")
             if user_profile.get("is_cybertech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
@@ -174,7 +210,10 @@ def render_home_portal():
                 with st.popover("🚀 Link CyberTech API Gateway"):
                     if st.button("Connect Application Checkout SDK", key="btn_confirm_cybertech"):
                         st.session_state["user_data"]["is_cybertech_active"] = True
+                        st.balloons()
                         st.rerun()
+
+# 4. --- CONTEXT CONDITIONAL CONTROL INTERFACE REGISTRY ---
 if not st.session_state["authenticated"]:
     st.title("🔒 FUZE TECH HOLDINGS — Secure Login Gateway")
     st.markdown("### Enterprise Multi-Tenant Infrastructure Portal")
@@ -219,25 +258,24 @@ else:
     navigation_pool = [home_page]
     
     if user_profile["is_logtech_active"]:
-        logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+        logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines", icon="🚚")
         navigation_pool.append(logtech_page)
         
     if user_profile["is_gridtech_active"]:
-        gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+        gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs", icon="⚡")
         navigation_pool.append(gridtech_page)
         
     if user_profile.get("is_cybertech_active", False):
-        cybertech_page = st.Page("sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
+        cybertech_page = st.Page("views/sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
         navigation_pool.append(cybertech_page)
         
     if user_profile.get("is_transittech_active", False):
-        transittech_page = st.Page("transit_token.py", title="Legacy Transit Token", icon="🚌")
+        transittech_page = st.Page("views/transit_token.py", title="Legacy Transit Token", icon="🚌")
         navigation_pool.append(transittech_page)
         
     if user_profile.get("is_healthtech_active", False):
-        healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
+        healthtech_page = st.Page("views/cold_chain.py", title="Legacy Cold Chain", icon="🏥")
         navigation_pool.append(healthtech_page)
         
-nav = st.navigation(navigation_pool)
-nav.run()
-
+    nav = st.navigation(navigation_pool)
+    nav.run()
