@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# 🔄 DATA LAYER INTEGRATION LOOP
-from database import MOCK_GRID_TELEMETRY
+client_meters = st.session_state["DB_GRIDTECH"].get(active_id, [])
 
 # Pull the globally verified tenant token straight from session memory
 user_profile = st.session_state["user_data"]
