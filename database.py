@@ -11,7 +11,8 @@ MOCK_CLIENTS_DB = [
         "account_name": "Prospective Client (Lead-Tier Account)",
         "client_id": "CLIENT-000",
         "is_logtech_active": False,
-        "is_gridtech_active": False
+        "is_gridtech_active": False,
+        "is_cybertech_active": False
     },
     {
         "email": "operations@supergroup.co.za",
@@ -19,7 +20,8 @@ MOCK_CLIENTS_DB = [
         "account_name": "Super Group Logistics",
         "client_id": "CLIENT-881",
         "is_logtech_active": True,
-        "is_gridtech_active": False
+        "is_gridtech_active": False,
+        "is_cybertech_active": False
     },
     {
         "email": "director@imperial.co.za",
@@ -27,7 +29,8 @@ MOCK_CLIENTS_DB = [
         "account_name": "Imperial Logistics Group",
         "client_id": "CLIENT-442",
         "is_logtech_active": True,
-        "is_gridtech_active": True
+        "is_gridtech_active": True,
+        "is_cybertech_active": True  # CyberTech Enabled
     }
 ]
 
@@ -50,5 +53,14 @@ MOCK_GRID_TELEMETRY = {
         {"Meter_ID": "MTR-801", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
         {"Meter_ID": "MTR-802", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
         {"Meter_ID": "MTR-803", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
+    ]
+}
+
+# 🛡️ CYBERTECH PROMO TRANSACTION REGISTRY (Gated by client_id)
+MOCK_CYBER_TELEMETRY = {
+    "CLIENT-442": [
+        {"Transaction_ID": "TXN-901", "User_Alias": "new_user_jhb", "Claimed_Email": "thabo.m@gmail.com", "Device_Hardware_Fingerprint": "HW-UUID-4401", "Promo_Code": "FIRST100", "Evaluation_Status": "APPROVED"},
+        {"Transaction_ID": "TXN-902", "User_Alias": "kfc_lover_22", "Claimed_Email": "lindiwe.k@outlook.com", "Device_Hardware_Fingerprint": "HW-UUID-8892", "Promo_Code": "EATSNEW50", "Evaluation_Status": "APPROVED"},
+        {"Transaction_ID": "TXN-903", "User_Alias": "disposable_acc_7", "Claimed_Email": "x7291@tempmail.io", "Device_Hardware_Fingerprint": "HW-UUID-1105", "Promo_Code": "FIRST100", "Evaluation_Status": "TRIGGERED COORD CLUSTER"}
     ]
 }
