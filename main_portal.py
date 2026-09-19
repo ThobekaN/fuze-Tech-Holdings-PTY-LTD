@@ -23,7 +23,7 @@ if not st.session_state["authenticated"]:
     st.divider()
     
     st.info("""💡 **Demo Instruction Panel for the Tshimologong Selectors:**
-- **To test an Unsubscribed Lead (Marketplace/30-Day Offer):** `lead@fuzetech.co.za` (Password: `password123`)
+- **To test an Unsubscribed Lead (Marketplace/All Trials Open):** `lead@fuzetech.co.za` (Password: `password123`)
 - **To test Subscribed Client A (Super Group Logistics):** `operations@supergroup.co.za` (Password: `superfleet2026`)
 - **To test Subscribed Client B (Imperial Group — FULL ENTERPRISE SUITE):** `director@imperial.co.za` (Password: `enterpriseultra`)""")
     
@@ -57,23 +57,20 @@ else:
         handle_logout()
     st.sidebar.divider()
     
+    # --- INTERFACE WORKSPACE 1: EXECUTIVE HOME DIRECTORY PANEL ---
     def render_home_portal():
         st.title("🛡️ FUZE TECH HOLDINGS — Gateway Portal")
         st.markdown("### *Central Infrastructure Control Center — Multi-Tenant Operating Hub*")
         st.divider()
         
+        # General Status Alert Strip
         if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile["is_cybertech_active"], user_profile["is_transittech_active"], user_profile["is_healthtech_active"]]):
-            st.success(f"🔓 **Active Database Session Token Verified.** Mapped to: **{user_profile['account_name']}**.")
+            st.success(f"🔓 **Active Database Session Token Verified.** Custom permission matrix mapped to: **{user_profile['account_name']}**.")
         else:
-            st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` does not carry an authorized runtime software license.")
-            with st.container(border=True):
-                st.markdown("### 🚀 Initialize Your 30-Day Free Trial Subscription")
-                st.markdown("Deploy our automated stream-processing algorithms over your assets for 30 days risk-free.")
-                if st.button("Activate 30-Day Free Trial Package on Your Tenant Token"):
-                    st.balloons()
-            st.divider()
+            st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` carries no active product tier licenses. All analytics sidebar routes are dynamically hidden.")
         
-        st.markdown("#### 📊 Real-Time Node Telematics Overview")
+        # Portfolio Infrastructure Overview Data Metrics Block
+        st.markdown("#### 📊 Real-Time Monitored Infrastructure Footprint")
         kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
         with kpi_col1:
             truck_count = len(MOCK_FLEET_TELEMETRY.get(active_id, []))
@@ -82,8 +79,84 @@ else:
             meter_count = len(MOCK_GRID_TELEMETRY.get(active_id, []))
             st.metric(label="⚡ Monitored Grid Nodes", value=f"{meter_count} Smart Meters" if user_profile["is_gridtech_active"] else "0 Smart Meters Connected")
         with kpi_col3:
-            transit_count = len(MOCK_TRANSIT_TELEMETRY.get(active_id, []))
-            st.metric(label="🚌 Fleet Scanner Modules", value=f"{transit_count} Busses Active" if user_profile["is_transittech_active"] else "0 Busses Active")
+            st.metric(label="🛡️ Pipeline Security Perimeter", value="Active", delta="Multi-Tenant Row Isolation Intact")
+            
+        st.divider()
+        
+        # 🚀 30-DAY FREE TRIAL DYNAMIC SUBSCRIPTION WORKSPACE BOARDS
+        st.markdown("#### 🏢 Unified Platform Ecosystem & Subscription Status")
+        st.info("💡 *How it works:* Subscribed modules unlock secure data visualization paths in your sidebar. Unsubscribed modules dynamically render a zero-risk 30-Day Free Trial activation module right below.")
+        st.write("")
+        
+        # Grid Matrix Layout for all 5 Software Verticals
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            # 1. LOGTECH TILES
+            with st.container(border=True):
+                st.markdown("##### 🚚 Legacy Freight Lines (LogTech)")
+                st.markdown("*Cross-border telematics, siphoning engines, and 2026 BURS custom declaration automation.*")
+                if user_profile["is_logtech_active"]:
+                    st.success("🟢 Active Subscription Billed")
+                else:
+                    st.error("🔴 License Status: Unsubscribed")
+                    if st.button("🚀 Activate 30-Day Free Trial", key="trial_logtech"):
+                        st.balloons()
+                        st.success("LogTech Pipeline Active! Refreshing network keys...")
+            
+            st.write("") # Layout spacer element
+            
+            # 4. TRANSITTECH TILES
+            with st.container(border=True):
+                st.markdown("##### 🚌 Legacy Transit Token (TransitTech)")
+                st.markdown("*Shuttle access management using strict anti-passback rules and 30s rotating tokens.*")
+                if user_profile.get("is_transittech_active", False):
+                    st.success("🟢 Active Subscription Billed")
+                else:
+                    st.error("🔴 License Status: Unsubscribed")
+                    if st.button("🚀 Activate 30-Day Free Trial", key="trial_transit"):
+                        st.balloons()
+                        st.success("TransitTech Pipeline Active! Syncing scanner nodes...")
+
+        with col2:
+            # 2. GRIDTECH TILES
+            with st.container(border=True):
+                st.markdown("##### ⚡ Legacy Utility Labs (GridTech)")
+                st.markdown("*Cross-referencing smart meters against sectional line current transformers to identify grid bypass fraud.*")
+                if user_profile["is_gridtech_active"]:
+                    st.success("🟢 Active Subscription Billed")
+                else:
+                    st.error("🔴 License Status: Unsubscribed")
+                    if st.button("🚀 Activate 30-Day Free Trial", key="trial_gridtech"):
+                        st.balloons()
+                        st.success("GridTech Pipeline Active! Syncing transformer metrics...")
+            
+            st.write("") # Layout spacer element
+            
+            # 5. HEALTHTECH TILES
+            with st.container(border=True):
+                st.markdown("##### 🏥 Legacy Cold Chain (HealthTech)")
+                st.markdown("*Wireless temperature sensor analytics and predictive trajectory tracking inside clinical fridges.*")
+                if user_profile.get("is_healthtech_active", False):
+                    st.success("🟢 Active Subscription Billed")
+                else:
+                    st.error("🔴 License Status: Unsubscribed")
+                    if st.button("🚀 Activate 30-Day Free Trial", key="trial_health"):
+                        st.balloons()
+                        st.success("HealthTech Pipeline Active! Initializing thermal alarms...")
+
+        with col3:
+            # 3. CYBERTECH TILES
+            with st.container(border=True):
+                st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
+                st.markdown("*Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.*")
+                if user_profile.get("is_cybertech_active", False):
+                    st.success("🟢 Active Subscription Billed")
+                else:
+                    st.error("🔴 License Status: Unsubscribed")
+                    if st.button("🚀 Activate 30-Day Free Trial", key="trial_cybertech"):
+                        st.balloons()
+                        st.success("CyberTech Pipeline Active! Generating secure API tokens...")
 
     # --- 🛠️ AUTOMATED NAVIGATION MANAGER MAPS ---
     home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
@@ -97,15 +170,15 @@ else:
         gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
         navigation_pool.append(gridtech_page)
 
-    if user_profile["is_cybertech_active"]:
+    if user_profile.get("is_cybertech_active", False):
         cybertech_page = st.Page("sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
         navigation_pool.append(cybertech_page)
 
-    if user_profile["is_transittech_active"]:
+    if user_profile.get("is_transittech_active", False):
         transittech_page = st.Page("transit_token.py", title="Legacy Transit Token", icon="🚌")
         navigation_pool.append(transittech_page)
 
-    if user_profile["is_healthtech_active"]:
+    if user_profile.get("is_healthtech_active", False):
         healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
         navigation_pool.append(healthtech_page)
         
