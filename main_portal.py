@@ -170,3 +170,65 @@ else:
                             for i in range(int(meter_count)):
                                 generated_meters.append({
                                     "Meter_ID": f"MTR-{random.randint(500, 999)}",
+                                    "Property_Fund": property_name,
+                                    "Metered_Usage_kW": float(random.choice([0.0, 1.2, 4.5, 8.9])),
+                                    "Substation_Line_Current_Amps": round(random.uniform(5.0, 50.0), 1),
+                                    "System_Status": random.choice(["NORMAL", "NORMAL", "SUSPECTED BYPASS"])})
+                                MOCK_GRID_TELEMETRY[active_id] = generated_metersst.session_state["user_data"]
+                                ["is_gridtech_active"] = Truest.balloons()
+                                st.success("Database linked! GridTech pipeline unlocked.")
+                                st.button("Reload Workspace Console")
+            st.write("")
+                                
+            # 🏥 5. HEALTHTECH TILES
+            with st.container(border=True):
+                st.markdown("##### 🏥 Legacy Cold Chain (HealthTech)")
+                st.markdown("Wireless temperature sensor analytics and predictive trajectory tracking inside clinical fridges.")
+                if user_profile.get("is_healthtech_active", False):
+                    st.success("🟢 Active Subscription Billed")
+                else:
+                    st.error("🔴 License Status: Unsubscribed")
+                    with st.popover("🚀 Start 30-Day Free Trial"):
+                        if st.button("Initialize Thermal Probe Matrix", key="btn_confirm_health"):
+                            st.session_state["user_data"]
+                            ["is_healthtech_active"] = Truest.balloons()
+                            st.rerun()
+        with col3:
+            # 🛡️ 3. CYBERTECH TILESwith 
+            st.container(border=True):
+            st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
+            st.markdown("Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.")
+            if user_profile.get("is_cybertech_active", False):
+                st.success("🟢 Active Subscription Billed")
+            else:
+                st.error("🔴 License Status: Unsubscribed")
+                with st.popover("🚀 Start 30-Day Free Trial"):
+                    if st.button("Link Vetting API Endpoints", key="btn_confirm_cybertech"):
+                        st.session_state["user_data"]["is_cybertech_active"] = Truest.balloons()
+                        st.rerun()
+                        
+# --- 🛠️ AUTOMATED NAVIGATION MANAGER MAPS ---
+home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
+navigation_pool = [home_page]
+if user_profile["is_logtech_active"]:
+    logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+    navigation_pool.append(logtech_page)
+    
+if user_profile["is_gridtech_active"]:
+    gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+    navigation_pool.append(gridtech_page)
+    
+if user_profile.get("is_cybertech_active", False):
+    cybertech_page = st.Page("sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
+    navigation_pool.append(cybertech_page)
+    
+if user_profile.get("is_transittech_active", False):
+    transittech_page = st.Page("transit_token.py", title="Legacy Transit Token", icon="🚌")
+    navigation_pool.append(transittech_page)
+    
+if user_profile.get("is_healthtech_active", False):
+    healthtech_page = st.Page("old_chain.py", title="Legacy Cold Chain", icon="🏥")
+    navigation_pool.append(healthtech_page)
+    
+nav = st.navigation(navigation_pool)
+nav.run()
