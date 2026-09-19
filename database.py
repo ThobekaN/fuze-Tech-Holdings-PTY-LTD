@@ -1,6 +1,6 @@
 # ==============================================================================
 # FUZE TECH HOLDINGS — RECOVERY & ANALYTICS DATA UTILITY HUB
-# Simulated Multi-Tenant PostgreSQL Relational Schema
+# Centralized Multi-Tenant Production Data Schema
 # ==============================================================================
 
 # 👥 USER AUTHENTICATION & ACCESS REGISTRY TABLE
@@ -12,7 +12,9 @@ MOCK_CLIENTS_DB = [
         "client_id": "CLIENT-000",
         "is_logtech_active": False,
         "is_gridtech_active": False,
-        "is_cybertech_active": False
+        "is_cybertech_active": False,
+        "is_transittech_active": False,
+        "is_healthtech_active": False
     },
     {
         "email": "operations@supergroup.co.za",
@@ -21,16 +23,20 @@ MOCK_CLIENTS_DB = [
         "client_id": "CLIENT-881",
         "is_logtech_active": True,
         "is_gridtech_active": False,
-        "is_cybertech_active": False
+        "is_cybertech_active": False,
+        "is_transittech_active": False,
+        "is_healthtech_active": False
     },
     {
         "email": "director@imperial.co.za",
         "password": "enterpriseultra",
-        "account_name": "Imperial Logistics Group",
+        "account_name": "Imperial Group (Full Enterprise Suite)",
         "client_id": "CLIENT-442",
         "is_logtech_active": True,
         "is_gridtech_active": True,
-        "is_cybertech_active": True  # CyberTech Enabled
+        "is_cybertech_active": True,
+        "is_transittech_active": True, # TransitTech Enabled
+        "is_healthtech_active": True   # HealthTech Enabled
     }
 ]
 
@@ -62,5 +68,23 @@ MOCK_CYBER_TELEMETRY = {
         {"Transaction_ID": "TXN-901", "User_Alias": "new_user_jhb", "Claimed_Email": "thabo.m@gmail.com", "Device_Hardware_Fingerprint": "HW-UUID-4401", "Promo_Code": "FIRST100", "Evaluation_Status": "APPROVED"},
         {"Transaction_ID": "TXN-902", "User_Alias": "kfc_lover_22", "Claimed_Email": "lindiwe.k@outlook.com", "Device_Hardware_Fingerprint": "HW-UUID-8892", "Promo_Code": "EATSNEW50", "Evaluation_Status": "APPROVED"},
         {"Transaction_ID": "TXN-903", "User_Alias": "disposable_acc_7", "Claimed_Email": "x7291@tempmail.io", "Device_Hardware_Fingerprint": "HW-UUID-1105", "Promo_Code": "FIRST100", "Evaluation_Status": "TRIGGERED COORD CLUSTER"}
+    ]
+}
+
+# 🚌 TRANSITTECH ENTRY/EXIT SHUTTLE GATEWAY REGISTRY (Gated by client_id)
+MOCK_TRANSIT_TELEMETRY = {
+    "CLIENT-442": [
+        {"Scan_ID": "SCN-701", "Student_Staff_ID": "WITS-10024", "Transit_Route": "Braamfontein -> Education", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "SCN-702", "Student_Staff_ID": "WITS-20491", "Transit_Route": "Main Campus -> Junction", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "SCN-703", "Student_Staff_ID": "WITS-10024", "Transit_Route": "Braamfontein -> Education", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
+    ]
+}
+
+# 🏥 HEALTHTECH COLD STORAGE THERMAL LOG MATRIX (Gated by client_id)
+MOCK_HEALTH_TELEMETRY = {
+    "CLIENT-442": [
+        {"Fridge_ID": "FRG-501", "Clinical_Facility": "Braamfontein Clinic", "Current_Temp_C": 4.2, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
+        {"Fridge_ID": "FRG-502", "Clinical_Facility": "Hillbrow Health Hub", "Current_Temp_C": 5.1, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
+        {"Fridge_ID": "FRG-503", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
     ]
 }
