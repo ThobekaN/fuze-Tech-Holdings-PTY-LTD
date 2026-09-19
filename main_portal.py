@@ -206,8 +206,8 @@ else:
                             st.rerun()
                         
 # --- 🛠️ AUTOMATED NAVIGATION MANAGER MAPS ---
-home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
-navigation_pool = [home_page]
+    home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
+    navigation_pool = [home_page]
 if user_profile["is_logtech_active"]:
     logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
     navigation_pool.append(logtech_page)
