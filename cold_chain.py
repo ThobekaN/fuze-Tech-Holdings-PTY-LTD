@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# 🔄 DATA LAYER INTEGRATION LOOP
+# 🔄 AUTOMATED DATA LAYER INTEGRATION
 from database import MOCK_HEALTH_TELEMETRY
 
 user_profile = st.session_state["user_data"]
@@ -11,6 +11,7 @@ st.title("🏥 LEGACY COLD CHAIN — B2B HealthTech Platform")
 st.markdown(f"### *Multi-Tenant Thermal Monitoring Stream — Client Node: {active_id}*")
 st.divider()
 
+# Pull only the authenticated client's isolated cold storage slice
 client_fridge_logs = MOCK_HEALTH_TELEMETRY.get(active_id, [])
 df_health = pd.DataFrame(client_fridge_logs)
 
