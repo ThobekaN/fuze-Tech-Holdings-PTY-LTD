@@ -228,5 +228,5 @@ else:
         healthtech_page = st.Page("old_chain.py", title="Legacy Cold Chain", icon="🏥")
         navigation_pool.append(healthtech_page)
     
-nav = st.navigation(navigation_pool)
-nav.run()
+    nav = st.navigation(navigation_pool)
+    nav.run()
