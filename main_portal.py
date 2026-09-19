@@ -194,7 +194,7 @@ def render_home_portal():
                                         st.rerun()
                             else:
                                 st.error("Authentication Denied: Invalid cryptographic identifier matching.")
-                            else:
+                        else:
                                 user_profile = st.session_state["user_data"]
                                 active_id = user_profile["client_id"]
                                 st.sidebar.title("🏢 Fuze Tech Gateway")
