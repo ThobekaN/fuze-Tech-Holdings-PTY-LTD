@@ -178,5 +178,5 @@ def render_home_portal():
                         st.balloons()
                         st.rerun()
 
-    with col3:
+        with col3:
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
