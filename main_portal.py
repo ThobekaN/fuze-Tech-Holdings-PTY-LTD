@@ -1,6 +1,6 @@
 import streamlit as st
 
-user_session = {
+user_profile = {
     "account_name": "super_group_admin",
     "is_logtech_subscribed": True,       # Active subscription
     "is_gridtech_subscribed": False,     # No subscription
