@@ -178,7 +178,8 @@ def render_home_portal():
                         if not st.session_state["authenticated"]:
                             st.title("🔒 FUZE TECH HOLDINGS — Secure Login Gateway")
                             st.markdown("### Enterprise Multi-Tenant Infrastructure Portal")
-                            st.divider()st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:To test an Unsubscribed Lead (Enables popover API trials): lead@fuzetech.co.za (Password: password123)To test an Active Subscribed Client: operations@supergroup.co.za (Password: superfleet2026)""")
+                            st.divider()
+                            st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:To test an Unsubscribed Lead (Enables popover API trials): lead@fuzetech.co.za (Password: password123)To test an Active Subscribed Client: operations@supergroup.co.za (Password: superfleet2026)""")
                             login_email = st.text_input("Corporate Account Email")login_password = st.text_input("Security Access Password", type="password")
                             if st.button("Authenticate Session"):
                                 matched_user = Nonecleaned_email = login_email.lower().strip()
