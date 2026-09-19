@@ -192,18 +192,18 @@ else:
                             st.session_state["user_data"]["is_healthtech_active"] = Truest.balloons()
                             st.rerun()
         with col3:
-            # 🛡️ 3. CYBERTECH TILESwith 
-            st.container(border=True):
-            st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
-            st.markdown("Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.")
-            if user_profile.get("is_cybertech_active", False):
-                st.success("🟢 Active Subscription Billed")
-            else:
-                st.error("🔴 License Status: Unsubscribed")
-                with st.popover("🚀 Start 30-Day Free Trial"):
-                    if st.button("Link Vetting API Endpoints", key="btn_confirm_cybertech"):
-                        st.session_state["user_data"]["is_cybertech_active"] = Truest.balloons()
-                        st.rerun()
+            # 🛡️ 3. CYBERTECH TILES
+            with st.container(border=True):
+                st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
+                st.markdown("Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.")
+                if user_profile.get("is_cybertech_active", False):
+                    st.success("🟢 Active Subscription Billed")
+                else:
+                    st.error("🔴 License Status: Unsubscribed")
+                    with st.popover("🚀 Start 30-Day Free Trial"):
+                        if st.button("Link Vetting API Endpoints", key="btn_confirm_cybertech"):
+                            st.session_state["user_data"]["is_cybertech_active"] = Truest.balloons()
+                            st.rerun()
                         
 # --- 🛠️ AUTOMATED NAVIGATION MANAGER MAPS ---
 home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
