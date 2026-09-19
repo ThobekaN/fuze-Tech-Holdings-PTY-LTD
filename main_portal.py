@@ -240,7 +240,10 @@ if not st.session_state["authenticated"]:
     st.divider()
     tab_login, tab_register = st.tabs(["🔒 Account Login", "📝 New Client Registration"])
     with tab_login:
-        st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:- **To test an Unsubscribed Lead (Enables popover API trials):** `lead@fuzetech.co.za` (Password: `password123`)- **To test an Active Subscribed Client:** `operations@supergroup.co.za` (Password: `superfleet2026`)- *Or use the Registration tab to create an entirely new human account live!*""")
+        st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:
+        - **To test an Unsubscribed Lead (Enables popover API trials):** `lead@fuzetech.co.za` (Password: `password123`)
+        - **To test an Active Subscribed Client:** `operations@supergroup.co.za` (Password: `superfleet2026`)
+        - *Or use the Registration tab to create an entirely new human account live!*""")
         
         login_email = st.text_input("Corporate Account Email", key="log_email")
         login_password = st.text_input("Security Access Password", type="password", key="log_pass")
