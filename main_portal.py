@@ -30,20 +30,26 @@ if not st.session_state["authenticated"]:
     login_email = st.text_input("Corporate Account Email")
     login_password = st.text_input("Security Access Token Key", type="password")
     
+       # Locate this section inside your main_portal.py code:
     if st.button("Authenticate Session"):
+        # The Automated Token Loop: Standardizing inputs to prevent case errors
         matched_user = None
+        cleaned_email = login_email.lower().strip() # <-- Forces lowercase and strips empty spaces
+        
         for record in MOCK_CLIENTS_DB:
-            if record["email"] == login_email and record["password"] == login_password:
+            if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
                 matched_user = record
                 break
         
         if matched_user:
+            # Token Loop Validated: Assign values to session memory state
             st.session_state["authenticated"] = True
             st.session_state["user_data"] = matched_user
-            st.success("Access Token Authorized. Routing Workspace...")
+            st.success("Session Token Generated Successfully! Redirecting...")
             st.rerun()
         else:
             st.error("Authentication Denied: Invalid cryptographic identifier matching.")
+
 
 else:
     user_profile = st.session_state["user_data"]
