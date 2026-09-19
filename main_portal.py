@@ -215,32 +215,75 @@ def render_home_portal():
 
 # 4. --- CONTEXT CONDITIONAL CONTROL INTERFACE REGISTRY ---
 if not st.session_state["authenticated"]:
-    st.title("🔒 FUZE TECH HOLDINGS — Secure Login Gateway")
-    st.markdown("### Enterprise Multi-Tenant Infrastructure Portal")
+    # 🌟 NEW FEATURE: FULL WIDTH REGISTRATION & LOGIN TAB HUB
+    st.title("🛡️ FUZE TECH HOLDINGS — Control Portal")
+    st.markdown("### Enterprise Multi-Tenant Infrastructure Gateway")
     st.divider()
-    st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:
+    tab_login, tab_register = st.tabs(["🔒 Account Login", "📝 New Client Registration"])
+    with tab_login:
+                st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:
 - **To test an Unsubscribed Lead (Enables popover API trials):** `lead@fuzetech.co.za` (Password: `password123`)
 - **To test an Active Subscribed Client:** `operations@supergroup.co.za` (Password: `superfleet2026`)""")
-    
-    login_email = st.text_input("Corporate Account Email")
-    login_password = st.text_input("Security Access Password", type="password")
-    
-    if st.button("Authenticate Session"):
-        matched_user = None
-        cleaned_email = login_email.lower().strip()
+- *Or use the Registration tab to create an entirely new human account live!*""")
         
-        for record in st.session_state["DB_CLIENTS"]:
-            if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
-                matched_user = record.copy()
-                break
+        login_email = st.text_input("Corporate Account Email", key="log_email")
+        login_password = st.text_input("Security Access Password", type="password", key="log_pass")
+        
+        if st.button("Authenticate Session", key="btn_login_submit"):
+            matched_user = None
+            cleaned_email = login_email.lower().strip()
+            
+            for record in st.session_state["DB_CLIENTS"]:
+                if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
+                    matched_user = record.copy()
+                    break
+                    
+            if matched_user:
+                st.session_state["authenticated"] = True
+                st.session_state["user_data"] = matched_user
+                st.success("Access Token Authorized. Routing Workspace...")
+                st.rerun()
+            else:
+                st.error("Authentication Denied: Invalid cryptographic identifier matching.")
                 
-        if matched_user:
-            st.session_state["authenticated"] = True
-            st.session_state["user_data"] = matched_user
-            st.success("Access Token Authorized. Routing Workspace...")
-            st.rerun()
-        else:
-            st.error("Authentication Denied: Invalid cryptographic identifier matching.")
+    with tab_register:
+        st.markdown("#### 📋 Establish Your Shared Multi-Tenant Tenant Profile")
+        st.caption("Please input your official firm metadata parameters. This creates an isolated database row state instantly.")
+        
+        reg_company = st.text_input("Corporate Company Name (e.g., Barloworld Transport)")
+        reg_email = st.text_input("Corporate Operational Email Address")
+        reg_password = st.text_input("Create Security Password", type="password")
+        reg_confirm_password = st.text_input("Confirm Security Password", type="password")
+        
+        if st.button("Commit Registration to Cloud Database", key="btn_register_submit"):
+            # Operational Edge Case Input Validation Checks
+            if not reg_company or not reg_email or not reg_password:
+                st.error("Submission Failed: All registration entry variables are strictly mandatory.")
+            elif reg_password != reg_confirm_password:
+                st.error("Submission Failed: Password validation conflict. Confirmation string must match.")
+            else:
+                # Check if email is already taken inside session memory
+                email_exists = any(r["email"].lower().strip() == reg_email.lower().strip() for r in st.session_state["DB_CLIENTS"])
+                if email_exists:
+                    st.error("Submission Failed: Email identifier already occupies an active tenant slot.")
+                else:
+                    # Dynamically generate unique client structural metadata values
+                    new_tenant_id = f"CLIENT-{random.randint(500, 999)}"
+                    new_profile = {
+                        "email": reg_email.lower().strip(),
+                        "password": reg_password,
+                        "account_name": reg_company,
+                        "client_id": new_tenant_id,
+                        "is_logtech_active": False,
+                        "is_gridtech_active": False,
+                        "is_cybertech_active": False,
+                        "is_transittech_active": False,
+                        "is_healthtech_active": False
+                    }
+                    
+                    # Dynamically append the new row into the global database state memory array
+                    st.session_state["DB_CLIENTS"].append(new_profile)
+                    st.success(f"🎉 Registration Committed Successfully! Profile row established. Tenant UUID assigned: {new_tenant_id}. Please toggle back to the 'Account Login' tab above and sign in.")
 
 else:
     user_profile = st.session_state["user_data"]
