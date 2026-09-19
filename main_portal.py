@@ -241,7 +241,7 @@ if not st.session_state["authenticated"]:
     tab_login, tab_register = st.tabs(["🔒 Account Login", "📝 New Client Registration"])
     with tab_login:
         st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:\n
-        • To test an Unsubscribed Lead (Enables popover API trials):** `lead@fuzetech.co.za` (Password: `password123`)\n
+        • To test an Unsubscribed Lead (Enables popover API trials): `lead@fuzetech.co.za` (Password: `password123`)\n
         • To test an Active Subscribed Client:** `operations@supergroup.co.za` (Password: `superfleet2026`)\n
         • Or use the Registration tab to create an entirely new human account live!""")
         
