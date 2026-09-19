@@ -46,16 +46,35 @@ def render_home_portal():
         st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` carries no active product tier licenses. All analytics sidebar routes are dynamically hidden.")
     
     # Portfolio Infrastructure Overview Data Metrics Block
+        # 📊 Real-Time Monitored Infrastructure Footprint (Updated 5-Vertical Overview)
     st.markdown("#### 📊 Real-Time Monitored Infrastructure Footprint")
-    kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
+    
+    # Split the screen into 5 equal columns to display all systems simultaneously
+    kpi_col1, kpi_col2, kpi_col3, kpi_col4, kpi_col5 = st.columns(5)
+    
     with kpi_col1:
         truck_count = len(st.session_state["DB_LOGTECH"].get(active_id, []))
-        st.metric(label="🚚 Connected Fleet Assets", value=f"{truck_count} Trucks Active" if user_profile["is_logtech_active"] else "0 Trucks Connected")
+        st.metric(label="🚚 Connected Fleets", value=f"{truck_count} Trucks Active" if user_profile["is_logtech_active"] else "0 Trucks Connected")
+        
     with kpi_col2:
         meter_count = len(st.session_state["DB_GRIDTECH"].get(active_id, []))
         st.metric(label="⚡ Monitored Grid Nodes", value=f"{meter_count} Smart Meters" if user_profile["is_gridtech_active"] else "0 Smart Meters Connected")
+        
     with kpi_col3:
-        st.metric(label="🛡️ Pipeline Security Perimeter", value="Active", delta="Multi-Tenant Row Isolation Intact")
+        # Check if the specific client data row occupies a slot inside the CyberTech table
+        cyber_count = len(st.session_state["DB_CYBERTECH"].get(active_id, []))
+        st.metric(label="🛡️ Vetted API Checkouts", value=f"{cyber_count} Scanned" if user_profile.get("is_cybertech_active", False) else "0 Scanned")
+        
+    with kpi_col4:
+        # Check if the specific client data row occupies a slot inside the TransitTech table
+        transit_count = len(database.MOCK_TRANSIT_TELEMETRY.get(active_id, []))
+        st.metric(label="🚌 Fleet Scanner Modules", value=f"{transit_count} Busses Active" if user_profile.get("is_transittech_active", False) else "0 Busses Active")
+        
+    with kpi_col5:
+        # Check if the specific client data row occupies a slot inside the HealthTech table
+        health_count = len(database.MOCK_HEALTH_TELEMETRY.get(active_id, []))
+        st.metric(label="🏥 Refrigeration Nodes", value=f"{health_count} Units Tracked" if user_profile.get("is_healthtech_active", False) else "0 Units Tracked")
+
         
     st.divider()
     
