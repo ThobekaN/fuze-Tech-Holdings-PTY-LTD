@@ -3,17 +3,27 @@ import pandas as pd
 import random
 from datetime import datetime
 
-# 🔄 DATA LAYER INTEGRATION LOOP
-from database import MOCK_CLIENTS_DB, MOCK_FLEET_TELEMETRY, MOCK_GRID_TELEMETRY, MOCK_CYBER_TELEMETRY, MOCK_TRANSIT_TELEMETRY, MOCK_HEALTH_TELEMETRY
+# 🔄 GLOBAL DATA LAYER IMPORT
+import database
 
 # Global Framework Page Configurations
 st.set_page_config(page_title="Fuze Tech Holdings - Portal Gateway", layout="wide")
 
-# 1. 🔐 STATE ENGINE INITIALIZATION (Locks in session memory arrays)
+# 🔐 STATE ENGINE ARCHITECTURE (Initializes your separate data tables into session memory)
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 if "user_data" not in st.session_state:
     st.session_state["user_data"] = None
+
+# Centralize your separate database matrices into active browser memory states
+if "DB_CLIENTS" not in st.session_state:
+    st.session_state["DB_CLIENTS"] = database.MOCK_CLIENTS_DB.copy()
+if "DB_LOGTECH" not in st.session_state:
+    st.session_state["DB_LOGTECH"] = database.MOCK_FLEET_TELEMETRY.copy()
+if "DB_GRIDTECH" not in st.session_state:
+    st.session_state["DB_GRIDTECH"] = database.MOCK_GRID_TELEMETRY.copy()
+if "DB_CYBERTECH" not in st.session_state:
+    st.session_state["DB_CYBERTECH"] = database.MOCK_CYBER_TELEMETRY.copy()
 
 def handle_logout():
     st.session_state["authenticated"] = False
@@ -28,7 +38,7 @@ if not st.session_state["authenticated"]:
     
     st.info("""💡 **Demo Instruction Panel for the Tshimologong Selectors:**
 - **To test an Unsubscribed Lead (Best for testing the live popover activation):** `lead@fuzetech.co.za` (Password: `password123`)
-- **To test Subscribed Client A (Super Group Logistics):** `operations@supergroup.co.za` (Password: `superfleet2026`)""")
+- **To test a Subscribed LogTech Client:** `operations@supergroup.co.za` (Password: `superfleet2026`)""")
     
     login_email = st.text_input("Corporate Account Email")
     login_password = st.text_input("Security Access Token Key", type="password")
@@ -36,10 +46,11 @@ if not st.session_state["authenticated"]:
     if st.button("Authenticate Session"):
         matched_user = None
         cleaned_email = login_email.lower().strip()
-        for record in MOCK_CLIENTS_DB:
+        
+        # Query our active session database state layer instead of the static file
+        for record in st.session_state["DB_CLIENTS"]:
             if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
-                # Copy record into local session storage state to allow dynamic updates
-                matched_user = record.copy()
+                matched_user = record
                 break
         
         if matched_user:
@@ -77,10 +88,10 @@ else:
         st.markdown("#### 📊 Real-Time Monitored Infrastructure Footprint")
         kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
         with kpi_col1:
-            truck_count = len(MOCK_FLEET_TELEMETRY.get(active_id, []))
+            truck_count = len(st.session_state["DB_LOGTECH"].get(active_id, []))
             st.metric(label="🚚 Connected Fleet Assets", value=f"{truck_count} Trucks Active" if user_profile["is_logtech_active"] else "0 Trucks Connected")
         with kpi_col2:
-            meter_count = len(MOCK_GRID_TELEMETRY.get(active_id, []))
+            meter_count = len(st.session_state["DB_GRIDTECH"].get(active_id, []))
             st.metric(label="⚡ Monitored Grid Nodes", value=f"{meter_count} Smart Meters" if user_profile["is_gridtech_active"] else "0 Smart Meters Connected")
         with kpi_col3:
             st.metric(label="🛡️ Pipeline Security Perimeter", value="Active", delta="Multi-Tenant Row Isolation Intact")
@@ -89,7 +100,7 @@ else:
         
         # 🚀 30-DAY FREE TRIAL DYNAMIC SUBSCRIPTION WORKSPACE BOARDS
         st.markdown("#### 🏢 Unified Platform Ecosystem & Subscription Status")
-        st.info("💡 *How it works:* Click any unsubscribed trial module below. A setup popover form will appear allowing you to input assets and inject live, random telematics parameters straight into your custom database slice.")
+        st.info("💡 *How it works:* Click any unsubscribed trial module below. Input assets and inject parameters to dynamically update your custom database slice.")
         st.write("")
         
         col1, col2, col3 = st.columns(3)
@@ -103,7 +114,6 @@ else:
                     st.success("🟢 Active Subscription Billed")
                 else:
                     st.error("🔴 License Status: Unsubscribed")
-                    # Popover Form Component acting as the pop-up modal configuration panel
                     with st.popover("🚀 Start 30-Day Free Trial"):
                         st.markdown("### 📋 LogTech System Initialization")
                         fleet_size = st.number_input("Number of heavy vehicles to provision:", min_value=1, max_value=5, value=1)
@@ -128,11 +138,18 @@ else:
                                     "BURS_Clearance": random.choice(["PROCEED TO BORDER", "HOLD AT STAGING"])
                                 })
                             
-                            # Save directly to master tracking arrays and flip license flags
-                            MOCK_FLEET_TELEMETRY[active_id] = generated_fleet
+                            # DYNAMIC PUSH MUTATION LAYER: Appends data rows straight to active session tables
+                            st.session_state["DB_LOGTECH"][active_id] = generated_fleet
+                            
+                            # Update account subscription status inside state memory
+                            for user_record in st.session_state["DB_CLIENTS"]:
+                                if user_record["client_id"] == active_id:
+                                    user_record["is_logtech_active"] = True
+                                    break
+                            
                             st.session_state["user_data"]["is_logtech_active"] = True
                             st.balloons()
-                            st.success("Database linked! LogTech pipeline unlocked.")
+                            st.success("Database records linked successfully! Rerouting workspace rails...")
                             st.button("Reload Workspace Console")
             
             st.write("") 
@@ -160,13 +177,3 @@ else:
                     st.success("🟢 Active Subscription Billed")
                 else:
                     st.error("🔴 License Status: Unsubscribed")
-                    with st.popover("🚀 Start 30-Day Free Trial"):
-                        st.markdown("### 📋 GridTech System Initialization")
-                        meter_count = st.number_input("Number of prepaid smart meters to mount:", min_value=1, max_value=5, value=1)
-                        property_name = st.text_input("Facility Name / Property Fund:", "Braamfontein Residential")
-                        
-                        if st.button("Confirm Deployment & Connect Grid", key="btn_confirm_gridtech"):
-                            generated_meters = []
-                            for i in range(int(meter_count)):
-                                generated_meters.append({
-                                    "Meter_ID": f"MTR-{random.randint(500, 999)}",
