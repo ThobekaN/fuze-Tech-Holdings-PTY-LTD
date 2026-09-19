@@ -28,11 +28,11 @@ if user_profile["is_logtech_active"]:
 else:
     logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines (Locked 🔒)", icon="🚚")
 
-if user_profile["is_gridtech_active"]:
+'''if user_profile["is_gridtech_active"]:
     gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
 else:
     gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs (Locked 🔒)", icon="⚡")
-
+'''
 # Initialize and run the multi-page engine cleanly
-nav = st.navigation([home_page, logtech_page, gridtech_page])
+nav = st.navigation([home_page, logtech_page])
 nav.run()
