@@ -195,35 +195,35 @@ def render_home_portal():
                             else:
                                 st.error("Authentication Denied: Invalid cryptographic identifier matching.")
                         else:
-                                user_profile = st.session_state["user_data"]
-                                active_id = user_profile["client_id"]
-                                st.sidebar.title("🏢 Fuze Tech Gateway")
-                                st.sidebar.markdown(f"Operator Group:\n{user_profile['account_name']}")
-                                st.sidebar.markdown(f"Tenant UUID: {active_id}")
-                                if st.sidebar.button("Secure Session Sign Out"):
-                                    handle_logout()
-                                    st.sidebar.divider()
-                                    home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
-                                    navigation_pool = [home_page]
-                                    if user_profile["is_logtech_active"]:
-                                        logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
-                                        navigation_pool.append(logtech_page)
+                            user_profile = st.session_state["user_data"]
+                            active_id = user_profile["client_id"]
+                            st.sidebar.title("🏢 Fuze Tech Gateway")
+                            st.sidebar.markdown(f"Operator Group:\n{user_profile['account_name']}")
+                            st.sidebar.markdown(f"Tenant UUID: {active_id}")
+                            if st.sidebar.button("Secure Session Sign Out"):
+                                handle_logout()
+                                st.sidebar.divider()
+                                home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
+                                navigation_pool = [home_page]
+                                if user_profile["is_logtech_active"]:
+                                    logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+                                    navigation_pool.append(logtech_page)
                                         
-                                    if user_profile["is_gridtech_active"]:
-                                        gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
-                                        navigation_pool.append(gridtech_page)
+                                if user_profile["is_gridtech_active"]:
+                                    gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+                                    navigation_pool.append(gridtech_page)
                                         
-                                    if user_profile.get("is_cybertech_active", False):
-                                        cybertech_page = st.Page("sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
-                                        navigation_pool.append(cybertech_page)
+                                if user_profile.get("is_cybertech_active", False):
+                                    cybertech_page = st.Page("sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
+                                    navigation_pool.append(cybertech_page)
                                         
-                                    if user_profile.get("is_transittech_active", False):
-                                        transittech_page = st.Page("transit_token.py", title="Legacy Transit Token", icon="🚌")
-                                        navigation_pool.append(transittech_page)
+                                if user_profile.get("is_transittech_active", False):
+                                    transittech_page = st.Page("transit_token.py", title="Legacy Transit Token", icon="🚌")
+                                    navigation_pool.append(transittech_page)
                                         
-                                    if user_profile.get("is_healthtech_active", False):
-                                        healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
-                                        navigation_pool.append(healthtech_page)
+                                if user_profile.get("is_healthtech_active", False):
+                                    healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
+                                    navigation_pool.append(healthtech_page)
                                         
-                                    nav = st.navigation(navigation_pool)
-                                    nav.run()
+                                nav = st.navigation(navigation_pool)
+                                nav.run()
