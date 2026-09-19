@@ -5,7 +5,7 @@ from datetime import datetime
 # 1. Page Configuration & Custom Theme Styling
 st.set_page_config(page_title="Legacy Freight Lines - LogTech Center", layout="wide")
 st.title("LEGACY FREIGHT LINES — B2B LogTech Platform")
-st.markdown("### *Wits Computer Science Innovation Project: Real-Time SADC Logistics Management*")
+st.markdown("### *Fuze Tech Holdings Innovation: Real-Time SADC Logistics Management*")
 st.divider()
 
 # 2. Database Simulation (Handles variable fleet sizes dynamically)
