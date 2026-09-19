@@ -88,3 +88,25 @@ MOCK_HEALTH_TELEMETRY = {
         {"Fridge_ID": "FRG-503", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
     ]
 }
+# ==============================================================================
+# EXTERNAL TELEMATICS PROVIDER CLOUD SERVERS (Simulating Third-Party Tracking APIs)
+# ==============================================================================
+REMOTE_TRACKING_SERVERS_JSON = {
+    "cartrack_oauth2_token_881": [
+        {"Truck_ID": "ND-882-901", "Driver": "Sipho Khumalo", "Route": "JHB -> Gaborone", "Speed_KMH": 0.0, "Fuel_Liters": 280.5, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "ND-104-552", "Driver": "Johan Burger", "Route": "JHB -> Windhoek", "Speed_KMH": 82.0, "Fuel_Liters": 310.0, "BURS_Clearance": "HOLD AT STAGING"},
+        {"Truck_ID": "ND-773-441", "Driver": "Thabo Ncube", "Route": "JHB -> Lobatse", "Speed_KMH": 0.0, "Fuel_Liters": 195.0, "BURS_Clearance": "HOLD AT STAGING"}
+    ],
+    "ctrack_secure_key_442": [
+        {"Truck_ID": "NC-551-209", "Driver": "Blessing Tau", "Route": "DBN -> Gaborone", "Speed_KMH": 65.0, "Fuel_Liters": 410.2, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "NC-992-881", "Driver": "Musa Zwane", "Route": "JHB -> Maseru", "Speed_KMH": 0.0, "Fuel_Liters": 380.0, "BURS_Clearance": "PROCEED TO BORDER"}
+    ]
+}
+
+REMOTE_MUNICIPAL_GRID_JSON = {
+    "city_power_grid_key_442": [
+        {"Meter_ID": "MTR-991", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-992", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-993", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
+    ]
+}
