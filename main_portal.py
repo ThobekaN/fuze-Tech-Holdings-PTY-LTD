@@ -14,12 +14,12 @@ pages = {}
 
 home_page = st.Page("main_portal.py", title="Home Control Center")
 
-if user_profile["is_logtech_active"]:
+if user_profile["is_logtech_subscribed"]:
     logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines")
 else:
     logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines (Locked 🔒)")
 
-if user_profile["is_gridtech_active"]:
+if user_profile["is_gridtech_subscribed"]:
     gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs")
 else:
     gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs (Locked 🔒)")
