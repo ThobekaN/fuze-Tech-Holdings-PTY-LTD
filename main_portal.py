@@ -78,8 +78,8 @@ def render_home_portal():
 home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
 
 # Setup clean, icon-enabled paths to point straight into your subfolder layout scripts
-logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines", icon="🚚")
-gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
 
 # 6. Initialize and Run the Multi-Page Navigation Engine
 nav = st.navigation([home_page, logtech_page, gridtech_page])
