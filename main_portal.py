@@ -24,14 +24,14 @@ home_page = st.Page("main_portal.py", title="Home Control Center", icon="🏢")
 
 # Dynamically gate visibility or access paths based on user subscription matrices
 if user_profile["is_logtech_active"]:
-    logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+    logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
 else:
-    logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines (Locked 🔒)", icon="🚚")
+    logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines (Locked 🔒)", icon="🚚")
 
 if user_profile["is_gridtech_active"]:
-    gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+    gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
 else:
-    gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs (Locked 🔒)", icon="⚡")
+    gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs (Locked 🔒)", icon="⚡")
 
 # Initialize and run the multi-page engine cleanly
 nav = st.navigation([home_page, logtech_page, gridtech_page])
