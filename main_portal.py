@@ -175,55 +175,69 @@ def render_home_portal():
                     if st.button("Connect Application Checkout SDK", key="btn_confirm_cybertech"):
                         st.session_state["user_data"]["is_cybertech_active"] = Truest.balloons()
                         st.rerun()
-                        if not st.session_state["authenticated"]:
-                            st.title("🔒 FUZE TECH HOLDINGS — Secure Login Gateway")
-                            st.markdown("### Enterprise Multi-Tenant Infrastructure Portal")
-                            st.divider()
-                            st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:To test an Unsubscribed Lead (Enables popover API trials): lead@fuzetech.co.za (Password: password123)To test an Active Subscribed Client: operations@supergroup.co.za (Password: superfleet2026)""")
-                            login_email = st.text_input("Corporate Account Email")
-                            login_password = st.text_input("Security Access Password", type="password")
-                            if st.button("Authenticate Session"):
-                                matched_user = Nonecleaned_email = login_email.lower().strip()
-                                for record in st.session_state["DB_CLIENTS"]:
-                                    if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
-                                        matched_user = record.copy()
-                                        break
-                                    if matched_user:
-                                        st.session_state["authenticated"] = Truest.session_state["user_data"] = matched_user
-                                        st.success("Access Token Authorized. Routing Workspace...")
-                                        st.rerun()
-                            else:
-                                st.error("Authentication Denied: Invalid cryptographic identifier matching.")
-                        else:
-                            user_profile = st.session_state["user_data"]
-                            active_id = user_profile["client_id"]
-                            st.sidebar.title("🏢 Fuze Tech Gateway")
-                            st.sidebar.markdown(f"Operator Group:\n{user_profile['account_name']}")
-                            st.sidebar.markdown(f"Tenant UUID: {active_id}")
-                            if st.sidebar.button("Secure Session Sign Out"):
-                                handle_logout()
-                                st.sidebar.divider()
-                                home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
-                                navigation_pool = [home_page]
-                                if user_profile["is_logtech_active"]:
-                                    logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
-                                    navigation_pool.append(logtech_page)
-                                        
-                                if user_profile["is_gridtech_active"]:
-                                    gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
-                                    navigation_pool.append(gridtech_page)
-                                        
-                                if user_profile.get("is_cybertech_active", False):
-                                    cybertech_page = st.Page("sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
-                                    navigation_pool.append(cybertech_page)
-                                        
-                                if user_profile.get("is_transittech_active", False):
-                                    transittech_page = st.Page("transit_token.py", title="Legacy Transit Token", icon="🚌")
-                                    navigation_pool.append(transittech_page)
-                                        
-                                if user_profile.get("is_healthtech_active", False):
-                                    healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
-                                    navigation_pool.append(healthtech_page)
-                                        
-                                nav = st.navigation(navigation_pool)
-                                nav.run()
+if not st.session_state["authenticated"]:
+    st.title("🔒 FUZE TECH HOLDINGS — Secure Login Gateway")
+    st.markdown("### Enterprise Multi-Tenant Infrastructure Portal")
+    st.divider()
+    st.info("""💡 Demo Instruction Panel for the Tshimologong Selectors:
+- **To test an Unsubscribed Lead (Enables popover API trials):** `lead@fuzetech.co.za` (Password: `password123`)
+- **To test an Active Subscribed Client:** `operations@supergroup.co.za` (Password: `superfleet2026`)""")
+    
+    login_email = st.text_input("Corporate Account Email")
+    login_password = st.text_input("Security Access Password", type="password")
+    
+    if st.button("Authenticate Session"):
+        matched_user = None
+        cleaned_email = login_email.lower().strip()
+        
+        for record in st.session_state["DB_CLIENTS"]:
+            if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
+                matched_user = record.copy()
+                break
+                
+        if matched_user:
+            st.session_state["authenticated"] = True
+            st.session_state["user_data"] = matched_user
+            st.success("Access Token Authorized. Routing Workspace...")
+            st.rerun()
+        else:
+            st.error("Authentication Denied: Invalid cryptographic identifier matching.")
+
+else:
+    user_profile = st.session_state["user_data"]
+    active_id = user_profile["client_id"]
+    
+    st.sidebar.title("🏢 Fuze Tech Gateway")
+    st.sidebar.markdown(f"Operator Group:\n{user_profile['account_name']}")
+    st.sidebar.markdown(f"Tenant UUID: {active_id}")
+    
+    if st.sidebar.button("Secure Session Sign Out"):
+        handle_logout()
+    st.sidebar.divider()
+    
+    home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
+    navigation_pool = [home_page]
+    
+    if user_profile["is_logtech_active"]:
+        logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+        navigation_pool.append(logtech_page)
+        
+    if user_profile["is_gridtech_active"]:
+        gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+        navigation_pool.append(gridtech_page)
+        
+    if user_profile.get("is_cybertech_active", False):
+        cybertech_page = st.Page("views/sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
+        navigation_pool.append(cybertech_page)
+        
+    if user_profile.get("is_transittech_active", False):
+        transittech_page = st.Page("views/transit_token.py", title="Legacy Transit Token", icon="🚌")
+        navigation_pool.append(transittech_page)
+        
+    if user_profile.get("is_healthtech_active", False):
+        healthtech_page = st.Page("views/cold_chain.py", title="Legacy Cold Chain", icon="🏥")
+        navigation_pool.append(healthtech_page)
+        
+    nav = st.navigation(navigation_pool)
+    nav.run()
+
