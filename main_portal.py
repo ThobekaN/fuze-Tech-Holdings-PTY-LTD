@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # 🔄 DATA LAYER INTEGRATION LOOP
-from database import MOCK_CLIENTS_DB, MOCK_FLEET_TELEMETRY, MOCK_GRID_TELEMETRY
+from database import MOCK_CLIENTS_DB, MOCK_FLEET_TELEMETRY, MOCK_GRID_TELEMETRY, MOCK_CYBER_TELEMETRY
 
 # Global Framework Page Configurations
 st.set_page_config(page_title="Fuze Tech Holdings - Portal Gateway", layout="wide")
@@ -25,31 +25,27 @@ if not st.session_state["authenticated"]:
     st.info("""💡 **Demo Instruction Panel for the Tshimologong Selectors:**
 - **To test an Unsubscribed Lead (Marketplace/30-Day Offer):** `lead@fuzetech.co.za` (Password: `password123`)
 - **To test Subscribed Client A (Super Group Data Split):** `operations@supergroup.co.za` (Password: `superfleet2026`)
-- **To test Subscribed Client B (Imperial Group Data Split):** `director@imperial.co.za` (Password: `enterpriseultra`)""")
+- **To test Subscribed Client B (Imperial Group Data Split — Full Suite):** `director@imperial.co.za` (Password: `enterpriseultra`)""")
     
     login_email = st.text_input("Corporate Account Email")
     login_password = st.text_input("Security Access Token Key", type="password")
     
-       # Locate this section inside your main_portal.py code:
     if st.button("Authenticate Session"):
-        # The Automated Token Loop: Standardizing inputs to prevent case errors
         matched_user = None
-        cleaned_email = login_email.lower().strip() # <-- Forces lowercase and strips empty spaces
-        
+        # CASE-INSENSITIVE HARDENED LOGIN CHECK LOOP
+        cleaned_email = login_email.lower().strip()
         for record in MOCK_CLIENTS_DB:
             if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
                 matched_user = record
                 break
         
         if matched_user:
-            # Token Loop Validated: Assign values to session memory state
             st.session_state["authenticated"] = True
             st.session_state["user_data"] = matched_user
-            st.success("Session Token Generated Successfully! Redirecting...")
+            st.success("Access Token Authorized. Routing Workspace...")
             st.rerun()
         else:
             st.error("Authentication Denied: Invalid cryptographic identifier matching.")
-
 
 else:
     user_profile = st.session_state["user_data"]
@@ -67,22 +63,23 @@ else:
         st.markdown("### *Central Infrastructure Control Center — Multi-Tenant Operating Hub*")
         st.divider()
         
-        if user_profile["is_logtech_active"] or user_profile["is_gridtech_active"]:
-            st.success(f"🔓 **Active Database Isolation Token Verified.** Currently streaming isolated data blocks mapped to **{user_profile['account_name']}**.")
+        if user_profile["is_logtech_active"] or user_profile["is_gridtech_active"] or user_profile.get("is_cybertech_active", False):
+            st.success(f"🔓 **Active Database Session Token Verified.** Currently streaming isolated data blocks mapped to **{user_profile['account_name']}**.")
         else:
             st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` does not carry an authorized runtime software license. Active data pipelines are locked.")
             with st.container(border=True):
                 st.markdown("### 🚀 Initialize Your 30-Day Free Trial Subscription")
                 st.markdown("Deploy our automated stream-processing algorithms over your assets for 30 days risk-free. Catch anomalies, stop fuel theft, or track grid fraud with zero upfront capital hardware expenditure.")
-                b_col1, b_col2 = st.columns(2)
+                b_col1, b_col2, b_col3 = st.columns(3)
                 with b_col1:
                     if st.button("Activate 30-Day Legacy Freight Lines Trial"):
                         st.balloons()
-                        st.success("LogTech Trial Pipeline Request Scheduled.")
                 with b_col2:
                     if st.button("Activate 30-Day Legacy Utility Labs Trial"):
                         st.balloons()
-                        st.success("GridTech Trial Pipeline Request Scheduled.")
+                with b_col3:
+                    if st.button("Activate 30-Day Legacy Sybil Gate Trial"):
+                        st.balloons()
             st.divider()
         
         st.markdown("#### 📊 Real-Time Node Telematics Overview")
@@ -94,13 +91,13 @@ else:
             meter_count = len(MOCK_GRID_TELEMETRY.get(active_id, []))
             st.metric(label="Monitored Grid Nodes", value=f"{meter_count} Smart Meters" if user_profile["is_gridtech_active"] else "0 Smart Meters Connected")
         with kpi_col3:
-            st.metric(label="Cloud Pipeline Integrity", value="100% Secure", delta="Row-Level Security Active")
+            fraud_count = len(MOCK_CYBER_TELEMETRY.get(active_id, []))
+            st.metric(label="Vetted API Checkouts", value=f"{fraud_count} Requests Scanned" if user_profile.get("is_cybertech_active", False) else "0 Requests Scanned")
 
     # --- 🛠️ AUTOMATED NAVIGATION MANAGER MAPS ---
     home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
     navigation_pool = [home_page]
     
-    # Point the routing targets to your external view paths inside the subfolder
     if user_profile["is_logtech_active"]:
         logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
         navigation_pool.append(logtech_page)
@@ -108,6 +105,10 @@ else:
     if user_profile["is_gridtech_active"]:
         gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
         navigation_pool.append(gridtech_page)
+
+    if user_profile.get("is_cybertech_active", False):
+        cybertech_page = st.Page("sybil_gate.py", title="Legacy Sybil Gate", icon="🛡️")
+        navigation_pool.append(cybertech_page)
         
     nav = st.navigation(navigation_pool)
     nav.run()
