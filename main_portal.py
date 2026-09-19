@@ -174,8 +174,7 @@ else:
                                     "Metered_Usage_kW": float(random.choice([0.0, 1.2, 4.5, 8.9])),
                                     "Substation_Line_Current_Amps": round(random.uniform(5.0, 50.0), 1),
                                     "System_Status": random.choice(["NORMAL", "NORMAL", "SUSPECTED BYPASS"])})
-                                MOCK_GRID_TELEMETRY[active_id] = generated_metersst.session_state["user_data"]
-                                ["is_gridtech_active"] = Truest.balloons()
+                                MOCK_GRID_TELEMETRY[active_id] = generated_metersst.session_state["user_data"]["is_gridtech_active"] = Truest.balloons()
                                 st.success("Database linked! GridTech pipeline unlocked.")
                                 st.button("Reload Workspace Console")
             st.write("")
@@ -190,8 +189,7 @@ else:
                     st.error("🔴 License Status: Unsubscribed")
                     with st.popover("🚀 Start 30-Day Free Trial"):
                         if st.button("Initialize Thermal Probe Matrix", key="btn_confirm_health"):
-                            st.session_state["user_data"]
-                            ["is_healthtech_active"] = Truest.balloons()
+                            st.session_state["user_data"]["is_healthtech_active"] = Truest.balloons()
                             st.rerun()
         with col3:
             # 🛡️ 3. CYBERTECH TILESwith 
