@@ -185,10 +185,13 @@ def render_home_portal():
                             if st.button("Authenticate Session"):
                                 matched_user = Nonecleaned_email = login_email.lower().strip()
                                 for record in st.session_state["DB_CLIENTS"]:
-                                    if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:matched_user = record.copy()breakif matched_user:
-                                    st.session_state["authenticated"] = Truest.session_state["user_data"] = matched_user
-                                    st.success("Access Token Authorized. Routing Workspace...")
-                                    st.rerun()
+                                    if record["email"].lower().strip() == cleaned_email and record["password"] == login_password:
+                                        matched_user = record.copy()
+                                        break
+                                    if matched_user:
+                                        st.session_state["authenticated"] = Truest.session_state["user_data"] = matched_user
+                                        st.success("Access Token Authorized. Routing Workspace...")
+                                        st.rerun()
                             else:
                                 st.error("Authentication Denied: Invalid cryptographic identifier matching.")
                             else:
