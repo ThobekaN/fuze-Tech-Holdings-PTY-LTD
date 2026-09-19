@@ -10,7 +10,7 @@ user_session = {
 st.sidebar.title("Fuze Tech Gateway")
 st.sidebar.markdown(f"**Logged in:** {user_profile['account_name']}")
 
-pages{}
+pages = {}
 
 home_page = st.Page("main_portal.py", title="Home Control Center")
 
