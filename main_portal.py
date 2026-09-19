@@ -7,6 +7,7 @@ from database import MOCK_CLIENTS_DB, MOCK_FLEET_TELEMETRY, MOCK_GRID_TELEMETRY,
 # Global Framework Page Configurations
 st.set_page_config(page_title="Fuze Tech Holdings - Portal Gateway", layout="wide")
 
+# Initialize Context Memory Tokens (Session State Flags)
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 if "user_data" not in st.session_state:
@@ -17,7 +18,9 @@ def handle_logout():
     st.session_state["user_data"] = None
     st.rerun()
 
+# --- CONTEXT CONDITIONAL CONTROL: LOGIN ENVELOPE OR ACCOUNT WORKSPACE ---
 if not st.session_state["authenticated"]:
+    # 🔒 SIDEBAR IS REMOVED HERE BY OMITTING IT FROM THIS BLOCK
     st.title("🔒 FUZE TECH HOLDINGS — Secure Login Gateway")
     st.markdown("### *Enterprise Multi-Tenant Infrastructure Portal*")
     st.divider()
@@ -47,9 +50,11 @@ if not st.session_state["authenticated"]:
             st.error("Authentication Denied: Invalid cryptographic identifier matching.")
 
 else:
+    # 🔓 THE SIDEBAR DYNAMICALLY UNLOCKS ONLY HERE AFTER VALIDATION
     user_profile = st.session_state["user_data"]
     active_id = user_profile["client_id"]
     
+    # Configure Corporate Shared Sidebar Access Controls
     st.sidebar.title("🏢 Fuze Tech Gateway")
     st.sidebar.markdown(f"**Operator Group:**\n`{user_profile['account_name']}`")
     st.sidebar.markdown(f"**Tenant UUID:** `{active_id}`")
@@ -63,7 +68,6 @@ else:
         st.markdown("### *Central Infrastructure Control Center — Multi-Tenant Operating Hub*")
         st.divider()
         
-        # General Status Alert Strip
         if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile["is_cybertech_active"], user_profile["is_transittech_active"], user_profile["is_healthtech_active"]]):
             st.success(f"🔓 **Active Database Session Token Verified.** Custom permission matrix mapped to: **{user_profile['account_name']}**.")
         else:
@@ -88,11 +92,9 @@ else:
         st.info("💡 *How it works:* Subscribed modules unlock secure data visualization paths in your sidebar. Unsubscribed modules dynamically render a zero-risk 30-Day Free Trial activation module right below.")
         st.write("")
         
-        # Grid Matrix Layout for all 5 Software Verticals
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            # 1. LOGTECH TILES
             with st.container(border=True):
                 st.markdown("##### 🚚 Legacy Freight Lines (LogTech)")
                 st.markdown("*Cross-border telematics, siphoning engines, and 2026 BURS custom declaration automation.*")
@@ -102,11 +104,7 @@ else:
                     st.error("🔴 License Status: Unsubscribed")
                     if st.button("🚀 Activate 30-Day Free Trial", key="trial_logtech"):
                         st.balloons()
-                        st.success("LogTech Pipeline Active! Refreshing network keys...")
-            
-            st.write("") # Layout spacer element
-            
-            # 4. TRANSITTECH TILES
+            st.write("") 
             with st.container(border=True):
                 st.markdown("##### 🚌 Legacy Transit Token (TransitTech)")
                 st.markdown("*Shuttle access management using strict anti-passback rules and 30s rotating tokens.*")
@@ -116,10 +114,8 @@ else:
                     st.error("🔴 License Status: Unsubscribed")
                     if st.button("🚀 Activate 30-Day Free Trial", key="trial_transit"):
                         st.balloons()
-                        st.success("TransitTech Pipeline Active! Syncing scanner nodes...")
 
         with col2:
-            # 2. GRIDTECH TILES
             with st.container(border=True):
                 st.markdown("##### ⚡ Legacy Utility Labs (GridTech)")
                 st.markdown("*Cross-referencing smart meters against sectional line current transformers to identify grid bypass fraud.*")
@@ -129,11 +125,7 @@ else:
                     st.error("🔴 License Status: Unsubscribed")
                     if st.button("🚀 Activate 30-Day Free Trial", key="trial_gridtech"):
                         st.balloons()
-                        st.success("GridTech Pipeline Active! Syncing transformer metrics...")
-            
-            st.write("") # Layout spacer element
-            
-            # 5. HEALTHTECH TILES
+            st.write("") 
             with st.container(border=True):
                 st.markdown("##### 🏥 Legacy Cold Chain (HealthTech)")
                 st.markdown("*Wireless temperature sensor analytics and predictive trajectory tracking inside clinical fridges.*")
@@ -143,10 +135,8 @@ else:
                     st.error("🔴 License Status: Unsubscribed")
                     if st.button("🚀 Activate 30-Day Free Trial", key="trial_health"):
                         st.balloons()
-                        st.success("HealthTech Pipeline Active! Initializing thermal alarms...")
 
         with col3:
-            # 3. CYBERTECH TILES
             with st.container(border=True):
                 st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
                 st.markdown("*Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.*")
@@ -156,7 +146,6 @@ else:
                     st.error("🔴 License Status: Unsubscribed")
                     if st.button("🚀 Activate 30-Day Free Trial", key="trial_cybertech"):
                         st.balloons()
-                        st.success("CyberTech Pipeline Active! Generating secure API tokens...")
 
     # --- 🛠️ AUTOMATED NAVIGATION MANAGER MAPS ---
     home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
