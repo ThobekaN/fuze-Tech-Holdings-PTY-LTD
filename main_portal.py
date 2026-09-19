@@ -173,7 +173,7 @@ def render_home_portal():
                 st.error("🔴 License Status: Unsubscribed")
                 with st.popover("🚀 Link CyberTech API Gateway"):
                     if st.button("Connect Application Checkout SDK", key="btn_confirm_cybertech"):
-                        st.session_state["user_data"]["is_cybertech_active"] = Truest.balloons()
+                        st.session_state["user_data"]["is_cybertech_active"] = True
                         st.rerun()
 if not st.session_state["authenticated"]:
     st.title("🔒 FUZE TECH HOLDINGS — Secure Login Gateway")
@@ -238,6 +238,6 @@ else:
         healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
         navigation_pool.append(healthtech_page)
         
-    nav = st.navigation(navigation_pool)
-    nav.run()
+nav = st.navigation(navigation_pool)
+nav.run()
 
