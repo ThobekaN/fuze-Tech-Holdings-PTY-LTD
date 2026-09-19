@@ -102,11 +102,11 @@ else:
     
     # Point the routing targets to your external view paths inside the subfolder
     if user_profile["is_logtech_active"]:
-        logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+        logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines", icon="🚚")
         navigation_pool.append(logtech_page)
         
     if user_profile["is_gridtech_active"]:
-        gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+        gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs", icon="⚡")
         navigation_pool.append(gridtech_page)
         
     nav = st.navigation(navigation_pool)
