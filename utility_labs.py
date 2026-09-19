@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 
 # 1. Custom Title Header for Multi-Page Rendering
-st.title("LEGACY UTILITY LABS — B2B GridTech Platform")
+st.title("⚡ LEGACY UTILITY LABS — B2B GridTech Platform")
 st.markdown("### *Fuze Tech Holdings Innovation: Real-Time Prepaid Meter Bypassing Detection*")
 st.divider()
 
@@ -23,21 +23,21 @@ df = pd.DataFrame(meter_data)
 
 # 3. Simulation Controls in Sidebar Workspace
 st.sidebar.subheader("🕹️ Grid Telematics Simulation")
-simulate_bypass = st.sidebar.button("Simulate Meter Bypassing Event (MTR-804)")
+simulate_bypass = st.sidebar.button("🚨 Simulate Meter Bypassing Event (MTR-804)")
 
 # 4. Top-Level Operational Metrics Panel
 metric_col1, metric_col2, metric_col3 = st.columns(3)
 
 with metric_col1:
-    st.metric(label="Total Monitored Nodes", value=f"{len(df)} Smart Meters", delta="Fuze Tech Group Core")
+    st.metric(label="📊 Total Monitored Nodes", value=f"{len(df)} Smart Meters", delta="Fuze Tech Group Core")
 with metric_col2:
     bypassed_meters = len(df[df["System_Status"] == "SUSPECTED BYPASS"])
-    st.metric(label="Active Fraud Alerts", value=f"{bypassed_meters} Critical", delta="Real-Time Detection", delta_color="inverse")
+    st.metric(label="🚨 Active Fraud Alerts", value=f"{bypassed_meters} Critical", delta="Real-Time Detection", delta_color="inverse")
 with metric_col3:
     if simulate_bypass:
-        st.metric(label="Grid Integrity Index", value="91.4% - CRITICAL", delta="-8.6% Grid Leakage", delta_color="inverse")
+        st.metric(label="🛡️ Grid Integrity Index", value="91.4% - CRITICAL", delta="-8.6% Grid Leakage", delta_color="inverse")
     else:
-        st.metric(label="Grid Integrity Index", value="100% SECURE", delta="Zero Leakage Detected")
+        st.metric(label="🛡️ Grid Integrity Index", value="100% SECURE", delta="Zero Leakage Detected")
 
 st.divider()
 
@@ -45,7 +45,7 @@ st.divider()
 col_left, col_right = st.columns(2)
 
 with col_left:
-    st.subheader("Core Utility Grid Registry & Telemetry Logs")
+    st.subheader("📋 Core Utility Grid Registry & Telemetry Logs")
     
     # Anomaly Engine Logic (Cross-references meter recording vs line current)
     if simulate_bypass:
@@ -57,15 +57,15 @@ with col_left:
     st.dataframe(df, use_container_width=True, hide_index=True)
 
 with col_right:
-    st.subheader("Automated Revenue Protection Engine")
-    st.info("Cross-examining data telemetry variables to protect municipal and landlord cash flows.")
+    st.subheader("🛡️ Automated Revenue Protection Engine")
+    st.info("ℹ️ Cross-examining data telemetry variables to protect municipal and landlord cash flows.")
     
     for index, row in df.iterrows():
-        st.markdown(f"**Node ID:** {row['Meter_ID']} | **Landlord Account:** {row['Property_Fund']}")
+        st.markdown(f"**🏢 Node ID:** {row['Meter_ID']} | **💼 Landlord Account:** {row['Property_Fund']}")
         if "NORMAL" in row['System_Status']:
-            st.success(f"Verified Secure. Status: **{row['System_Status']}**\n\n*Meter telemetry balances with grid consumption metrics.*")
+            st.success(f"✅ Verified Secure. Status: **{row['System_Status']}**\n\n*Meter telemetry balances with grid consumption metrics.*")
         else:
-            st.warning(f"Revenue Exposure. Status: **{row['System_Status']}**\n\n*Action Required: Dispatch field audit team to isolate bridged physical wiring.*")
+            st.warning(f"⚠️ Revenue Exposure. Status: **{row['System_Status']}**\n\n*Action Required: Dispatch field audit team to isolate bridged physical wiring.*")
         st.divider()
 
-st.caption(f"System timestamp synced: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} SAST | Developed by Thobeka Asanda Ngcobo.")
+st.caption(f"🕒 System timestamp synced: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} SAST | Developed by Thobeka Asanda Ngcobo.")
