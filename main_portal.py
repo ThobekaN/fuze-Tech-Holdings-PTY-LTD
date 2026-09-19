@@ -1,31 +1,38 @@
-# 1. Simulate the Logged-In User's Session Tokens
-user_session = {
-    "username": "super_group_admin",
-    "is_logtech_subscribed": True,       # Active subscription
-    "is_gridtech_subscribed": False,     # No subscription
-    "is_cybertech_subscribed": False,    # No subscription
+import streamlit as st
+
+# 1. Establish the Page Config for the Central Control Center
+st.set_page_config(page_title="Fuze Tech Holdings - Portal Gateway", layout="wide")
+
+# 2. Simulate User Subscription Flags from the Database
+# In production, these fields are pulled dynamically from your PostgreSQL 'clients' table
+user_profile = {
+    "account_name": "Super Group Operations",
+    "is_logtech_active": True,
+    "is_gridtech_active": False, # Offers a 30-Day Free Trial hook
+    "is_transit_active": True
 }
 
-st.sidebar.title("Fuze Tech Gateway Portal")
+st.sidebar.title("Fuze Tech Gateway")
+st.sidebar.markdown(f"**Logged in:** {user_profile['account_name']}")
 
-# 2. Gating Navigation Links based on active backend database flags
-page_selection = st.sidebar.radio("Navigate Workspace", ["Home Portal", "Legacy Freight Lines", "Legacy Utility Labs"])
+# 3. Define the Global Multi-Tenant Navigation Architecture
+# Streamlit reads these files as separate views based on database permissions
+pages = {}
 
-if page_selection == "Home Portal":
-    st.subheader("Welcome to Your Infrastructure Control Center")
-    # Render layout options...
+# All clients see the Central Entry Home Portal
+home_page = st.Page("main_portal.py", title="Home Control Center", icon="🏢")
 
-elif page_selection == "Legacy Freight Lines":
-    if user_session["is_logtech_subscribed"]:
-        # Execute your rewritten app.py code loop here!
-        st.success("Access Granted: Loading active telematics streams...")
-    else:
-        st.error("Access Denied: This vertical requires an active subscription or free trial activation.")
+# Dynamically gate visibility or access paths based on user subscription matrices
+if user_profile["is_logtech_active"]:
+    logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines", icon="🚚")
+else:
+    logtech_page = st.Page("views/freight_lines.py", title="Legacy Freight Lines (Locked 🔒)", icon="🚚")
 
-elif page_selection == "Legacy Utility Labs":
-    if user_session["is_gridtech_subscribed"]:
-        # Execute your smart meter code loop here...
-        st.success("Access Granted: Loading grid telemetry...")
-    else:
-        st.error("🔒 Access Denied: Your account is not subscribed to Legacy Utility Labs.")
-        st.button("Activate Your 30-Day Free Trial Subscription")
+if user_profile["is_gridtech_active"]:
+    gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs", icon="⚡")
+else:
+    gridtech_page = st.Page("views/utility_labs.py", title="Legacy Utility Labs (Locked 🔒)", icon="⚡")
+
+# Initialize and run the multi-page engine cleanly
+nav = st.navigation([home_page, logtech_page, gridtech_page])
+nav.run()
