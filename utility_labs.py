@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-
-client_meters = st.session_state["DB_GRIDTECH"].get(active_id, [])
+from database import MOCK_GRID_TELEMETRY
 
 # Pull the globally verified tenant token straight from session memory
 user_profile = st.session_state["user_data"]
