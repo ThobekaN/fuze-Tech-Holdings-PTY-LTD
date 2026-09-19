@@ -1,31 +1,28 @@
-# 1. Simulate the Logged-In User's Session Tokens
+import streamlit as st
+
 user_session = {
-    "username": "super_group_admin",
+    "account_name": "super_group_admin",
     "is_logtech_subscribed": True,       # Active subscription
     "is_gridtech_subscribed": False,     # No subscription
-    "is_cybertech_subscribed": False,    # No subscription
+    "is_cybertech_subscribed": True,    # Active subscription
 }
 
-st.sidebar.title("Fuze Tech Gateway Portal")
+st.sidebar.title("Fuze Tech Gateway")
+st.sidebar.markdown(f"**Logged in:** {user_profile['account_name']}")
 
-# 2. Gating Navigation Links based on active backend database flags
-page_selection = st.sidebar.radio("Navigate Workspace", ["Home Portal", "Legacy Freight Lines", "Legacy Utility Labs"])
+pages{}
 
-if page_selection == "Home Portal":
-    st.subheader("Welcome to Your Infrastructure Control Center")
-    # Render layout options...
+home_page = st.Page("main_portal.py", title="Home Control Center")
 
-elif page_selection == "Legacy Freight Lines":
-    if user_session["is_logtech_subscribed"]:
-        # Execute your rewritten app.py code loop here!
-        st.success("Access Granted: Loading active telematics streams...")
-    else:
-        st.error("Access Denied: This vertical requires an active subscription or free trial activation.")
+if user_profile["is_logtech_active"]:
+    logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines")
+else:
+    logtech_page = st.Page("freight_lines.py", title="Legacy Freight Lines (Locked 🔒)")
 
-elif page_selection == "Legacy Utility Labs":
-    if user_session["is_gridtech_subscribed"]:
-        # Execute your smart meter code loop here...
-        st.success("Access Granted: Loading grid telemetry...")
-    else:
-        st.error("🔒 Access Denied: Your account is not subscribed to Legacy Utility Labs.")
-        st.button("Activate Your 30-Day Free Trial Subscription")
+if user_profile["is_gridtech_active"]:
+    gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs")
+else:
+    gridtech_page = st.Page("utility_labs.py", title="Legacy Utility Labs (Locked 🔒)")
+
+nav = st.navigation([home_page, logtech_page, gridtech_page])
+nav.run()
