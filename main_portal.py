@@ -65,18 +65,18 @@ def render_home_portal():
                 st.session_state["user_data"]["is_healthtech_active"] = False
                 st.session_state["DB_HEALTHTECH"][active_id] = []
 
-           for record in st.session_state["DB_CLIENTS"]:
-            if record["client_id"] == active_id:
-                if cancel_logtech: 
-                    record["is_logtech_active"] = False
-                if cancel_gridtech: 
-                    record["is_gridtech_active"] = False
-                if cancel_cybertech: 
-                    record["is_cybertech_active"] = False
-                if cancel_transittech: 
-                    record["is_transittech_active"] = False
-                if cancel_healthtech: 
-                    record["is_healthtech_active"] = False
+            for record in st.session_state["DB_CLIENTS"]:
+                if record["client_id"] == active_id:
+                    if cancel_logtech: 
+                        record["is_logtech_active"] = False
+                    if cancel_gridtech: 
+                        record["is_gridtech_active"] = False
+                    if cancel_cybertech: 
+                        record["is_cybertech_active"] = False
+                    if cancel_transittech: 
+                        record["is_transittech_active"] = False
+                    if cancel_healthtech: 
+                        record["is_healthtech_active"] = False
                 break
 
     st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
