@@ -53,6 +53,56 @@ if "DB_TRANSITTECH" not in st.session_state:
 if "DB_HEALTHTECH" not in st.session_state:
     st.session_state["DB_HEALTHTECH"] = get_cached_healthtech()
 
+if "trigger_logtech_activation" in st.session_state and st.session_state["trigger_logtech_activation"]:
+    active_id = st.session_state["user_data"]["client_id"]
+    st.session_state["DB_LOGTECH"][active_id] = database.REMOTE_TRACKING_SERVERS_JSON[st.session_state["cached_token_logtech"]]
+    st.session_state["user_data"]["is_logtech_active"] = True
+    for record in st.session_state["DB_CLIENTS"]:
+        if record["client_id"] == active_id:
+            record["is_logtech_active"] = True
+            break
+    del st.session_state["trigger_logtech_activation"]
+
+if "trigger_transittech_activation" in st.session_state and st.session_state["trigger_transittech_activation"]:
+    active_id = st.session_state["user_data"]["client_id"]
+    st.session_state["DB_TRANSITTECH"][active_id] = database.MOCK_TRANSIT_TELEMETRY.get("CLIENT-442", [])
+    st.session_state["user_data"]["is_transittech_active"] = True
+    for record in st.session_state["DB_CLIENTS"]:
+        if record["client_id"] == active_id:
+            record["is_transittech_active"] = True
+            break
+    del st.session_state["trigger_transittech_activation"]
+
+if "trigger_gridtech_activation" in st.session_state and st.session_state["trigger_gridtech_activation"]:
+    active_id = st.session_state["user_data"]["client_id"]
+    st.session_state["DB_GRIDTECH"][active_id] = database.REMOTE_MUNICIPAL_GRID_JSON[st.session_state["cached_token_gridtech"]]
+    st.session_state["user_data"]["is_gridtech_active"] = True
+    for record in st.session_state["DB_CLIENTS"]:
+        if record["client_id"] == active_id:
+            record["is_gridtech_active"] = True
+            break
+    del st.session_state["trigger_gridtech_activation"]
+
+if "trigger_healthtech_activation" in st.session_state and st.session_state["trigger_healthtech_activation"]:
+    active_id = st.session_state["user_data"]["client_id"]
+    st.session_state["DB_HEALTHTECH"][active_id] = database.MOCK_HEALTH_TELEMETRY.get("CLIENT-442", [])
+    st.session_state["user_data"]["is_healthtech_active"] = True
+    for record in st.session_state["DB_CLIENTS"]:
+        if record["client_id"] == active_id:
+            record["is_healthtech_active"] = True
+            break
+    del st.session_state["trigger_healthtech_activation"]
+
+if "trigger_cybertech_activation" in st.session_state and st.session_state["trigger_cybertech_activation"]:
+    active_id = st.session_state["user_data"]["client_id"]
+    st.session_state["DB_CYBERTECH"][active_id] = database.MOCK_CYBER_TELEMETRY.get("CLIENT-442", [])
+    st.session_state["user_data"]["is_cybertech_active"] = True
+    for record in st.session_state["DB_CLIENTS"]:
+        if record["client_id"] == active_id:
+            record["is_cybertech_active"] = True
+            break
+    del st.session_state["trigger_cybertech_activation"]
+    
 def handle_logout():
     st.session_state["authenticated"] = False
     st.session_state["user_data"] = None
@@ -114,28 +164,18 @@ def render_home_portal():
         # 🚚 1. LOGTECH AUTOMATED API ONBOARDING CARD (SUPABASE DEMO)
         with st.container(border=True):
             st.markdown("##### 🚚 Legacy Freight Lines (LogTech)")
-            st.markdown("*Automated 2026 BURS custom clearance checks and real-time fuel-siphoning derivative analysis.*")
+            st.markdown("*Automated 2026 BURS customs clearance verification and real-time fuel-siphoning derivative analysis along Western trade corridors.*")
             if user_profile["is_logtech_active"]:
                 st.success("🟢 Active Subscription Billed")
             else:
                 st.error("🔴 License Status: Unsubscribed")
-                with st.popover("🚀 Initialize LogTech Asset Node Integration"):
+                with st.popover("🚀 Initialize LogTech Asset Node Integration", key="pop_logtech_node"):
                     st.markdown("### 💳 Select Your Billing Alignment Model")
-
                     commercial_model = st.radio(
                         "Choose Onboarding Tier:",
-                        [
-                            "🎁 30-Day Free Trial (Onboard up to 5 trucks at R0.00)",
-                            "💎 Direct Premium Enterprise Suite (Immediate Full Fleet Scale)"
-                        ],
+                        ["🎁 30-Day Free Trial (Onboard up to 5 trucks at R0.00)", "💎 Direct Premium Enterprise Suite (Immediate Full Fleet Scale)"],
                         key="model_logTech"
                     )
-                    st.divider()
-                    if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a standard paid contract at R1,500/truck per month upon completion of the 30-day validation sprint, unless you manually submit a cancellation prompt through your profile management panel prior to expiration.")
-                    else:
-                        st.info("ℹ️ **Billing Policy Notice:** Immediate corporate invoicing loops will initialize at a flat R1,500 per managed logistics node per month.")
-
                     st.divider()
                     st.markdown("### 📡 API Token Gateway Handshake")
                     st.caption("Presentation Hint: Paste `cartrack_oauth2_token_881` into the field below.")
@@ -143,30 +183,9 @@ def render_home_portal():
                     
                     if st.button("Establish API Loop Link", key="btn_connect_logtech"):
                         if input_log_token in database.REMOTE_TRACKING_SERVERS_JSON:
-                            
-                            # LIVE SUPABASE LOG CONSOLE ANIMATION
-                            log_placeholder = st.empty()
-                            with log_placeholder.container():
-                                st.code("🔍 Resolving cross_border telematics fleet gateway address...", language="sql")
-                                time.sleep(0.3)
-                                if "30-Day" in commercial_model:
-                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
-                                    time.sleep(0.2)
-                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
-                                time.sleep(0.2)
-                                st.code(f"📝 INSERT INTO vehicles (client_id, registration, driver, route) VALUES ('{active_id}', ...);", language="sql")
-                                time.sleep(0.2)
-                                st.code("✅ TRANSACTION COMMITTED. Supabase cache tables synchronized.", language="sql")
-                                time.sleep(0.2)
-                            
-                            log_placeholder.empty() 
-                            
-                            st.session_state["DB_LOGTECH"][active_id] = database.REMOTE_TRACKING_SERVERS_JSON[input_log_token]
-                            st.session_state["user_data"]["is_logtech_active"] = True
-                            for record in st.session_state["DB_CLIENTS"]:
-                                if record["client_id"] == active_id:
-                                    record["is_logtech_active"] = True
-                                    break
+                            st.session_state["cached_token_logtech"] = input_log_token
+                            st.session_state["trigger_logtech_activation"] = True
+                            st.rerun()
                         else:
                             st.error("Connection Failed: Invalid or unauthorized API token string footprint.")
         st.write("") 
@@ -190,44 +209,17 @@ def render_home_portal():
                         key="model_transitTech"
                     )
                     st.divider()
-                    if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R800/bus per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
-                    else:
-                        st.info("ℹ️ **Billing Policy Notice:** Corporate invoicing cycles will initialize immediately at a flat R800 per active operational transit node per month.")
-                        
-                    st.divider() 
+        
                     st.markdown("### 📡 API Gateway Handshake")
                     st.caption("Presentation Hint: Type `wits_campus_transit_loop_key` into the field below.")
-                    input_token = st.text_input("Enter Institutional Access Key ID", key="tk_transit")
+                    input_transit_token = st.text_input("Enter Institutional Access Key ID", key="tk_transit")
                     
                     if st.button("Establish Campus Network API Link", key="btn_confirm_transit"):
-                        if input_token == "wits_campus_transit_loop_key":
-                            log_placeholder = st.empty()
-                            with log_placeholder.container():
-                                st.code("🔍 Routing campus mainframe server gateway parameters...", language="sql")
-                                time.sleep(0.3)
-                                if "30-Day" in commercial_model:
-                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
-                                    time.sleep(0.2)
-                                st.code("📡 INTERFACING CONTROLLER: transit_gate_controller.py compiled at edge hardware...", language="python")
-                                time.sleep(0.2)
-                                st.code("📝 payload = {'client_institution_id': '" + active_id + "', 'vehicle_node_id': 'TERM-BUS-04'}", language="python")
-                                time.sleep(0.2)
-                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
-                                time.sleep(0.2)
-                                st.code(f"📝 ALTER TABLE transit_scans ENABLE ROW LEVEL SECURITY;", language="sql")
-                                time.sleep(0.2)
-                                st.code("✅ TRANSACTION COMMITTED. Transit perimeter handshake established.", language="sql")
-                                    
-                            log_placeholder.empty()
-             
-                        st.session_state["DB_TRANSITTECH"][active_id] = database.MOCK_TRANSIT_TELEMETRY.get("CLIENT-442", [])
-                        st.session_state["user_data"]["is_transittech_active"] = True
-                        for record in st.session_state["DB_CLIENTS"]:
-                            record["is_transittech_active"] = True
-                            break
-                    else:
-                        st.error("Connection Failed: Remote institutional gateway endpoint rejected configuration.")
+                        if input_transit_token == "wits_campus_transit_loop_key":
+                            st.session_state["trigger_transittech_activation"] = True
+                            st.rerun()
+                        else:
+                            st.error("Connection Failed: Remote institutional gateway endpoint rejected configuration.")
 
     with col2:
         # ⚡ 2. GRIDTECH AUTOMATED API ONBOARDING CARD (SUPABASE DEMO)
@@ -251,46 +243,18 @@ def render_home_portal():
                     )
 
                     st.divider()
-
-                    if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R150/meter per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
-                    else:
-                        st.info("ℹ️ **Billing Policy Notice:** Corporate invoicing cycles will initialize immediately at a flat R150 per micro property node per month.")
-
-                    st.divider()
-
+                    
                     st.markdown("### 📡 API Token Gateway Handshake")
                     st.caption("Presentation Hint: Paste `city_power_grid_key_442` into the field below.")
                     input_grid_token = st.text_input("Enter Smart Grid API Key", key="tk_grid")
                     
                     if st.button("Establish Grid Handshake Link", key="btn_connect_gridtech"):
                         if input_grid_token in database.REMOTE_MUNICIPAL_GRID_JSON:
-                            
-                            # LIVE SUPABASE LOG CONSOLE ANIMATION
-                            log_grid_placeholder = st.empty()
-                            with log_grid_placeholder.container():
-                                st.code("🔍 Resolving municipal current grid gateway address...", language="sql")
-                                time.sleep(0.3)
-                                if "30-Day" in commercial_model:
-                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
-                                    time.sleep(0.2)
-                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
-                                time.sleep(0.2)
-                                st.code(f"📝 INSERT INTO smart_meters (client_id, meter_id, location) VALUES ('{active_id}', ...);", language="sql")
-                                time.sleep(0.2)
-                                st.code("✅ TRANSACTION COMMITTED. Supabase database tables synchronized.", language="sql")
-                            
-                            log_grid_placeholder.empty()
-                            
-                            # Save records dynamically to active memory array
-                        st.session_state["DB_GRIDTECH"][active_id] = database.REMOTE_MUNICIPAL_GRID_JSON[input_grid_token]
-                        st.session_state["user_data"]["is_gridtech_active"] = True
-                        for record in st.session_state["DB_CLIENTS"]:
-                            if record["client_id"] == active_id:
-                                record["is_gridtech_active"] = True
-                                break
-                    else:
-                        st.error("Connection Failed: Remote utility endpoint handshake rejected.")
+                            st.session_state["cached_token_gridtech"] = input_grid_token
+                            st.session_state["trigger_gridtech_activation"] = True
+                            st.rerun()
+                        else:
+                            st.error("Connection Failed: Remote utility endpoint handshake rejected.")
                         
         st.write("")
         
@@ -319,44 +283,12 @@ def render_home_portal():
                     delivery_address = st.text_input("Clinic Delivery Street Address", "10 Hospital Street, Braamfontein")
                     st.divider()
                     
-                    if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R400/fridge per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
-                    else:
-                        st.info("ℹ️ **Billing Policy Notice:** Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
-                    
-                    st.divider()
-                    
                     if st.button("Authorize Payment & Initialize Dispatch", key="btn_confirm_health"):
                         if delivery_address and fridge_count:
-                            log_placeholder = st.empty()
-                            with log_placeholder.container():
-                                st.code("🔍 Processing merchant gateway checkout authentication token...", language="sql")
-                                time.sleep(0.4)
-                                if "30-Day" in commercial_model:
-                                    st.code("📝 REGISTERING AUTO-RENEWAL PROFILES IN CONTRACT ENGINE...", language="sql")
-                                    time.sleep(0.2)
-                                    st.code(f"⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER — WHITELISTING {int(fridge_count)} HARDWARE TRANSCIEVERS...", language="sql")
-                                    time.sleep(0.2)
-                                for i in range(int(fridge_count)):
-                                    generated_sn = f"PRB-992{random.randint(1,9)}-X"
-                                    st.code(f"📝 INSERT INTO cold_chain_probes (client_healthcare_id, physical_probe_serial) VALUES ('{active_id}', '{generated_sn}');", language="sql")
-                                    time.sleep(0.2)
-                                st.code("📡 ASSEMBLING ENTERPRISE DROPSHIP PAYLOAD TO HARDWARE DISTRIBUTOR...", language="sql")
-                                time.sleep(0.2)
-                                st.code(f"🚚 ROUTING COURIER API DELIVERY DESPATCH TO: {delivery_address}...", language="sql")
-                                time.sleep(0.2)
-                                st.code("✅ INVENTORY COMMITTED. Bootloader configuration whitelists synchronized with GitHub cloud source repositories.", language="sql")
-                                time.sleep(0.2)
-                            log_placeholder.empty()
-                            
-                        st.session_state["DB_HEALTHTECH"][active_id] = database.MOCK_HEALTH_TELEMETRY.get("CLIENT-442", [])
-                        st.session_state["user_data"]["is_healthtech_active"] = True
-                        for record in st.session_state["DB_CLIENTS"]:
-                            if record["client_id"] == active_id:
-                                record["is_healthtech_active"] = True
-                                break
-                    else:
-                        st.error("Fulfillment Failed: Secure delivery street parameters are strictly mandatory.")
+                            st.session_state["trigger_healthtech_activation"] = True
+                            st.rerun()
+                        else:
+                            st.error("Fulfillment Failed: Secure delivery street parameters are strictly mandatory.")
 
     with col3:
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
@@ -380,42 +312,16 @@ def render_home_portal():
                     )
                     st.divider()
 
-                    if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a contract billed at R0.50 per scan upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
-                    else:
-                        st.info("ℹ️ **Billing Policy Notice:** Operational API consumption counters will initialize immediately at R0.50 per individual transaction sweep.")
-                        
-                    st.divider()
                     st.markdown("### 📡 API SDK Integration Handshake")
                     st.caption("Presentation Hint: Type `secure_sybil_verification_endpoint_token` into the field below.")
-                    input_token = st.text_input("Enter Operational SDK Integration Token ID", key="tk_cyber")
+                    input_cyber_token = st.text_input("Enter Operational SDK Integration Token ID", key="tk_cyber")
                     
                     if st.button("Connect Application Checkout SDK", key="btn_confirm_cybertech"):
-                        if input_token == "secure_sybil_verification_endpoint_token":
-                            log_placeholder = st.empty()
-                            with log_placeholder.container():
-                                st.code("🔍 Injecting asynchronous verification SDK listener loops...", language="sql")
-                                time.sleep(0.3)
-                                if "30-Day" in commercial_model:
-                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
-                                    time.sleep(0.2)
-                                st.code("🛡️ CORE MODULE LINKED: sybil_gate_sdk.py compiled into client application checkout layer...", language="python")
-                                time.sleep(0.2)
-                                st.code("📝 payload = generate_checkout_verification_payload('" + active_id + "', user_alias, ...)", language="python")
-                                time.sleep(0.2)
-                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
-                                time.sleep(0.2)
-                                st.code("✅ TRANSACTION COMMITTED. App checkout perimeter hardened.", language="sql")
-                            log_placeholder.empty()
-                            
-                        st.session_state["DB_CYBERTECH"][active_id] = database.MOCK_CYBER_TELEMETRY.get("CLIENT-442", [])
-                        st.session_state["user_data"]["is_cybertech_active"] = True
-                        for record in st.session_state["DB_CLIENTS"]:
-                            if record["client_id"] == active_id:
-                                record["is_cybertech_active"] = True
-                                break
-                    else:
-                        st.error("Connection Failed: Operational application server rejected integration keys.")
+                        if input_cyber_token == "secure_sybil_verification_endpoint_token":
+                            st.session_state["trigger_cybertech_activation"] = True
+                            st.rerun()
+                        else:
+                            st.error("Connection Failed: Operational application server rejected integration keys.")
 
     with st.sidebar.popover("❌ Prompt Contract Cancellation"):
          st.markdown("### 🔏 Cancel Subscription / Trial Renewals")
