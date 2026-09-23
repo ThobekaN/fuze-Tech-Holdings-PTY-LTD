@@ -94,7 +94,23 @@ def render_home_portal():
                 st.success("🟢 Active Subscription Billed")
             else:
                 st.error("🔴 License Status: Unsubscribed")
-                with st.popover("🚀 Connect Third-Party Telematics API"):
+                with st.popover("🚀 Initialize LogTech Asset Node Integration"):
+                    st.markdown("### 💳 Select Your Billing Alignment Model")
+
+                    commercial_model = st.radio(
+                        "Choose Onboarding Tier:",
+                        [
+                            "🎁 30-Day Free Trial (Onboard up to 5 trucks at R0.00)",
+                            "💎 Direct Premium Enterprise Suite (Immediate Full Fleet Scale)"
+                        ]
+                    )
+                    st.divider()
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a standard paid contract at R1,500/truck per month upon completion of the 30-day validation sprint, unless you manually submit a cancellation prompt through your profile management panel prior to expiration.")
+                    else:
+                        st.info("ℹ️ **Billing Policy Notice:** Immediate corporate invoicing loops will initialize at a flat R1,500 per managed logistics node per month.")
+
+                    st.divider()
                     st.markdown("### 📡 API Token Gateway Handshake")
                     st.caption("Presentation Hint: Paste `cartrack_oauth2_token_881` into the field below.")
                     input_token = st.text_input("Enter Telematics Provider Read-Token ID", key="tk_logtech")
@@ -111,6 +127,10 @@ def render_home_portal():
                                 time.sleep(0.6)
                                 st.code("📦 JSON payload received from remote server tracking endpoints...", language="sql")
                                 time.sleep(0.5)
+
+                                if "30-Day" in commercial_model:
+                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
+                                    time.sleep(0.4)
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
                                 time.sleep(0.4)
                                 st.code(f"📝 INSERT INTO vehicles (client_id, registration, driver, route) VALUES ('{active_id}', ...);", language="sql")
@@ -118,7 +138,7 @@ def render_home_portal():
                                 st.code("✅ TRANSACTION COMMITTED. Supabase cache tables synchronized.", language="sql")
                                 time.sleep(0.4)
                             
-                            log_placeholder.empty() # Clear log to reveal success frame
+                            log_placeholder.empty() 
                             
                             # Real-World Simulation Loop: Grabs JSON data block and writes to memory state
                             fetched_json = database.REMOTE_TRACKING_SERVERS_JSON[input_token]
@@ -132,7 +152,10 @@ def render_home_portal():
                                     break
                                     
                             st.balloons()
-                            st.success("Supabase Link Secure! 3 Trucks successfully mapped via telemetry stream into your PostgreSQL instance in 2.9s.")
+                             if "30-Day" in commercial_model:
+                                st.success("Supabase Link Secure! 3 Trucks successfully mapped under your 30-Day Trial. Auto-renew parameters registered.")
+                            else:
+                                st.success("Supabase Link Secure! 3 Trucks successfully mapped under your Premium Enterprise contract. Invoicing active.")
                             st.rerun()
                         else:
                             st.error("Connection Failed: Invalid or unauthorized API token string footprint.")
