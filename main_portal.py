@@ -505,7 +505,6 @@ else:
 
     nav = st.navigation(navigation_pool)
     nav.run()
-
     st.sidebar.divider()
     
     if st.sidebar.button("Secure Session Sign Out"):
