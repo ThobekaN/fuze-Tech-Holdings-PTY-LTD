@@ -139,10 +139,10 @@ def render_home_portal():
                     st.divider()
                     st.markdown("### 📡 API Token Gateway Handshake")
                     st.caption("Presentation Hint: Paste `cartrack_oauth2_token_881` into the field below.")
-                    input_token = st.text_input("Enter Telematics Provider Read-Token ID", key="tk_logtech")
+                    input_log_token = st.text_input("Enter Telematics Provider Read-Token ID", key="tk_logtech")
                     
                     if st.button("Establish API Loop Link", key="btn_connect_logtech"):
-                        if input_token in database.REMOTE_TRACKING_SERVERS_JSON:
+                        if input_log_token in database.REMOTE_TRACKING_SERVERS_JSON:
                             
                             # LIVE SUPABASE LOG CONSOLE ANIMATION
                             log_placeholder = st.empty()
@@ -161,11 +161,7 @@ def render_home_portal():
                             
                             log_placeholder.empty() 
                             
-                            # Real-World Simulation Loop: Grabs JSON data block and writes to memory state
-                            fetched_json = database.REMOTE_TRACKING_SERVERS_JSON[input_token]
-                            st.session_state["DB_LOGTECH"][active_id] = fetched_json
-                            
-                            # Mutate active user token state metrics
+                            st.session_state["DB_LOGTECH"][active_id] = database.REMOTE_TRACKING_SERVERS_JSON[input_log_token]
                             st.session_state["user_data"]["is_logtech_active"] = True
                             for record in st.session_state["DB_CLIENTS"]:
                                 if record["client_id"] == active_id:
@@ -227,6 +223,7 @@ def render_home_portal():
                                     
                             log_placeholder.empty()
              
+                        st.session_state["DB_TRANSITTECH"][active_id] = database.MOCK_TRANSIT_TELEMETRY.get("CLIENT-442", [])
                         st.session_state["user_data"]["is_transittech_active"] = True
                         for record in st.session_state["DB_CLIENTS"]:
                             record["is_transittech_active"] = True
@@ -291,10 +288,8 @@ def render_home_portal():
                             log_grid_placeholder.empty()
                             
                             # Save records dynamically to active memory array
-                        fetched_grid_json = database.REMOTE_MUNICIPAL_GRID_JSON[input_grid_token]
-                        st.session_state["DB_GRIDTECH"][active_id] = fetched_grid_json
+                        st.session_state["DB_GRIDTECH"][active_id] = database.REMOTE_MUNICIPAL_GRID_JSON[input_grid_token]
                         st.session_state["user_data"]["is_gridtech_active"] = True
-                        
                         for record in st.session_state["DB_CLIENTS"]:
                             if record["client_id"] == active_id:
                                 record["is_gridtech_active"] = True
@@ -315,7 +310,7 @@ def render_home_portal():
             else:
                 st.error("🔴 License Status: Unsubscribed")
                 with st.popover("🚀  Initialize HealthTech Thermal Integration"):
-                    st.markdown("### 💳 Select Your Billing Alignment Model")
+                    st.markdown("### 💳 Hardware-as-a-Service Fulfillment Console")
                     
                     commercial_model = st.radio(
                         "Choose Onboarding Tier:",
@@ -327,34 +322,41 @@ def render_home_portal():
                     )
                     st.divider()
 
+                    fridge_count = st.number_input("Number of physical medication fridges to protect:", min_value=1, max_value=5, value=1)
+                    delivery_address = st.text_input("Clinic Delivery Street Address", "10 Hospital Street, Braamfontein")
+                    st.divider()
+                    
                     if "30-Day" in commercial_model:
                         st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R400/fridge per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
                         st.info("ℹ️ **Billing Policy Notice:** Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
                     
                     st.divider()
-                    st.markdown("### 📡 API Gateway Handshake")
-                    st.caption("Presentation Hint: Type `wireless_thermal_iot_broadcast_probe` into the field below.")
-                    input_token = st.text_input("Enter Hardware Transceiver Access Key", key="tk_health")
                     
-                    if st.button("Link Wireless Thermal Probes", key="btn_confirm_health"):
-                        if input_token == "wireless_thermal_iot_broadcast_probe":
+                    if st.button("Authorize Payment & Initialize Dispatch", key="btn_confirm_health"):
+                        if delivery_address and fridge_count:
                             log_placeholder = st.empty()
                             with log_placeholder.container():
-                                st.code("🔍 Listening for low-power remote hardware Wi-Fi data broadcasts...", language="sql")
-                                time.sleep(0.3)
+                                st.code("🔍 Processing merchant gateway checkout authentication token...", language="sql")
+                                time.sleep(0.4)
                                 if "30-Day" in commercial_model:
-                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
+                                    st.code("📝 REGISTERING AUTO-RENEWAL PROFILES IN CONTRACT ENGINE...", language="sql")
                                     time.sleep(0.2)
-                                st.code("🌡️ RUNNING HARDWARE ENGINE: cold_chain_firmware.py executing on ambient probe...", language="python")
+                                    st.code(f"⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER — WHITELISTING {int(fridge_count)} HARDWARE TRANSCIEVERS...", language="sql")
+                                    time.sleep(0.2)
+                                for i in range(int(fridge_count)):
+                                    generated_sn = f"PRB-992{random.randint(1,9)}-X"
+                                    st.code(f"📝 INSERT INTO cold_chain_probes (client_healthcare_id, physical_probe_serial) VALUES ('{active_id}', '{generated_sn}');", language="sql")
+                                    time.sleep(0.2)
+                                st.code("📡 ASSEMBLING ENTERPRISE DROPSHIP PAYLOAD TO HARDWARE DISTRIBUTOR...", language="sql")
                                 time.sleep(0.2)
-                                st.code("📝 payload = transmit_thermal_telemetry('" + active_id + "', 'PRB-9921-X', ...)", language="python")
+                                st.code(f"🚚 ROUTING COURIER API DELIVERY DESPATCH TO: {delivery_address}...", language="sql")
                                 time.sleep(0.2)
-                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
+                                st.code("✅ INVENTORY COMMITTED. Bootloader configuration whitelists synchronized with GitHub cloud source repositories.", language="sql")
                                 time.sleep(0.2)
-                                st.code("✅ TRANSACTION COMMITTED. Thermal baseline trajectory engine initialized.", language="sql")
                             log_placeholder.empty()
                             
+                        st.session_state["DB_HEALTHTECH"][active_id] = database.MOCK_HEALTH_TELEMETRY.get("CLIENT-442", [])
                         st.session_state["user_data"]["is_healthtech_active"] = True
                         for record in st.session_state["DB_CLIENTS"]:
                             if record["client_id"] == active_id:
@@ -363,7 +365,7 @@ def render_home_portal():
                         time.sleep(0.1)
                         st.rerun()
                     else:
-                        st.error("Connection Failed: Low-power sensory device authentication failed.")
+                        st.error("Fulfillment Failed: Secure delivery street parameters are strictly mandatory.")
 
     with col3:
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
@@ -415,6 +417,7 @@ def render_home_portal():
                                 st.code("✅ TRANSACTION COMMITTED. App checkout perimeter hardened.", language="sql")
                             log_placeholder.empty()
                             
+                        st.session_state["DB_CYBERTECH"][active_id] = database.MOCK_CYBER_TELEMETRY.get("CLIENT-442", [])
                         st.session_state["user_data"]["is_cybertech_active"] = True
                         for record in st.session_state["DB_CLIENTS"]:
                             if record["client_id"] == active_id:
