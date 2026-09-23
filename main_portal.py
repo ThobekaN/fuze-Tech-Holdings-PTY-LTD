@@ -80,7 +80,7 @@ def render_home_portal():
                 break
 
     st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
-        time.sleep(1.0)
+    time.sleep(1.0)
 
     st.rerun()
 
