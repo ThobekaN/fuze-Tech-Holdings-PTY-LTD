@@ -68,7 +68,7 @@ def render_home_portal():
     st.divider()
     
     # Session Status Validation Alert Bar
-    if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile.get("is_cybertech_active", False)]):
+    if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile.get("is_cybertech_active", user_profile.get("is_transittech_active", user_profile.get("is_healthtech_active", False)]):
         st.success(f"🔓 **Active Database Session Token Verified.** Custom permission matrix mapped to: **{user_profile['account_name']}**.")
     else:
         st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` carries no active product tier licenses. All analytics sidebar routes are dynamically hidden.")
