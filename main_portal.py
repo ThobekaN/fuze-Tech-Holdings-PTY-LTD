@@ -46,8 +46,8 @@ def render_home_portal():
 
         if st.button("Confirm Immediate Pipeline Termination", key="btn_cancel_execution"):
             if cancel_logtech:
-            st.session_state["user_data"]["is_logtech_active"] = False
-            st.session_state["DB_LOGTECH"][active_id] = [] 
+                st.session_state["user_data"]["is_logtech_active"] = False
+                st.session_state["DB_LOGTECH"][active_id] = [] 
             
             if cancel_gridtech:
                 st.session_state["user_data"]["is_gridtech_active"] = False
