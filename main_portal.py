@@ -53,16 +53,6 @@ if "DB_TRANSITTECH" not in st.session_state:
 if "DB_HEALTHTECH" not in st.session_state:
     st.session_state["DB_HEALTHTECH"] = get_cached_healthtech()
 
-if "trigger_logtech_activation" in st.session_state and st.session_state["trigger_logtech_activation"]:
-    active_id = st.session_state["user_data"]["client_id"]
-    st.session_state["DB_LOGTECH"][active_id] = database.REMOTE_TRACKING_SERVERS_JSON[st.session_state["cached_token_logtech"]]
-    st.session_state["user_data"]["is_logtech_active"] = True
-    for record in st.session_state["DB_CLIENTS"]:
-        if record["client_id"] == active_id:
-            record["is_logtech_active"] = True
-            break
-    del st.session_state["trigger_logtech_activation"]
-
 if "trigger_transittech_activation" in st.session_state and st.session_state["trigger_transittech_activation"]:
     active_id = st.session_state["user_data"]["client_id"]
     st.session_state["DB_TRANSITTECH"][active_id] = database.MOCK_TRANSIT_TELEMETRY.get("CLIENT-442", [])
@@ -183,8 +173,27 @@ def render_home_portal():
                     
                     if st.button("Establish API Loop Link", key="btn_connect_logtech"):
                         if input_log_token in database.REMOTE_TRACKING_SERVERS_JSON:
-                            st.session_state["cached_token_logtech"] = input_log_token
-                            st.session_state["trigger_logtech_activation"] = True
+                            log_placeholder = st.empty()
+                            with log_placeholder.container():
+                                st.code("🔍 Resolving cross-border telematics fleet gateway address...", language="sql")
+                                time.sleep(0.4)
+                                if "30-Day" in commercial_model:
+                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
+                                    time.sleep(0.2)
+                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
+                                time.sleep(0.3)
+                                st.code("✅ TRANSACTION COMMITTED. Supabase cache tables synchronized.", language="sql")
+                                time.sleep(0.3)
+                            log_placeholder.empty()
+                            
+                            st.session_state["DB_LOGTECH"][active_id] = database.REMOTE_TRACKING_SERVERS_JSON[input_token]
+                            st.session_state["user_data"]["is_logtech_active"] = True
+                            for record in st.session_state["DB_CLIENTS"]:
+                                if record["client_id"] == active_id:
+                                    record["is_logtech_active"] = True
+                                    break
+                            st.balloons()
+                            time.sleep(0.1)
                             st.rerun()
                         else:
                             st.error("Connection Failed: Invalid or unauthorized API token string footprint.")
