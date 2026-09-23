@@ -256,14 +256,14 @@ def render_home_portal():
                         st.balloons()
                         st.rerun()
 
-     with st.sidebar.popover("❌ Prompt Contract Cancellation"):
-        st.markdown("### 🔏 Cancel Subscription / Trial Renewals")
-        st.caption("Select which active industrial runtime pipelines you would like to terminate instantly.")
-        cancel_logtech = st.checkbox("Terminate Legacy Freight Lines (LogTech)", value=False) if user_profile["is_logtech_active"] else False
-        cancel_gridtech = st.checkbox("Terminate Legacy Utility Labs (GridTech)", value=False) if user_profile["is_gridtech_active"] else False
-        cancel_cybertech = st.checkbox("Terminate Legacy Sybil Gate (CyberTech)", value-False) if user_profile["is_cybertech_active"] else False
-        cancel_transittech = st.checkbox("Terminate Legacy Transit Token (TransitTech)", value=False) if user_profile["is_transittech_active"] else False
-        cancel_healthtech = st.checkbox("Terminate Legacy Cold Chain (HealthTech)", value=False) if user_profile["is_healthtech_active"] else False
+    with st.sidebar.popover("❌ Prompt Contract Cancellation"):
+         st.markdown("### 🔏 Cancel Subscription / Trial Renewals")
+         st.caption("Select which active industrial runtime pipelines you would like to terminate instantly.")
+         cancel_logtech = st.checkbox("Terminate Legacy Freight Lines (LogTech)", value=False) if user_profile["is_logtech_active"] else False
+         cancel_gridtech = st.checkbox("Terminate Legacy Utility Labs (GridTech)", value=False) if user_profile["is_gridtech_active"] else False
+         cancel_cybertech = st.checkbox("Terminate Legacy Sybil Gate (CyberTech)", value-False) if user_profile["is_cybertech_active"] else False
+         cancel_transittech = st.checkbox("Terminate Legacy Transit Token (TransitTech)", value=False) if user_profile["is_transittech_active"] else False
+         cancel_healthtech = st.checkbox("Terminate Legacy Cold Chain (HealthTech)", value=False) if user_profile["is_healthtech_active"] else False
 
         if st.button("Confirm Immediate Pipeline Termination", key="btn_cancel_execution"):
             if cancel_logtech:
