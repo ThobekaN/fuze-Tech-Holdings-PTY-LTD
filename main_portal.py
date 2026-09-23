@@ -460,7 +460,7 @@ else:
                 if cancel_cybertech:
                     st.session_state["user_data"]["is_cybertech_active"] = False
                     st.session_state["DB_CYBERTECH"][active_id] = []
-                if cancel_transit:
+                if cancel_transittech:
                     st.session_state["user_data"]["is_transittech_active"] = False
                     st.session_state["DB_TRANSITTECH"][active_id] = []
                 if cancel_health:
