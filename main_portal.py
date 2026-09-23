@@ -150,22 +150,19 @@ def render_home_portal():
                             # LIVE SUPABASE LOG CONSOLE ANIMATION
                             log_placeholder = st.empty()
                             with log_placeholder.container():
-                                st.code("🔍 Initializing client handshake routing...", language="sql")
-                                time.sleep(0.5)
-                                st.code("⚡ Access token validated. Requesting raw telematics metadata payload...", language="sql")
-                                time.sleep(0.6)
-                                st.code("📦 JSON payload received from remote server tracking endpoints...", language="sql")
-                                time.sleep(0.5)
+                                st.code("🔍 Resolving cross_border telematics fleet gateway address...", language="sql")
+                                time.sleep(0.3)
 
                                 if "30-Day" in commercial_model:
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
-                                    time.sleep(0.4)
+                                    time.sleep(0.2)
+                                    
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
-                                time.sleep(0.4)
+                                time.sleep(0.2)
                                 st.code(f"📝 INSERT INTO vehicles (client_id, registration, driver, route) VALUES ('{active_id}', ...);", language="sql")
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 st.code("✅ TRANSACTION COMMITTED. Supabase cache tables synchronized.", language="sql")
-                                time.sleep(0.4)
+                                time.sleep(0.2)
                             
                             log_placeholder.empty() 
                             
@@ -193,28 +190,88 @@ def render_home_portal():
         # 🚌 4. TRANSITTECH TILES
         with st.container(border=True):
             st.markdown("##### 🚌 Legacy Transit Token (TransitTech)")
-            st.markdown("*Shuttle access management using strict anti-passback rules and 30s rotating tokens.*")
+            st.markdown("*Eliminating card-sharing and screenshot forgery via database anti-passback lpgic and 30-second rotating cryptography tokens*")
             if user_profile.get("is_transittech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
                 st.error("🔴 License Status: Unsubscribed")
-                with st.popover("🚀 Connect Transit API"):
+                with st.popover("🚀 Intialize TransitTech Security SDK"):
+                    st.markdown("### 💳 Select Your Billing Alignment Model")
+                    commercial_model = st.radio(
+                        "Choose Onboarding Tier:",
+                        ["🎁 30-Day Free Trial (Provision up to a single transit routes at R0.00)", "💎 Direct Premium Enterprise Suite (Immediate Global Campus Scale)"],
+                        key="model_transitTech"
+                    )
+                    st.divider()
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a paid contract at R800/bus per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R800 per active operational transit node per month.")
+                        
+                    st.divider() 
+                    st.markdown("### 📡 API Gateway Handshake")
+                    st.caption("Presentation Hint: Type wits_campus_transit_loop_key into the field below.")
+                    input_token = st.text_input("Enter Institutional Access Key ID", key="tk_transit")
+                    
                     if st.button("Establish Campus Network API Link", key="btn_confirm_transit"):
+                        if input_token == "wits_campus_transit_loop_key":
+                            log_placeholder = st.empty()
+                            with log_placeholder.container():
+                                st.code("🔍 Routing campus mainframe server gateway parameters...", language="sql")
+                                time.sleep(0.3)
+                                
+                                if "30-Day" in commercial_model:
+                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
+                                    time.sleep(0.2)
+                                    
+                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
+                                time.sleep(0.2)
+                                st.code(f"📝 ALTER TABLE transit_scans ENABLE ROW LEVEL SECURITY;", language="sql")
+                                time.sleep(0.2)
+                                st.code("✅ TRANSACTION COMMITTED. Transit perimeter handshake established.", language="sql")
+                                    
+                            log_placeholder.empty()
+             
                         st.session_state["user_data"]["is_transittech_active"] = True
+                        for record in st.session_state["DB_CLIENTS"]:
+                            record["is_transittech_active"] = True
+                            break
                         st.balloons()
                         st.rerun()
+
+            else:
+                st.error("Connection Failed: Remote institutional gateway endpoint rejected configuration.")
 
     with col2:
         # ⚡ 2. GRIDTECH AUTOMATED API ONBOARDING CARD (SUPABASE DEMO)
         with st.container(border=True):
             st.markdown("##### ⚡ Legacy Utility Labs (GridTech)")
-            st.markdown("*Cross-referencing smart meters against sectional line current transformers to identify grid bypass fraud.*")
+            st.markdown("*Active prepaid meter fraud isolation by matching consumer usages directly against clip-on secondary line current transformers.*")
             if user_profile["is_gridtech_active"]:
                 st.success("🟢 Active Subscription Billed")
             else:
                 st.error("🔴 License Status: Unsubscribed")
-                with st.popover("🚀 Connect Municipal Smart Grid API"):
-                    st.markdown("### 📡 Municipal Grid Handshake Console")
+                with st.popover("🚀 Initialize GridTech Substation Integration"):
+                    st.markdown("### 💳 Select Your Billing Alignment Model")
+
+                    commercial_model = st.radio(
+                        "Choose Onboarding Tier:",
+                        ["🎁 30-Day Free Trial (Mount up to 10 smart meters at R0.00)", 
+                         "💎 Direct Premium Enterprise Suite (Full Estate Infrastructure Portfolio)"
+                        ],
+                        key="model_gridTech"
+                    )
+
+                    st.divider()
+
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a paid contract at R150/meter per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R150 per micro property node per month.")
+
+                    st.divider()
+
+                    st.markdown("### 📡 API Token Gateway Handshake")
                     st.caption("Presentation Hint: Paste `city_power_grid_key_442` into the field below.")
                     input_grid_token = st.text_input("Enter Smart Grid API Key", key="tk_grid")
                     
@@ -225,15 +282,17 @@ def render_home_portal():
                             log_grid_placeholder = st.empty()
                             with log_grid_placeholder.container():
                                 st.code("🔍 Resolving municipal current grid gateway address...", language="sql")
-                                time.sleep(0.5)
-                                st.code("📦 Fetching live sectional line transformer load objects...", language="sql")
-                                time.sleep(0.6)
+                                time.sleep(0.3)
+                                
+                                if "30-Day" in commercial_model:
+                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
+                                    time.sleep(0.2)
+                            
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
-                                time.sleep(0.4)
+                                time.sleep(0.2)
                                 st.code(f"📝 INSERT INTO smart_meters (client_id, meter_id, location) VALUES ('{active_id}', ...);", language="sql")
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 st.code("✅ TRANSACTION COMMITTED. Supabase database tables synchronized.", language="sql")
-                                time.sleep(0.4)
                             
                             log_grid_placeholder.empty()
                             
@@ -258,31 +317,114 @@ def render_home_portal():
         # 🏥 5. HEALTHTECH TILES
         with st.container(border=True):
             st.markdown("##### 🏥 Legacy Cold Chain (HealthTech)")
-            st.markdown("Wireless temperature sensor analytics and predictive trajectory tracking inside clinical fridges.")
+            st.markdown("Wireless sensor data streaming and predictive trajectory analysis inside clinic vaccine fridges to prevent thermal spoilage.")
             if user_profile.get("is_healthtech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
                 st.error("🔴 License Status: Unsubscribed")
-                with st.popover("🚀 Connect HealthTech API"):
+                with st.popover("🚀  Initialize HealthTech Thermal Integration"):
+                    st.markdown("### 💳 Select Your Billing Alignment Model")
+                    
+                    commercial_model = st.radio(
+                        "Choose Onboarding Tier:",
+                        ["🎁 30-Day Free Trial (Link up to 3 medical refrigerators at R0.00)",
+                         "💎 Direct Premium Enterprise Suite (Full Clinic Network Security)"
+                        ],
+                        key="model_healthTech"
+                    )
+                    st.divider()
+
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a paid contract at R400/fridge per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
+                    
+                    st.divider()
+                    st.markdown("### 📡 API Gateway Handshake")
+                    st.caption("Presentation Hint: Type wireless_thermal_iot_broadcast_probe into the field below.")
+                    input_token = st.text_input("Enter Hardware Transceiver Access Key", key="tk_health")
+                    
                     if st.button("Link Wireless Thermal Probes", key="btn_confirm_health"):
+                        if input_token == "wireless_thermal_iot_broadcast_probe":
+                            log_placeholder = st.empty()
+                            with log_placeholder.container():
+                                st.code("🔍 Listening for low-power remote hardware Wi-Fi data broadcasts...", language="sql")
+                                time.sleep(0.3)
+                                
+                                if "30-Day" in commercial_model:
+                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
+                                    time.sleep(0.2)
+
+                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
+                                time.sleep(0.2)
+                                st.code("✅ TRANSACTION COMMITTED. Thermal baseline trajectory engine initialized.", language="sql")
+                            log_placeholder.empty()
+                            
                         st.session_state["user_data"]["is_healthtech_active"] = True
+                        for record in st.session_state["DB_CLIENTS"]:
+                            if record["client_id"] == active_id:
+                                record["is_healthtech_active"] = True
+                                break
                         st.balloons()
                         st.rerun()
+                    else:
+                        st.error("Connection Failed: Low-power sensory device authentication failed.")
 
     with col3:
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
         with st.container(border=True):
             st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
-            st.markdown("Defeating coupon abuse fraud on fast food aggregator checkouts via unalterable hardware profiling and geographic address clustering.")
+            st.markdown("Protecting on-demand checkouts from automated promo abuse rings via unalterable device fingerprint hashes and location coordinate clustering.")
             if user_profile.get("is_cybertech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
                 st.error("🔴 License Status: Unsubscribed")
-                with st.popover("🚀 Link CyberTech API Gateway"):
+                with st.popover("🚀 Initialize CyberTech Protection Gateway"):
+                    st.markdown("### 💳 Select Your Billing Alignment Model")
+                    
+                    commercial_model = st.radio(
+                        "Choose Onboarding Tier:",
+                        ["🎁 30-Day Free Trial (First 10,000 checkout security sweeps at R0.00)",
+                         "💎 Direct Premium Enterprise Suite (Uncapped High-Frequency Scale)"],
+                        key="model_cyberTech"
+                    )
+                    st.divider()
+
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a contract billed at R0.50 per scan upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Operational API consumption counters will initialize immediately at R0.50 per individual transaction sweep.")
+                        
+                    st.divider()
+                    st.markdown("### 📡 API SDK Integration Handshake")
+                    st.caption("Presentation Hint: Type secure_sybil_verification_endpoint_token into the field below.")
+                    input_token = st.text_input("Enter Operational SDK Integration Token ID", key="tk_cyber")
+                    
                     if st.button("Connect Application Checkout SDK", key="btn_confirm_cybertech"):
+                        if input_token == "secure_sybil_verification_endpoint_token":
+                            log_placeholder = st.empty()
+                            with log_placeholder.container():
+                                st.code("🔍 Injecting asynchronous verification SDK listener loops...", language="sql")
+                                time.sleep(0.3)
+
+                                if "30-Day" in commercial_model:
+                                    st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
+                                    time.sleep(0.2)
+
+                                st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
+                                time.sleep(0.2)
+                                st.code("✅ TRANSACTION COMMITTED. App checkout perimeter hardened.", language="sql")
+                            log_placeholder.empty()
+                            
                         st.session_state["user_data"]["is_cybertech_active"] = True
+                        for record in st.session_state["DB_CLIENTS"]:
+                            if record["client_id"] == active_id:
+                                record["is_cybertech_active"] = True
+                                break
                         st.balloons()
                         st.rerun()
+                    else:
+                        st.error("Connection Failed: Operational application server rejected integration keys.")
 
     with st.sidebar.popover("❌ Prompt Contract Cancellation"):
          st.markdown("### 🔏 Cancel Subscription / Trial Renewals")
