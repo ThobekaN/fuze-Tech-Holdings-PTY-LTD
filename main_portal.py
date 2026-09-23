@@ -480,10 +480,6 @@ else:
 
     st.sidebar.divider()
     
-    if st.sidebar.button("Secure Session Sign Out"):
-        handle_logout()
-    st.sidebar.divider()
-    
     home_page = st.Page(render_home_portal, title="Home Control Center", icon="🏢")
     navigation_pool = [home_page]
     
@@ -506,6 +502,11 @@ else:
     if user_profile.get("is_healthtech_active", False):
         healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
         navigation_pool.append(healthtech_page)
+
+    st.sidebar.divider()
+    
+    if st.sidebar.button("Secure Session Sign Out"):
+        handle_logout()
         
     nav = st.navigation(navigation_pool)
     nav.run()
