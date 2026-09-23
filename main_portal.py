@@ -171,6 +171,7 @@ def render_home_portal():
                                 if record["client_id"] == active_id:
                                     record["is_logtech_active"] = True
                                     break
+                            time.sleep(0.1)
                             st.rerun()
                         else:
                             st.error("Connection Failed: Invalid or unauthorized API token string footprint.")
@@ -230,6 +231,7 @@ def render_home_portal():
                         for record in st.session_state["DB_CLIENTS"]:
                             record["is_transittech_active"] = True
                             break
+                        time.sleep(0.1)
                         st.rerun()
 
                     else:
@@ -297,6 +299,7 @@ def render_home_portal():
                             if record["client_id"] == active_id:
                                 record["is_gridtech_active"] = True
                                 break
+                        time.sleep(0.1)
                         st.rerun()
                     else:
                         st.error("Connection Failed: Remote utility endpoint handshake rejected.")
@@ -357,6 +360,7 @@ def render_home_portal():
                             if record["client_id"] == active_id:
                                 record["is_healthtech_active"] = True
                                 break
+                        time.sleep(0.1)
                         st.rerun()
                     else:
                         st.error("Connection Failed: Low-power sensory device authentication failed.")
@@ -416,6 +420,7 @@ def render_home_portal():
                             if record["client_id"] == active_id:
                                 record["is_cybertech_active"] = True
                                 break
+                        time.sleep(0.1)
                         st.rerun()
                     else:
                         st.error("Connection Failed: Operational application server rejected integration keys.")
