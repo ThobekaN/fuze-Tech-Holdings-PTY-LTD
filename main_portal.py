@@ -304,7 +304,7 @@ def render_home_portal():
                         st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
                     st.divider()
                     
-                    fridge_count = st.number_input("Number of physical medication fridges to protect:", min_value=1, max_value=5, value=1)
+                    fridge_count = st.number_input("Number of physical medication fridges to protect:", min_value=1, max_value=3, value=1)
                     delivery_address = st.text_input("Clinic Delivery Street Address", "10 Hospital Street, Braamfontein")
                     st.divider()
                     
