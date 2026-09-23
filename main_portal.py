@@ -221,6 +221,10 @@ def render_home_portal():
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
                                     
+                                st.code("📡 INTERFACING CONTROLLER: transit_gate_controller.py compiled at edge hardware...", language="python")
+                                time.sleep(0.2)
+                                st.code("📝 payload = {'client_institution_id': '" + active_id + "', 'vehicle_node_id': 'TERM-BUS-04'}", language="python")
+                                time.sleep(0.2)
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
                                 time.sleep(0.2)
                                 st.code(f"📝 ALTER TABLE transit_scans ENABLE ROW LEVEL SECURITY;", language="sql")
@@ -349,7 +353,11 @@ def render_home_portal():
                                 if "30-Day" in commercial_model:
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
-
+                                    
+                                st.code("🌡️ RUNNING HARDWARE ENGINE: cold_chain_firmware.py executing on ambient probe...", language="python")
+                                time.sleep(0.2)
+                                st.code("📝 payload = transmit_thermal_telemetry('" + active_id + "', 'PRB-9921-X', ...)", language="python")
+                                time.sleep(0.2)
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
                                 time.sleep(0.2)
                                 st.code("✅ TRANSACTION COMMITTED. Thermal baseline trajectory engine initialized.", language="sql")
@@ -407,6 +415,10 @@ def render_home_portal():
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
 
+                                st.code("🛡️ CORE MODULE LINKED: sybil_gate_sdk.py compiled into client application checkout layer...", language="python")
+                                time.sleep(0.2)
+                                st.code("📝 payload = generate_checkout_verification_payload('" + active_id + "', user_alias, ...)", language="python")
+                                time.sleep(0.2)
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
                                 time.sleep(0.2)
                                 st.code("✅ TRANSACTION COMMITTED. App checkout perimeter hardened.", language="sql")
