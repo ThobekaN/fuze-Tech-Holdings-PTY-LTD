@@ -48,6 +48,10 @@ if "DB_GRIDTECH" not in st.session_state:
     st.session_state["DB_GRIDTECH"] = database.MOCK_GRID_TELEMETRY.copy()
 if "DB_CYBERTECH" not in st.session_state:
     st.session_state["DB_CYBERTECH"] = database.MOCK_CYBER_TELEMETRY.copy()
+if "DB_TRANSITTECH" not in st.session_state:
+    st.session_state["DB_TRANSITTECH"] = database.MOCK_TRANSIT_TELEMETRY.copy()
+if "DB_HEALTHTECH" not in st.session_state:
+    st.session_state["DB_HEALTHTECH"] = database.MOCK_HEALTH_TELEMETRY.copy()
 
 def handle_logout():
     st.session_state["authenticated"] = False
