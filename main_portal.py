@@ -298,7 +298,7 @@ def render_home_portal():
                          record["is_transittech_active"] = False
                      if cancel_healthtech: 
                          record["is_healthtech_active"] = False
-                 break
+                     break
 
              st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
              time.sleep(1.0)
