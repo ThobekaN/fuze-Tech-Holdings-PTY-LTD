@@ -193,7 +193,10 @@ def render_home_portal():
                     st.markdown("### 💳 Select Your Billing Alignment Model")
                     commercial_model = st.radio(
                         "Choose Onboarding Tier:",
-                        ["🎁 30-Day Free Trial (Provision up to a single transit routes at R0.00)", "💎 Direct Premium Enterprise Suite (Immediate Global Campus Scale)"],
+                        [
+                            "🎁 30-Day Free Trial (Provision up to a single transit routes at R0.00)",
+                            "💎 Direct Premium Enterprise Suite (Immediate Global Campus Scale)"
+                        ],
                         key="model_transitTech"
                     )
                     st.divider()
@@ -249,8 +252,9 @@ def render_home_portal():
 
                     commercial_model = st.radio(
                         "Choose Onboarding Tier:",
-                        ["🎁 30-Day Free Trial (Mount up to 10 smart meters at R0.00)", 
-                         "💎 Direct Premium Enterprise Suite (Full Estate Infrastructure Portfolio)"
+                        [
+                            "🎁 30-Day Free Trial (Mount up to 10 smart meters at R0.00)", 
+                            "💎 Direct Premium Enterprise Suite (Full Estate Infrastructure Portfolio)"
                         ],
                         key="model_gridTech"
                     )
@@ -317,8 +321,9 @@ def render_home_portal():
                     
                     commercial_model = st.radio(
                         "Choose Onboarding Tier:",
-                        ["🎁 30-Day Free Trial (Link up to 3 medical refrigerators at R0.00)",
-                         "💎 Direct Premium Enterprise Suite (Full Clinic Network Security)"
+                        [
+                            "🎁 30-Day Free Trial (Link up to 3 medical refrigerators at R0.00)",
+                            "💎 Direct Premium Enterprise Suite (Full Clinic Network Security)"
                         ],
                         key="model_healthTech"
                     )
@@ -373,8 +378,10 @@ def render_home_portal():
                     
                     commercial_model = st.radio(
                         "Choose Onboarding Tier:",
-                        ["🎁 30-Day Free Trial (First 10,000 checkout security sweeps at R0.00)",
-                         "💎 Direct Premium Enterprise Suite (Uncapped High-Frequency Scale)"],
+                        [
+                            "🎁 30-Day Free Trial (First 10,000 checkout security sweeps at R0.00)",
+                            "💎 Direct Premium Enterprise Suite (Uncapped High-Frequency Scale)"
+                        ],
                         key="model_cyberTech"
                     )
                     st.divider()
