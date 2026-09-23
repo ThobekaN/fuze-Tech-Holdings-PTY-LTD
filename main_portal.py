@@ -68,7 +68,7 @@ def render_home_portal():
     st.divider()
     
     # Session Status Validation Alert Bar
-    if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile.get("is_cybertech_active", user_profile.get("is_transittech_active", user_profile.get("is_healthtech_active", False)]):
+    if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile.get("is_cybertech_active", False), user_profile.get("is_transittech_active", False), user_profile.get("is_healthtech_active", False)]):
         st.success(f"🔓 **Active Database Session Token Verified.** Custom permission matrix mapped to: **{user_profile['account_name']}**.")
     else:
         st.error(f"🔒 **Limited Execution Mode:** Account `{active_id}` carries no active product tier licenses. All analytics sidebar routes are dynamically hidden.")
@@ -94,13 +94,10 @@ def render_home_portal():
         st.metric(label="🛡️ Vetted API Checkouts", value=f"{cyber_count} Scanned" if user_profile.get("is_cybertech_active", False) else "0 Scanned")
         
     with kpi_col4:
-        # Check if the specific client data row occupies a slot inside the TransitTech table
-        transit_count = len(database.MOCK_TRANSIT_TELEMETRY.get(active_id, []))
-        st.metric(label="🚌 Fleet Scanner Modules", value=f"{transit_count} Busses Active" if user_profile.get("is_transittech_active", False) else "0 Busses Active")
-        
+        transit_count = len(st.session_state["DB_TRANSITTECH"].get(active_id, []))
+        st.metric(label="🚌 Fleet Scanners", value=f"{transit_count} Busses Active" if user_profile.get("is_transittech_active", False) else "0 Busses Active")
     with kpi_col5:
-        # Check if the specific client data row occupies a slot inside the HealthTech table
-        health_count = len(database.MOCK_HEALTH_TELEMETRY.get(active_id, []))
+        health_count = len(st.session_state["DB_HEALTHTECH"].get(active_id, []))
         st.metric(label="🏥 Refrigeration Nodes", value=f"{health_count} Units Tracked" if user_profile.get("is_healthtech_active", False) else "0 Units Tracked")
 
         
@@ -152,11 +149,9 @@ def render_home_portal():
                             with log_placeholder.container():
                                 st.code("🔍 Resolving cross_border telematics fleet gateway address...", language="sql")
                                 time.sleep(0.3)
-
                                 if "30-Day" in commercial_model:
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
-                                    
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
                                 time.sleep(0.2)
                                 st.code(f"📝 INSERT INTO vehicles (client_id, registration, driver, route) VALUES ('{active_id}', ...);", language="sql")
@@ -201,9 +196,9 @@ def render_home_portal():
                     )
                     st.divider()
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R800/bus per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R800/bus per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R800 per active operational transit node per month.")
+                        st.info("ℹ️ **Billing Policy Notice:** Corporate invoicing cycles will initialize immediately at a flat R800 per active operational transit node per month.")
                         
                     st.divider() 
                     st.markdown("### 📡 API Gateway Handshake")
@@ -216,11 +211,9 @@ def render_home_portal():
                             with log_placeholder.container():
                                 st.code("🔍 Routing campus mainframe server gateway parameters...", language="sql")
                                 time.sleep(0.3)
-                                
                                 if "30-Day" in commercial_model:
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
-                                    
                                 st.code("📡 INTERFACING CONTROLLER: transit_gate_controller.py compiled at edge hardware...", language="python")
                                 time.sleep(0.2)
                                 st.code("📝 payload = {'client_institution_id': '" + active_id + "', 'vehicle_node_id': 'TERM-BUS-04'}", language="python")
@@ -266,9 +259,9 @@ def render_home_portal():
                     st.divider()
 
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R150/meter per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R150/meter per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R150 per micro property node per month.")
+                        st.info("ℹ️ **Billing Policy Notice:** Corporate invoicing cycles will initialize immediately at a flat R150 per micro property node per month.")
 
                     st.divider()
 
@@ -284,11 +277,9 @@ def render_home_portal():
                             with log_grid_placeholder.container():
                                 st.code("🔍 Resolving municipal current grid gateway address...", language="sql")
                                 time.sleep(0.3)
-                                
                                 if "30-Day" in commercial_model:
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
-                            
                                 st.code("⚡ CONNECTING TO SUPABASE POSTGRES CLUSTER...", language="sql")
                                 time.sleep(0.2)
                                 st.code(f"📝 INSERT INTO smart_meters (client_id, meter_id, location) VALUES ('{active_id}', ...);", language="sql")
@@ -334,9 +325,9 @@ def render_home_portal():
                     st.divider()
 
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R400/fridge per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R400/fridge per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
+                        st.info("ℹ️ **Billing Policy Notice:** Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
                     
                     st.divider()
                     st.markdown("### 📡 API Gateway Handshake")
@@ -349,11 +340,9 @@ def render_home_portal():
                             with log_placeholder.container():
                                 st.code("🔍 Listening for low-power remote hardware Wi-Fi data broadcasts...", language="sql")
                                 time.sleep(0.3)
-                                
                                 if "30-Day" in commercial_model:
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
-                                    
                                 st.code("🌡️ RUNNING HARDWARE ENGINE: cold_chain_firmware.py executing on ambient probe...", language="python")
                                 time.sleep(0.2)
                                 st.code("📝 payload = transmit_thermal_telemetry('" + active_id + "', 'PRB-9921-X', ...)", language="python")
@@ -395,9 +384,9 @@ def render_home_portal():
                     st.divider()
 
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a contract billed at R0.50 per scan upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a contract billed at R0.50 per scan upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Operational API consumption counters will initialize immediately at R0.50 per individual transaction sweep.")
+                        st.info("ℹ️ **Billing Policy Notice:** Operational API consumption counters will initialize immediately at R0.50 per individual transaction sweep.")
                         
                     st.divider()
                     st.markdown("### 📡 API SDK Integration Handshake")
@@ -410,11 +399,9 @@ def render_home_portal():
                             with log_placeholder.container():
                                 st.code("🔍 Injecting asynchronous verification SDK listener loops...", language="sql")
                                 time.sleep(0.3)
-
                                 if "30-Day" in commercial_model:
                                     st.code("📝 REGISTERING AUTO-RENEWAL MANDATE IN BILLING ENGINE...", language="sql")
                                     time.sleep(0.2)
-
                                 st.code("🛡️ CORE MODULE LINKED: sybil_gate_sdk.py compiled into client application checkout layer...", language="python")
                                 time.sleep(0.2)
                                 st.code("📝 payload = generate_checkout_verification_payload('" + active_id + "', user_alias, ...)", language="python")
