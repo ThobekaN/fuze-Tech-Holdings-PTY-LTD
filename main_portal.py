@@ -463,7 +463,7 @@ else:
                 if cancel_transittech:
                     st.session_state["user_data"]["is_transittech_active"] = False
                     st.session_state["DB_TRANSITTECH"][active_id] = []
-                if cancel_health:
+                if cancel_healthtech:
                     st.session_state["user_data"]["is_healthtech_active"] = False
                     st.session_state["DB_HEALTHTECH"][active_id] = []
                     
@@ -473,8 +473,8 @@ else:
                         if cancel_logtech: record["is_logtech_active"] = False
                         if cancel_gridtech: record["is_gridtech_active"] = False
                         if cancel_cybertech: record["is_cybertech_active"] = False
-                        if cancel_transit: record["is_transittech_active"] = False
-                        if cancel_health: record["is_healthtech_active"] = False
+                        if cancel_transittech: record["is_transittech_active"] = False
+                        if cancel_healthtech: record["is_healthtech_active"] = False
                         break
                         
                 st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
