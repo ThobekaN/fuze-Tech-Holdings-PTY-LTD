@@ -10,6 +10,22 @@ import database
 # 1. Global Framework Page Configurations
 st.set_page_config(page_title="Fuze Tech Holdings - Portal Gateway", layout="wide")
 
+@st.cache_data(ttl=600)  # Caches the mock schemas in RAM for 10 minutes to stop reload lag
+def get_cached_clients():
+    return database.MOCK_CLIENTS_DB.copy()
+
+@st.cache_data(ttl=600)
+def get_cached_logtech():
+    return database.MOCK_FLEET_TELEMETRY.copy()
+
+@st.cache_data(ttl=600)
+def get_cached_gridtech():
+    return database.MOCK_GRID_TELEMETRY.copy()
+
+@st.cache_data(ttl=600)
+def get_cached_cybertech():
+    return database.MOCK_CYBER_TELEMETRY.copy()
+
 # 2. 🔐 STATE ENGINE ARCHITECTURE (Initializes data records inside active browser memory)
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
