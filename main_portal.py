@@ -503,10 +503,12 @@ else:
         healthtech_page = st.Page("cold_chain.py", title="Legacy Cold Chain", icon="🏥")
         navigation_pool.append(healthtech_page)
 
+    nav = st.navigation(navigation_pool)
+    nav.run()
+
     st.sidebar.divider()
     
     if st.sidebar.button("Secure Session Sign Out"):
         handle_logout()
+
         
-    nav = st.navigation(navigation_pool)
-    nav.run()
