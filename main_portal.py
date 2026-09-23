@@ -184,7 +184,7 @@ def render_home_portal():
         # 🚌 4. TRANSITTECH TILES
         with st.container(border=True):
             st.markdown("##### 🚌 Legacy Transit Token (TransitTech)")
-            st.markdown("Eliminating card-sharing and screenshot forgery via database anti-passback lpgic and 30-second rotating cryptography tokens.")
+            st.markdown("*Eliminating card-sharing and screenshot forgery via database anti-passback lpgic and 30-second rotating cryptography tokens.*")
             if user_profile.get("is_transittech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
@@ -201,9 +201,9 @@ def render_home_portal():
                     )
                     st.divider()
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R800/bus per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.**")
+                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R800/bus per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R800 per active operational transit node per month.**")
+                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R800 per active operational transit node per month.")
                         
                     st.divider() 
                     st.markdown("### 📡 API Gateway Handshake")
@@ -242,7 +242,7 @@ def render_home_portal():
         # ⚡ 2. GRIDTECH AUTOMATED API ONBOARDING CARD (SUPABASE DEMO)
         with st.container(border=True):
             st.markdown("##### ⚡ Legacy Utility Labs (GridTech)")
-            st.markdown("Active prepaid meter fraud isolation by matching consumer usages directly against clip-on secondary line current transformers.")
+            st.markdown("*Active prepaid meter fraud isolation by matching consumer usages directly against clip-on secondary line current transformers.*")
             if user_profile["is_gridtech_active"]:
                 st.success("🟢 Active Subscription Billed")
             else:
@@ -262,9 +262,9 @@ def render_home_portal():
                     st.divider()
 
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R150/meter per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.**")
+                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R150/meter per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R150 per micro property node per month.**")
+                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R150 per micro property node per month.")
 
                     st.divider()
 
@@ -311,7 +311,7 @@ def render_home_portal():
         # 🏥 5. HEALTHTECH TILES
         with st.container(border=True):
             st.markdown("##### 🏥 Legacy Cold Chain (HealthTech)")
-            st.markdown("Wireless sensor data streaming and predictive trajectory analysis inside clinic vaccine fridges to prevent thermal spoilage.")
+            st.markdown("*Wireless sensor data streaming and predictive trajectory analysis inside clinic vaccine fridges to prevent thermal spoilage.*")
             if user_profile.get("is_healthtech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
@@ -330,9 +330,9 @@ def render_home_portal():
                     st.divider()
 
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R400/fridge per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.**")
+                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a paid contract at R400/fridge per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.**")
+                        st.info("ℹ️ **Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
                     
                     st.divider()
                     st.markdown("### 📡 API Gateway Handshake")
@@ -368,7 +368,7 @@ def render_home_portal():
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
         with st.container(border=True):
             st.markdown("##### 🛡️ Legacy Sybil Gate (CyberTech)")
-            st.markdown("Protecting on-demand checkouts from automated promo abuse rings via unalterable device fingerprint hashes and location coordinate clustering.")
+            st.markdown("*Protecting on-demand checkouts from automated promo abuse rings via unalterable device fingerprint hashes and location coordinate clustering.*")
             if user_profile.get("is_cybertech_active", False):
                 st.success("🟢 Active Subscription Billed")
             else:
@@ -387,9 +387,9 @@ def render_home_portal():
                     st.divider()
 
                     if "30-Day" in commercial_model:
-                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a contract billed at R0.50 per scan upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.**")
+                        st.warning("⚠️ **Subscription Policy Notice: Your account will automatically transition into a contract billed at R0.50 per scan upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
                     else:
-                        st.info("ℹ️ **Billing Policy Notice: Operational API consumption counters will initialize immediately at R0.50 per individual transaction sweep.**")
+                        st.info("ℹ️ **Billing Policy Notice: Operational API consumption counters will initialize immediately at R0.50 per individual transaction sweep.")
                         
                     st.divider()
                     st.markdown("### 📡 API SDK Integration Handshake")
