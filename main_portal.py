@@ -176,12 +176,6 @@ def render_home_portal():
                                 if record["client_id"] == active_id:
                                     record["is_logtech_active"] = True
                                     break
-                                    
-                            st.balloons()
-                            if "30-Day" in commercial_model:
-                                st.success("Supabase Link Secure! 3 Trucks successfully mapped under your 30-Day Trial. Auto-renew parameters registered.")
-                            else:
-                                st.success("Supabase Link Secure! 3 Trucks successfully mapped under your Premium Enterprise contract. Invoicing active.")
                             st.rerun()
                         else:
                             st.error("Connection Failed: Invalid or unauthorized API token string footprint.")
@@ -236,11 +230,10 @@ def render_home_portal():
                         for record in st.session_state["DB_CLIENTS"]:
                             record["is_transittech_active"] = True
                             break
-                        st.balloons()
                         st.rerun()
 
-            else:
-                st.error("Connection Failed: Remote institutional gateway endpoint rejected configuration.")
+                    else:
+                        st.error("Connection Failed: Remote institutional gateway endpoint rejected configuration.")
 
     with col2:
         # ⚡ 2. GRIDTECH AUTOMATED API ONBOARDING CARD (SUPABASE DEMO)
@@ -305,9 +298,6 @@ def render_home_portal():
                             if record["client_id"] == active_id:
                                 record["is_gridtech_active"] = True
                                 break
-                                
-                        st.balloons()
-                        st.success("Supabase Link Secure! 3 Sectional meters balanced and live mapped.")
                         st.rerun()
                     else:
                         st.error("Connection Failed: Remote utility endpoint handshake rejected.")
@@ -365,7 +355,6 @@ def render_home_portal():
                             if record["client_id"] == active_id:
                                 record["is_healthtech_active"] = True
                                 break
-                        st.balloons()
                         st.rerun()
                     else:
                         st.error("Connection Failed: Low-power sensory device authentication failed.")
@@ -421,7 +410,6 @@ def render_home_portal():
                             if record["client_id"] == active_id:
                                 record["is_cybertech_active"] = True
                                 break
-                        st.balloons()
                         st.rerun()
                     else:
                         st.error("Connection Failed: Operational application server rejected integration keys.")
