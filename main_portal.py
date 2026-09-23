@@ -507,7 +507,7 @@ else:
     nav.run()
     st.sidebar.divider()
     
-    if st.sidebar.button("Secure Session Sign Out"):
+    if st.sidebar.button("Secure Session Sign Out", key="btn_signout"):
         handle_logout()
 
         
