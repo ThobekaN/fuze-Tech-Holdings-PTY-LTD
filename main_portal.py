@@ -207,7 +207,7 @@ def render_home_portal():
                         
                     st.divider() 
                     st.markdown("### 📡 API Gateway Handshake")
-                    st.caption("Presentation Hint: Type wits_campus_transit_loop_key into the field below.")
+                    st.caption("Presentation Hint: Type `wits_campus_transit_loop_key` into the field below.")
                     input_token = st.text_input("Enter Institutional Access Key ID", key="tk_transit")
                     
                     if st.button("Establish Campus Network API Link", key="btn_confirm_transit"):
@@ -336,7 +336,7 @@ def render_home_portal():
                     
                     st.divider()
                     st.markdown("### 📡 API Gateway Handshake")
-                    st.caption("Presentation Hint: Type wireless_thermal_iot_broadcast_probe into the field below.")
+                    st.caption("Presentation Hint: Type `wireless_thermal_iot_broadcast_probe` into the field below.")
                     input_token = st.text_input("Enter Hardware Transceiver Access Key", key="tk_health")
                     
                     if st.button("Link Wireless Thermal Probes", key="btn_confirm_health"):
@@ -393,7 +393,7 @@ def render_home_portal():
                         
                     st.divider()
                     st.markdown("### 📡 API SDK Integration Handshake")
-                    st.caption("Presentation Hint: Type secure_sybil_verification_endpoint_token into the field below.")
+                    st.caption("Presentation Hint: Type `secure_sybil_verification_endpoint_token` into the field below.")
                     input_token = st.text_input("Enter Operational SDK Integration Token ID", key="tk_cyber")
                     
                     if st.button("Connect Application Checkout SDK", key="btn_confirm_cybertech"):
