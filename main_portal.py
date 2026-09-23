@@ -300,8 +300,8 @@ def render_home_portal():
                          record["is_healthtech_active"] = False
                  break
 
-        st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
-        time.sleep(1.0)
+             st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
+             time.sleep(1.0)
 
     st.rerun()
 
