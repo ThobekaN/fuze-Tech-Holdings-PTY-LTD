@@ -265,40 +265,40 @@ def render_home_portal():
          cancel_transittech = st.checkbox("Terminate Legacy Transit Token (TransitTech)", value=False) if user_profile["is_transittech_active"] else False
          cancel_healthtech = st.checkbox("Terminate Legacy Cold Chain (HealthTech)", value=False) if user_profile["is_healthtech_active"] else False
 
-        if st.button("Confirm Immediate Pipeline Termination", key="btn_cancel_execution"):
-            if cancel_logtech:
-                st.session_state["user_data"]["is_logtech_active"] = False
-                st.session_state["DB_LOGTECH"][active_id] = [] 
+         if st.button("Confirm Immediate Pipeline Termination", key="btn_cancel_execution"):
+             if cancel_logtech:
+                 st.session_state["user_data"]["is_logtech_active"] = False
+                 st.session_state["DB_LOGTECH"][active_id] = [] 
             
-            if cancel_gridtech:
-                st.session_state["user_data"]["is_gridtech_active"] = False
-                st.session_state["DB_GRIDTECH"][active_id] = [] 
+             if cancel_gridtech:
+                 st.session_state["user_data"]["is_gridtech_active"] = False
+                 st.session_state["DB_GRIDTECH"][active_id] = [] 
                 
-            if cancel_cybertech:
-                st.session_state["user_data"]["is_cybertech_active"] = False
-                st.session_state["DB_CYBERTECH"][active_id] = []
+             if cancel_cybertech:
+                 st.session_state["user_data"]["is_cybertech_active"] = False
+                 st.session_state["DB_CYBERTECH"][active_id] = []
             
-            if cancel_transittech:
-                st.session_state["user_data"]["is_transittech_active"] = False
-                st.session_state["DB_TRANSITTECH"][active_id] = []
+             if cancel_transittech:
+                 st.session_state["user_data"]["is_transittech_active"] = False
+                 st.session_state["DB_TRANSITTECH"][active_id] = []
 
-            if cancel_healthtech:
-                st.session_state["user_data"]["is_healthtech_active"] = False
-                st.session_state["DB_HEALTHTECH"][active_id] = []
+             if cancel_healthtech:
+                 st.session_state["user_data"]["is_healthtech_active"] = False
+                 st.session_state["DB_HEALTHTECH"][active_id] = []
 
-            for record in st.session_state["DB_CLIENTS"]:
-                if record["client_id"] == active_id:
-                    if cancel_logtech: 
-                        record["is_logtech_active"] = False
-                    if cancel_gridtech: 
-                        record["is_gridtech_active"] = False
-                    if cancel_cybertech: 
-                        record["is_cybertech_active"] = False
-                    if cancel_transittech: 
-                        record["is_transittech_active"] = False
-                    if cancel_healthtech: 
-                        record["is_healthtech_active"] = False
-                break
+             for record in st.session_state["DB_CLIENTS"]:
+                 if record["client_id"] == active_id:
+                     if cancel_logtech: 
+                         record["is_logtech_active"] = False
+                     if cancel_gridtech: 
+                         record["is_gridtech_active"] = False
+                     if cancel_cybertech: 
+                         record["is_cybertech_active"] = False
+                     if cancel_transittech: 
+                         record["is_transittech_active"] = False
+                     if cancel_healthtech: 
+                         record["is_healthtech_active"] = False
+                 break
 
     st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
     time.sleep(1.0)
