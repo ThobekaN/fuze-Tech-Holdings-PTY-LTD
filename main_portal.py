@@ -354,48 +354,6 @@ def render_home_portal():
                         else:
                             st.error("Connection Failed: Operational application server rejected integration keys.")
 
-    with st.sidebar.popover("❌ Prompt Contract Cancellation"):
-         st.markdown("### 🔏 Cancel Subscription / Trial Renewals")
-         st.caption("Select which active industrial runtime pipelines you would like to terminate instantly.")
-        
-         cancel_logtech = st.checkbox("Terminate Legacy Freight Lines (LogTech)", value=False) if user_profile["is_logtech_active"] else False
-         cancel_gridtech = st.checkbox("Terminate Legacy Utility Labs (GridTech)", value=False) if user_profile["is_gridtech_active"] else False
-         cancel_cybertech = st.checkbox("Terminate Legacy Sybil Gate (CyberTech)", value-False) if user_profile["is_cybertech_active"] else False
-         cancel_transittech = st.checkbox("Terminate Legacy Transit Token (TransitTech)", value=False) if user_profile["is_transittech_active"] else False
-         cancel_healthtech = st.checkbox("Terminate Legacy Cold Chain (HealthTech)", value=False) if user_profile["is_healthtech_active"] else False
-
-         if st.button("Confirm Immediate Pipeline Termination", key="btn_cancel_execution"):
-                if cancel_logtech:
-                    st.session_state["user_data"]["is_logtech_active"] = False
-                    st.session_state["DB_LOGTECH"][active_id] = []
-                if cancel_gridtech:
-                    st.session_state["user_data"]["is_gridtech_active"] = False
-                    st.session_state["DB_GRIDTECH"][active_id] = []
-                if cancel_cybertech:
-                    st.session_state["user_data"]["is_cybertech_active"] = False
-                    st.session_state["DB_CYBERTECH"][active_id] = []
-                if cancel_transit:
-                    st.session_state["user_data"]["is_transittech_active"] = False
-                    st.session_state["DB_TRANSITTECH"][active_id] = []
-                if cancel_health:
-                    st.session_state["user_data"]["is_healthtech_active"] = False
-                    st.session_state["DB_HEALTHTECH"][active_id] = []
-                    
-                # Synchronize status directly down to the primary client session array
-                for record in st.session_state["DB_CLIENTS"]:
-                    if record["client_id"] == active_id:
-                        if cancel_logtech: record["is_logtech_active"] = False
-                        if cancel_gridtech: record["is_gridtech_active"] = False
-                        if cancel_cybertech: record["is_cybertech_active"] = False
-                        if cancel_transit: record["is_transittech_active"] = False
-                        if cancel_health: record["is_healthtech_active"] = False
-                        break
-                        
-                st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
-                st.rerun()
-
-
-
 
 # 4. --- CONTEXT CONDITIONAL CONTROL INTERFACE REGISTRY ---
 if not st.session_state["authenticated"]:
@@ -476,6 +434,53 @@ else:
     st.sidebar.title("🏢 Fuze Tech Gateway")
     st.sidebar.markdown(f"Operator Group:\n{user_profile['account_name']}")
     st.sidebar.markdown(f"Tenant UUID: {active_id}")
+
+    st.sidebar.divider()
+
+    if any([user_profile["is_logtech_active"], user_profile["is_gridtech_active"], user_profile.get("is_cybertech_active", False), user_profile.get("is_transittech_active", False), user_profile.get("is_healthtech_active", False)]):
+        st.sidebar.subheader("💳 Subscription Profiles")
+
+        with st.sidebar.popover("❌ Prompt Contract Cancellation"):
+            st.markdown("### 🔏 Cancel Subscription / Trial Renewals")
+            st.caption("Select which active industrial runtime pipelines you would like to terminate instantly.")
+        
+            cancel_logtech = st.checkbox("Terminate Legacy Freight Lines (LogTech)", value=False) if user_profile["is_logtech_active"] else False
+            cancel_gridtech = st.checkbox("Terminate Legacy Utility Labs (GridTech)", value=False) if user_profile["is_gridtech_active"] else False
+            cancel_cybertech = st.checkbox("Terminate Legacy Sybil Gate (CyberTech)", value-False) if user_profile["is_cybertech_active"] else False
+            cancel_transittech = st.checkbox("Terminate Legacy Transit Token (TransitTech)", value=False) if user_profile["is_transittech_active"] else False
+            cancel_healthtech = st.checkbox("Terminate Legacy Cold Chain (HealthTech)", value=False) if user_profile["is_healthtech_active"] else False
+
+            if st.button("Confirm Immediate Pipeline Termination", key="btn_cancel_execution"):
+                if cancel_logtech:
+                    st.session_state["user_data"]["is_logtech_active"] = False
+                    st.session_state["DB_LOGTECH"][active_id] = []
+                if cancel_gridtech:
+                    st.session_state["user_data"]["is_gridtech_active"] = False
+                    st.session_state["DB_GRIDTECH"][active_id] = []
+                if cancel_cybertech:
+                    st.session_state["user_data"]["is_cybertech_active"] = False
+                    st.session_state["DB_CYBERTECH"][active_id] = []
+                if cancel_transit:
+                    st.session_state["user_data"]["is_transittech_active"] = False
+                    st.session_state["DB_TRANSITTECH"][active_id] = []
+                if cancel_health:
+                    st.session_state["user_data"]["is_healthtech_active"] = False
+                    st.session_state["DB_HEALTHTECH"][active_id] = []
+                    
+                # Synchronize status directly down to the primary client session array
+                for record in st.session_state["DB_CLIENTS"]:
+                    if record["client_id"] == active_id:
+                        if cancel_logtech: record["is_logtech_active"] = False
+                        if cancel_gridtech: record["is_gridtech_active"] = False
+                        if cancel_cybertech: record["is_cybertech_active"] = False
+                        if cancel_transit: record["is_transittech_active"] = False
+                        if cancel_health: record["is_healthtech_active"] = False
+                        break
+                        
+                st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
+                st.rerun()
+
+    st.sidebar.divider()
     
     if st.sidebar.button("Secure Session Sign Out"):
         handle_logout()
