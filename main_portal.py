@@ -464,7 +464,7 @@ def render_home_portal():
              st.toast("⚠️ Subscriptions terminated successfully. Relational nodes disconnected.", icon="🔒")
              time.sleep(1.0)
 
-    st.rerun()
+
 
 # 4. --- CONTEXT CONDITIONAL CONTROL INTERFACE REGISTRY ---
 if not st.session_state["authenticated"]:
