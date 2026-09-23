@@ -152,7 +152,7 @@ def render_home_portal():
                                     break
                                     
                             st.balloons()
-                             if "30-Day" in commercial_model:
+                            if "30-Day" in commercial_model:
                                 st.success("Supabase Link Secure! 3 Trucks successfully mapped under your 30-Day Trial. Auto-renew parameters registered.")
                             else:
                                 st.success("Supabase Link Secure! 3 Trucks successfully mapped under your Premium Enterprise contract. Invoicing active.")
