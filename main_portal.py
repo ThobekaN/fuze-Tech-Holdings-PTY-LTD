@@ -41,17 +41,17 @@ if "user_data" not in st.session_state:
     st.session_state["user_data"] = None
 
 if "DB_CLIENTS" not in st.session_state:
-    st.session_state["DB_CLIENTS"] = database.MOCK_CLIENTS_DB.copy()
+    st.session_state["DB_CLIENTS"] = get_cached_clients()
 if "DB_LOGTECH" not in st.session_state:
-    st.session_state["DB_LOGTECH"] = database.MOCK_FLEET_TELEMETRY.copy()
+    st.session_state["DB_LOGTECH"] = get_cached_logtech()
 if "DB_GRIDTECH" not in st.session_state:
-    st.session_state["DB_GRIDTECH"] = database.MOCK_GRID_TELEMETRY.copy()
+    st.session_state["DB_GRIDTECH"] = get_cached_gridtech()
 if "DB_CYBERTECH" not in st.session_state:
-    st.session_state["DB_CYBERTECH"] = database.MOCK_CYBER_TELEMETRY.copy()
+    st.session_state["DB_CYBERTECH"] = get_cached_cybertech()
 if "DB_TRANSITTECH" not in st.session_state:
-    st.session_state["DB_TRANSITTECH"] = database.MOCK_TRANSIT_TELEMETRY.copy()
+    st.session_state["DB_TRANSITTECH"] = get_cached_transittech()
 if "DB_HEALTHTECH" not in st.session_state:
-    st.session_state["DB_HEALTHTECH"] = database.MOCK_HEALTH_TELEMETRY.copy()
+    st.session_state["DB_HEALTHTECH"] = get_cached_healthtech()
 
 def handle_logout():
     st.session_state["authenticated"] = False
