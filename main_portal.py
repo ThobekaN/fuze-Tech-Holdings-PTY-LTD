@@ -102,7 +102,7 @@ def render_home_portal():
                         [
                             "🎁 30-Day Free Trial (Onboard up to 5 trucks at R0.00)",
                             "💎 Direct Premium Enterprise Suite (Immediate Full Fleet Scale)"
-                        ]
+                        ],
                         key="model_logTech"
                     )
                     st.divider()
