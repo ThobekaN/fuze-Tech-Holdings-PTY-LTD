@@ -26,6 +26,14 @@ def get_cached_gridtech():
 def get_cached_cybertech():
     return database.MOCK_CYBER_TELEMETRY.copy()
 
+@st.cache_data(ttl=600)
+def get_cached_transittech():
+    return database.MOCK_TRANSIT_TELEMETRY.copy()
+
+@st.cache_data(ttl=600)
+def get_cached_healthtech():
+    return database.MOCK_HEALTH_TELEMETRY.copy()
+
 # 2. 🔐 STATE ENGINE ARCHITECTURE (Initializes data records inside active browser memory)
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
