@@ -217,6 +217,12 @@ def render_home_portal():
                     )
                     st.divider()
         
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ **Subscription Policy Notice:** Your account will automatically transition into a paid contract at R800/bus per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R800 per active operational transit node per month.")
+                    st.divider()
+                    
                     st.markdown("### 📡 API Gateway Handshake")
                     st.caption("Presentation Hint: Type `wits_campus_transit_loop_key` into the field below.")
                     input_transit_token = st.text_input("Enter Institutional Access Key ID", key="tk_transit")
@@ -249,6 +255,12 @@ def render_home_portal():
                         key="model_gridTech"
                     )
 
+                    st.divider()
+
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a paid contract at R150/meter per month upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R150 per micro property node per month.")
                     st.divider()
                     
                     st.markdown("### 📡 API Token Gateway Handshake")
@@ -286,6 +298,12 @@ def render_home_portal():
                     )
                     st.divider()
 
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a standard contract at R400/fridge per month upon trial completion, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
+                    st.divider()
+                    
                     fridge_count = st.number_input("Number of physical medication fridges to protect:", min_value=1, max_value=5, value=1)
                     delivery_address = st.text_input("Clinic Delivery Street Address", "10 Hospital Street, Braamfontein")
                     st.divider()
@@ -319,6 +337,12 @@ def render_home_portal():
                     )
                     st.divider()
 
+                    if "30-Day" in commercial_model:
+                        st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a contract billed at R0.50 per scan upon completion of the 30-day trial, unless a cancellation prompt is manually submitted.")
+                    else:
+                        st.info("ℹ️ Billing Policy Notice: Operational API consumption counters will initialize immediately at R0.50 per individual transaction sweep.")
+                    st.divider()
+                    
                     st.markdown("### 📡 API SDK Integration Handshake")
                     st.caption("Presentation Hint: Type `secure_sybil_verification_endpoint_token` into the field below.")
                     input_cyber_token = st.text_input("Enter Operational SDK Integration Token ID", key="tk_cyber")
