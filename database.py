@@ -140,13 +140,11 @@ REMOTE_TRACKING_SERVERS_JSON = {
 REMOTE_MUNICIPAL_GRID_JSON = {
     "city_power_grid_key_000": [
         {"Meter_ID": "MTR-001", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
-        {"Meter_ID": "MTR-002", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
-        {"Meter_ID": "MTR-003", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
+        {"Meter_ID": "MTR-002", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 4.1, "System_Status": "SUSPECTED BYPASS"}
     ],
     "city_power_grid_key_881": [
-        {"Meter_ID": "MTR-101", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
-        {"Meter_ID": "MTR-102", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
-        {"Meter_ID": "MTR-103", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
+        {"Meter_ID": "MTR-202", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-203", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
     ],
     "city_power_grid_key_442": [
         {"Meter_ID": "MTR-991", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
