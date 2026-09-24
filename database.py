@@ -59,6 +59,14 @@ MOCK_FLEET_TELEMETRY = {
 
 # ⚡ GRIDTECH SMART METER METRIC REGISTRY (Gated by client_id)
 MOCK_GRID_TELEMETRY = {
+    "Client-000": [
+        {"Meter_ID": "MTR-001", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-002", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 4.1, "System_Status": "SUSPECTED BYPASS"}
+    ],
+    "Client-881": [
+        {"Meter_ID": "MTR-202", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-203", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
+    ],
     "CLIENT-442": [
         {"Meter_ID": "MTR-801", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
         {"Meter_ID": "MTR-802", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
@@ -68,6 +76,14 @@ MOCK_GRID_TELEMETRY = {
 
 # 🛡️ CYBERTECH PROMO TRANSACTION REGISTRY (Gated by client_id)
 MOCK_CYBER_TELEMETRY = {
+    "Client-000": [
+        {"Transaction_ID": "TXN-001", "User_Alias": "new_user_jhb", "Claimed_Email": "thabo.m@gmail.com", "Device_Hardware_Fingerprint": "HW-UUID-4401", "Promo_Code": "FIRST100", "Evaluation_Status": "TRIGGERED COORD CLUSTER"},
+        {"Transaction_ID": "TXN-002", "User_Alias": "kfc_lover_22", "Claimed_Email": "lindiwe.k@outlook.com", "Device_Hardware_Fingerprint": "HW-UUID-8892", "Promo_Code": "EATSNEW50", "Evaluation_Status": "APPROVED"}
+    ],
+    "Client-881": [
+        {"Transaction_ID": "TXN-202", "User_Alias": "kfc_lover_22", "Claimed_Email": "lindiwe.k@outlook.com", "Device_Hardware_Fingerprint": "HW-UUID-8892", "Promo_Code": "EATSNEW50", "Evaluation_Status": "APPROVED"},
+        {"Transaction_ID": "TXN-203", "User_Alias": "disposable_acc_7", "Claimed_Email": "x7291@tempmail.io", "Device_Hardware_Fingerprint": "HW-UUID-1105", "Promo_Code": "FIRST100", "Evaluation_Status": "TRIGGERED COORD CLUSTER"}
+    ],
     "CLIENT-442": [
         {"Transaction_ID": "TXN-901", "User_Alias": "new_user_jhb", "Claimed_Email": "thabo.m@gmail.com", "Device_Hardware_Fingerprint": "HW-UUID-4401", "Promo_Code": "FIRST100", "Evaluation_Status": "APPROVED"},
         {"Transaction_ID": "TXN-902", "User_Alias": "kfc_lover_22", "Claimed_Email": "lindiwe.k@outlook.com", "Device_Hardware_Fingerprint": "HW-UUID-8892", "Promo_Code": "EATSNEW50", "Evaluation_Status": "APPROVED"},
@@ -77,10 +93,20 @@ MOCK_CYBER_TELEMETRY = {
 
 # 🚌 TRANSITTECH ENTRY/EXIT SHUTTLE GATEWAY REGISTRY (Gated by client_id)
 MOCK_TRANSIT_TELEMETRY = {
+    "CLIENT-000": [
+        {"Scan_ID": "WITS-001", "Student_Number": "2653844", "Transit_Route": "Amic -> Noswal -> WEC", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "WITS-002", "Student_Number": "2869006", "Transit_Route": "Amic -> WEC -> Junction", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "WITS-003", "Student_Number": "2814103", "Transit_Route": "Knockando -> EOH -> Amic", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
+    ]
+    "CLIENT-881": [
+        {"Scan_ID": "UJ-001", "Student_Number": "1597532", "Transit_Route": "APB -> APK", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UJ-002", "Student_Number": "2049100", "Transit_Route": "APK -> DFC", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UJ-003", "Student_Number": "4852713", "Transit_Route": "APK -> SWC", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
+    ],
     "CLIENT-442": [
-        {"Scan_ID": "SCN-701", "Student_Staff_ID": "WITS-10024", "Transit_Route": "Braamfontein -> Education", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "SCN-702", "Student_Staff_ID": "WITS-20491", "Transit_Route": "Main Campus -> Junction", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "SCN-703", "Student_Staff_ID": "WITS-10024", "Transit_Route": "Braamfontein -> Education", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
+        {"Scan_ID": "UKZN-701", "Student_Number": "224537", "Transit_Route": "Joosub Hall -> Makhabane Bus Stop", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UKZN-702", "Student_Number": "145723", "Transit_Route": "Joosub Hall -> Makhabane Bus Stop", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UKZN-703", "Student_Number": "345162", "Transit_Route": "Makhabane Bus Stop -> Joosub Hall", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
     ]
 }
 
@@ -112,6 +138,16 @@ REMOTE_TRACKING_SERVERS_JSON = {
 }
 
 REMOTE_MUNICIPAL_GRID_JSON = {
+    "city_power_grid_key_000": [
+        {"Meter_ID": "MTR-001", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-002", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-003", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
+    ],
+    "city_power_grid_key_881": [
+        {"Meter_ID": "MTR-101", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-102", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
+        {"Meter_ID": "MTR-103", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
+    ],
     "city_power_grid_key_442": [
         {"Meter_ID": "MTR-991", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
         {"Meter_ID": "MTR-992", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
