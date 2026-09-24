@@ -60,7 +60,7 @@ with col_right:
         else:
             st.caption("No nodes currently tracking inside baseline gate fields")
 
-   with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
+    with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
         if not df_problem.empty:
             for index, row in df_problem.iterrows():
                 st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Number / Staff_ID']}")
