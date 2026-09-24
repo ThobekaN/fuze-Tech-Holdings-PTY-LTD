@@ -76,7 +76,7 @@ with col_right:
                 if "ANTI-PASSBACK" in row['Gate_Action']:
                     st.warning(f"⚠️ Anti-Passback Violation. Status: **{row['Gate_Action']} {row['Card_State']}**")
                 else:
-                    st.error(f"❌ Access Denied. Status: **{row['Gate_Action']} {"ALREADY" + row['Card_State']}**")
+                    st.error(f"❌ Access Denied. Status: **{row['Gate_Action']} {("ALREADY " + row['Card_State'])}**")
         else:
             st.caption("All operational perimeters clear. Zero excursions active")
             
