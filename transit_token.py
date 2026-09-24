@@ -47,7 +47,7 @@ with col_left:
             df_transit = pd.concat([df_transit, pd.DataFrame([new_scan])], ignore_index=True)
             st.error("🚨 CRITICAL ACCESS ALERT: Scan WITS-004 presented a static barcode token older than the 30-second rotation window! System flags screenshot fraud and locked the door.")
         elif "UJ" in "Scan_id":
-            new_scan =  {"Scan_ID": "UJ-003", "Student_Number / Staff_ID": "4852713", "Transit_Route": "APK -> SWC", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 56, "CRITICAL ERROR - EXPIRED TOKEN"}
+            new_scan =  {"Scan_ID": "UJ-003", "Student_Number / Staff_ID": "4852713", "Transit_Route": "APK -> SWC", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 56, "Gate_Action": "CRITICAL ERROR - EXPIRED TOKEN"}
             df_transit = pd.concat([df_transit, pd.DataFrame([new_scan])], ignore_index=True)
             st.error("🚨 CRITICAL ACCESS ALERT: Scan UJ-003 presented a static barcode token older than the 30-second rotation window! System flags screenshot fraud and locked the door.")
         else:
