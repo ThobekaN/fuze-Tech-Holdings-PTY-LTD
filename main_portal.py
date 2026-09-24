@@ -69,7 +69,7 @@ if "trigger_logtech_activation" in st.session_state and st.session_state["trigge
 
 if "trigger_transittech_activation" in st.session_state and st.session_state["trigger_transittech_activation"]:
     active_id = st.session_state["user_data"]["client_id"]
-    st.session_state["DB_TRANSITTECH"][active_id] = database.MOCK_TRANSIT_TELEMETRY.get(client_id, [])
+    st.session_state["DB_TRANSITTECH"][active_id] = database.MOCK_TRANSIT_TELEMETRY.get("client_id", [])
     st.session_state["user_data"]["is_transittech_active"] = True
     for record in st.session_state["DB_CLIENTS"]:
         if record["client_id"] == active_id:
