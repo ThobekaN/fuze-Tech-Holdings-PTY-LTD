@@ -38,14 +38,14 @@ col_left, col_right = st.columns(2)
 with col_left:
     st.subheader("📋 Isolated Client Fleet Log Registry")
     if simulate_theft and len(df_fleet) > 0:
-        df_fleet.loc[0, "Fuel_Litres"] = df_fleet.loc[0, "Fuel_Litres"] - 45.0
-        df_fleet.loc[0, "Speed_KMH"] = 0.0
+        df_log.loc[0, "Fuel_Litres"] = df_fleet.loc[0, "Fuel_Litres"] - 45.0
+        df_log.loc[0, "Speed_KMH"] = 0.0
         st.error(f"🚨 CRITICAL TELEMETRY EXPOSURE: Sudden slope drop detected on Vehicle {df_fleet.loc[0, 'Truck_ID']} while stationary! Alarm fired.")
     st.dataframe(df_log, use_container_width=True, hide_index=True)
 
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
-    df_problem = [(df_fleet.loc[0, "Fuel_Litres"] - 45.0), df_fleet.loc[0, "Speed_KMH"] == 0.0]
+    df_problem = [(df_log.loc[0, "Fuel_Litres"] - 45.0), df_log.loc[0, "Speed_KMH"] == 0.0]
     df_normal != df_problem 
 
     with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
@@ -63,10 +63,10 @@ with col_right:
        if not df_problem.empty:
            for index, row in df_problem.iterrows():
                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
-               if (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "PROCEED TO BORDER":
+               if (df_log.loc[0, "Fuel_Litres"] - 45.0) and df_log.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "PROCEED TO BORDER":
                     st.error(f"❌ Critical Telemetry Exposure.")
                     st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
-               elif (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "HOLD AT STAGING":
+               elif (df_log.loc[0, "Fuel_Litres"] - 45.0) and df_log.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "HOLD AT STAGING":
                    st.error(f"❌ Critical Telemetry Exposure.")
                    st.success(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
        
