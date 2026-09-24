@@ -193,7 +193,7 @@ def render_home_portal():
                     input_log_token = st.text_input("Enter Telematics Provider Read-Token ID", key="tk_logtech")
                     
                     if st.button("Establish API Loop Link", key="btn_connect_logtech"):
-                        if input_log_token in database.REMOTE_TRACKING_SERVERS_JSON:
+                        if input_log_token in ["cartrack_oauth2_token_881", "cartrack_oauth2_token_000", "ctrack_secure_key_442"]:
                             st.session_state["cached_token_logtech"] = input_log_token
                             st.session_state["trigger_logtech_activation"] = True
                             st.rerun()
