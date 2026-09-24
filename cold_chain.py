@@ -97,7 +97,7 @@ with st.container(border=True):
                     simulated_temp = round(random.uniform(2.5, 5.8), 1)
                     
                     new_probes.append({
-                        "Probe_ID": generated_fridge_id,
+                        "Probe_ID": generated_probe_id,
                         "Clinical_Facility": facility_target.strip(),
                         "Current_Temp_C": simulated_temp,
                         "Safety_Range": "2°C - 8°C",
