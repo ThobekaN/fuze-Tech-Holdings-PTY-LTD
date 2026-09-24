@@ -60,7 +60,7 @@ with col_right:
         else:
             st.caption("No nodes currently tracking inside baseline gate")
 
-    with st.expander(f"🔴 Isolated System Critcal Anomalies ({len(df_normal)} Nodes)", expanded=True):
+    with st.expander(f"🔴 Isolated System Critcal Anomalies ({len(df_problem)} Nodes)", expanded=True):
        if not df_problem.empty:
            for index, row in df_problem.iterrows():
                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
