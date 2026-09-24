@@ -275,7 +275,7 @@ def render_home_portal():
                     input_grid_token = st.text_input("Enter Smart Grid API Key", key="tk_grid")
                     
                     if st.button("Establish Grid Handshake Link", key="btn_connect_gridtech"):
-                        if input_grid_token in ["city_power_grid_442", "city_power_grid_000", "city_power_grid_881"]:
+                        if input_grid_token in ["city_power_grid__key_442", "city_power_grid_key_000", "city_power_grid_key_881"]:
                             st.session_state["cached_token_gridtech"] = input_grid_token
                             st.session_state["trigger_gridtech_activation"] = True
                             st.rerun()
