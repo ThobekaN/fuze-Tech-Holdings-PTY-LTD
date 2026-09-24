@@ -451,7 +451,7 @@ else:
         
             cancel_logtech = st.checkbox("Terminate Legacy Freight Lines (LogTech)", value=False) if user_profile["is_logtech_active"] else False
             cancel_gridtech = st.checkbox("Terminate Legacy Utility Labs (GridTech)", value=False) if user_profile["is_gridtech_active"] else False
-            cancel_cybertech = st.checkbox("Terminate Legacy Sybil Gate (CyberTech)", value-False) if user_profile["is_cybertech_active"] else False
+            cancel_cybertech = st.checkbox("Terminate Legacy Sybil Gate (CyberTech)", value=False) if user_profile["is_cybertech_active"] else False
             cancel_transittech = st.checkbox("Terminate Legacy Transit Token (TransitTech)", value=False) if user_profile["is_transittech_active"] else False
             cancel_healthtech = st.checkbox("Terminate Legacy Cold Chain (HealthTech)", value=False) if user_profile["is_healthtech_active"] else False
 
