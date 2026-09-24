@@ -46,8 +46,6 @@ with col_left:
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
     
-    # 🛠️ FIX 1: Track if the theft simulation actually mutated the telemetry
-    # We identify the problem vehicle if simulation is active AND it matches our targeted index 0
     if simulate_theft and len(df_log) > 0:
         df_problem = df_log.iloc[[0]]   # Isolate the anomaly node
         df_normal = df_log.iloc[1:]     # Rest of the stable fleet
@@ -73,7 +71,6 @@ with col_right:
             for index, row in df_problem.iterrows():
                 st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
                 
-                # 🛠️ FIX 2: Evaluate scalar row telemetry values instead of passing un-reduced Pandas Series
                 if row["Speed_KMH"] == 0.0:
                     st.error(f"❌ Critical Telemetry Exposure. High Siphon Gradient Verified.")
                     
