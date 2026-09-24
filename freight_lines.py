@@ -37,11 +37,23 @@ col_left, col_right = st.columns(2)
 
 with col_left:
     st.subheader("📋 Isolated Client Fleet Log Registry")
-    if simulate_theft and len(df_log) > 0:
-        df_log.loc[0, "Fuel_Litres"] = df_log.loc[0, 'Fuel_Litres'] - 45.0
-        df_log.loc[0, "Speed_KMH"] = 0.0
-        st.error(f"🚨 CRITICAL TELEMETRY EXPOSURE: Sudden slope drop detected on Vehicle {df_log.loc[0, 'Truck_ID']} while stationary! Alarm fired.")
-    st.dataframe(df_log, use_container_width=True, hide_index=True)
+    
+    # Check if the dataframe is empty OR if the required columns are missing
+    required_cols = ["Fuel_Litres", "Speed_KMH", "Truck_ID"]
+    missing_cols = [col for col in required_cols if col not in df_log.columns]
+
+    if df_log.empty:
+        st.warning("⚠️ No active vehicle telemetry feeds found for this tenant node.")
+    elif missing_cols:
+        st.error(f"⚙️ Data Schema Mismatch. Missing critical column metrics: {missing_cols}")
+    else:
+        # Code only runs if the columns actually exist and data is present
+        if simulate_theft:
+            df_log.loc[0, "Fuel_Litres"] = df_log.loc[0, "Fuel_Litres"] - 45.0
+            df_log.loc[0, "Speed_KMH"] = 0.0
+            st.error(f"🚨 CRITICAL TELEMETRY EXPOSURE: Sudden slope drop detected on Vehicle {df_log.loc[0, 'Truck_ID']} while stationary! Alarm fired.")
+        
+        st.dataframe(df_log, use_container_width=True, hide_index=True)
 
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
