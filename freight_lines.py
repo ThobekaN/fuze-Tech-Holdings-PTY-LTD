@@ -47,7 +47,7 @@ with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
     fuel_check = df_log.loc[0, "Fuel_Litres"] == df_log.loc[0, "Fuel_Litres"] - 45.0
     speed_check = df_log.loc[0, "Speed_KMH"] == 0.0
-    df_problem = df_log[df_log["Fuel_Litres"] != (df_log.loc[0, "Fuel_Litres"] - 45.0)]
+    df_problem = df_log[df_log["Fuel_Litres"] == (df_log.loc[0, "Fuel_Litres"] - 45.0)]
     df_normal = df_log[df_log["Fuel_Litres"] != (df_log.loc[0, "Fuel_Litres"] - 45.0)]
  
 
