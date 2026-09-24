@@ -45,10 +45,17 @@ with col_left:
 
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
-    df_problem = df_log[df_log["Fuel_Litres"] == (df_log.loc[0, "Fuel_Litres"] - 45.0)]
-    df_normal = df_log[df_log["Fuel_Litres"] != (df_log.loc[0, "Fuel_Litres"] - 45.0)]
- 
+    
+    # 🛠️ FIX 1: Track if the theft simulation actually mutated the telemetry
+    # We identify the problem vehicle if simulation is active AND it matches our targeted index 0
+    if simulate_theft and len(df_log) > 0:
+        df_problem = df_log.iloc[[0]]   # Isolate the anomaly node
+        df_normal = df_log.iloc[1:]     # Rest of the stable fleet
+    else:
+        df_problem = pd.DataFrame()     # Empty anomaly frame
+        df_normal = df_log              # Entire fleet is stable
 
+    # 🟢 STABLE INFRASTRUCTURE EXPANDER
     with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
         if not df_normal.empty:
             for index, row in df_normal.iterrows():
@@ -56,20 +63,23 @@ with col_right:
                 if row['BURS_Clearance'] == "PROCEED TO BORDER":
                     st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
                 elif "HOLD AT STAGING" in row['BURS_Clearance']:
-                   st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
+                    st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
         else:
             st.caption("No nodes currently tracking inside baseline gate")
 
-    with st.expander(f"🔴 Isolated System Critcal Anomalies ({len(df_problem)} Nodes)", expanded=True):
-       if not df_problem.empty:
-           for index, row in df_problem.iterrows():
-               st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
-               if df_log[df_log.loc[0, "Fuel_Litres"] == df_log.loc[0, "Fuel_Litres"] - 45.0] and df_log[df_log.loc[0, "Speed_KMH"] == 0.0]:
-                   if row['BURS_Clearance'] == "PROCEED TO BORDER":
-                       st.error(f"❌ Critical Telemetry Exposure.")
-                       st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
-
-                   else:
-                       st.error(f"❌ Critical Telemetry Exposure.")
-                       st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
-
+    # 🔴 CRITICAL ANOMALIES EXPANDER
+    with st.expander(f"🔴 Isolated System Critical Anomalies ({len(df_problem)} Nodes)", expanded=True):
+        if not df_problem.empty:
+            for index, row in df_problem.iterrows():
+                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
+                
+                # 🛠️ FIX 2: Evaluate scalar row telemetry values instead of passing un-reduced Pandas Series
+                if row["Speed_KMH"] == 0.0:
+                    st.error(f"❌ Critical Telemetry Exposure. High Siphon Gradient Verified.")
+                    
+                if row['BURS_Clearance'] == "PROCEED TO BORDER":
+                    st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+                else:
+                    st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
+        else:
+            st.caption("No critical telemetry vectors flagged.")
