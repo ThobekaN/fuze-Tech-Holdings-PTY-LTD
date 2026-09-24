@@ -91,9 +91,11 @@ if "trigger_gridtech_activation" in st.session_state and st.session_state["trigg
             break
     del st.session_state["trigger_gridtech_activation"]
 
+health_data = database.MOCK_HEALTH_TELEMETRY.copy()
+
 if "trigger_healthtech_activation" in st.session_state and st.session_state["trigger_healthtech_activation"]:
     active_id = st.session_state["user_data"]["client_id"]
-    st.session_state["DB_HEALTHTECH"][active_id] = database.MOCK_HEALTH_TELEMETRY.get("CLIENT-442", [])
+    st.session_state["DB_HEALTHTECH"][active_id] = health_data
     st.session_state["user_data"]["is_healthtech_active"] = True
     for record in st.session_state["DB_CLIENTS"]:
         if record["client_id"] == active_id:
@@ -309,7 +311,7 @@ def render_home_portal():
                     if "30-Day" in commercial_model:
                         st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a standard contract at R400/fridge per month upon trial completion, unless a cancellation prompt is manually submitted.")
                         fridge_count = st.number_input("Number of physical medication fridges to protect:", min_value=1, max_value=3, value=1)
-                        health_data = database.MOCK_HEALTH_TELEMETRY.copy()
+                        
                         health_data["CLIENT-000"] = health_data["CLIENT-000"][:fridge_count]
                         for fridge in health_data["CLIENT-000"]:
                             st.write(fridge)
