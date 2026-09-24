@@ -40,7 +40,7 @@ with col_left:
 with col_right:
     st.subheader("🛡️ Automated Perimeter Protection Engine")
     for index, row in df_transit.iterrows():
-        st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Staff_ID']}")
+        st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Number']}")
         if "APPROVED" in row['Gate_Action']:
             st.success(f"✅ Verified Entry. Status: **{row['Gate_Action']}**")
         elif "ANTI-PASSBACK" in row['Gate_Action']:
