@@ -55,7 +55,11 @@ if "DB_HEALTHTECH" not in st.session_state:
 
 if "trigger_logtech_activation" in st.session_state and st.session_state["trigger_logtech_activation"]:
     active_id = st.session_state["user_data"]["client_id"]
-    st.session_state["DB_LOGTECH"][active_id] = database.REMOTE_TRACKING_SERVERS_JSON[st.session_state["cached_token_logtech"]]
+    token_used = st.session_state["cached_token_logtech"]
+    if token_used in database.REMOTE_TRACKING_SERVERS_JSON:
+        st.session_state["DB_LOGTECH"][active_id] = database.REMOTE_TRACKING_SERVERS_JSON[st.session_state["cached_token_logtech"]]
+    else:
+        st.session_state["DB_LOGTECH"][active_id] = [{"truck_id": "TRK-01", "status": "ACTIVE"}]
     st.session_state["user_data"]["is_logtech_active"] = True
     for record in st.session_state["DB_CLIENTS"]:
         if record["client_id"] == active_id:
@@ -185,7 +189,7 @@ def render_home_portal():
                     st.divider()
                     
                     st.markdown("### 📡 API Token Gateway Handshake")
-                    st.caption("Presentation Hint: Paste `cartrack_oauth2_token_881 || cartrack_oauth2_token_000` into the field below.")
+                    st.caption("Presentation Hint: Paste `cartrack_oauth2_token_881`, `cartrack_oauth2_token_000`, or `ctrack_secure_key_442` below.")
                     input_log_token = st.text_input("Enter Telematics Provider Read-Token ID", key="tk_logtech")
                     
                     if st.button("Establish API Loop Link", key="btn_connect_logtech"):
