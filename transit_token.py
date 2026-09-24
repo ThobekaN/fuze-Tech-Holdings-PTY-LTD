@@ -17,7 +17,7 @@ st.title("🚌 LEGACY TRANSIT TOKEN — B2B TransitTech Platform")
 st.markdown(f"### *Multi-Tenant Transit Access Stream — Client Node: {active_id}*")
 st.divider()
 
-if active_id not in session_state["DB_TRANSITTECH"] or not in session_state["DB_TRANSITTECH"][active_id]:
+if active_id not in session_state["DB_TRANSITTECH"] or not session_state["DB_TRANSITTECH"][active_id]:
     st.session_state["DB_TRANSITTECH"][active_id] = MOCK_TRANSIT_TELEMETRY.get(active_id, [])
 
 # Pull only the authenticated client's isolated transit data slice
