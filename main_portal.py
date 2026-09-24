@@ -185,7 +185,7 @@ def render_home_portal():
                     st.divider()
                     
                     st.markdown("### 📡 API Token Gateway Handshake")
-                    st.caption("Presentation Hint: Paste (`cartrack_oauth2_token_881` || `cartrack_oauth2_token_000`) into the field below.")
+                    st.caption("Presentation Hint: Paste `cartrack_oauth2_token_881 || cartrack_oauth2_token_000` into the field below.")
                     input_log_token = st.text_input("Enter Telematics Provider Read-Token ID", key="tk_logtech")
                     
                     if st.button("Establish API Loop Link", key="btn_connect_logtech"):
