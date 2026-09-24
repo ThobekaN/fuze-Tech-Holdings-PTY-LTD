@@ -4,6 +4,10 @@ import pandas as pd
 # 🔄 DATA LAYER INTEGRATION LOOP
 from database import MOCK_FLEET_TELEMETRY
 
+if "authenticated" not in st.session_state or not st.session_state["authenticated"]:
+    st.error("🔒 Unauthorized Session Scope: Explicit parent portal token authorization required.")
+    st.stop()
+
 # Pull the globally verified tenant token straight from session memory
 user_profile = st.session_state["user_data"]
 active_id = user_profile["client_id"]
@@ -13,14 +17,15 @@ st.markdown(f"### *Multi-Tenant Telematics Isolation Stream — Client Node: {ac
 st.divider()
 
 # 🚨 DATA ISOLATION QUERY: Pull only the current client's data matrix records
-client_fleet = MOCK_FLEET_TELEMETRY.get(active_id, [])
-df_fleet = pd.DataFrame(client_fleet)
+client_fleet = st.session_state["DB_LOGTECH"][active_id]
+df_log = pd.DataFrame(client_fleet)
 
 simulate_theft = st.sidebar.button("🚨 Simulate Fuel Theft Anomaly")
 
 m_col1, m_col2 = st.columns(2)
 with m_col1:
-    st.metric(label="📊 Monitored Fleet Size", value=f"{len(df_fleet)} Heavy Vehicles")
+    total_fleets = len(df_log) + (1 if simulate_theft and len(df_log) > 0 else 0)
+    st.metric(label="📊 Monitored Fleet Size", value=f"{total_fleets} Heavy Vehicles")
 with m_col2:
     if simulate_theft:
         st.metric(label="🛡️ System Security Profile", value="CRITICAL ALERT", delta="-45L Sudden Siphon", delta_color="inverse")
@@ -28,22 +33,40 @@ with m_col2:
         st.metric(label="🛡️ System Security Profile", value="SECURE", delta="All Probes Normal")
 
 st.divider()
-col_l, col_r = st.columns(2)
+col_left, col_right = st.columns(2)
 
-with col_l:
+with col_left:
     st.subheader("📋 Isolated Client Fleet Log Registry")
     if simulate_theft and len(df_fleet) > 0:
-        df_fleet.loc[0, "Fuel_Liters"] = df_fleet.loc[0, "Fuel_Liters"] - 45.0
+        df_fleet.loc[0, "Fuel_Litres"] = df_fleet.loc[0, "Fuel_Litres"] - 45.0
         df_fleet.loc[0, "Speed_KMH"] = 0.0
         st.error(f"🚨 CRITICAL TELEMETRY EXPOSURE: Sudden slope drop detected on Vehicle {df_fleet.loc[0, 'Truck_ID']} while stationary! Alarm fired.")
     st.dataframe(df_fleet, use_container_width=True, hide_index=True)
 
-with col_r:
-    st.subheader("🚧 Automated Border Compliance Status")
-    for index, row in df_fleet.iterrows():
-        st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
-        if row['BURS_Clearance'] == "PROCEED TO BORDER":
-            st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+with col_right:
+    st.subheader("🚧 Automated Border Compliance Status") 
+    df_problem = [(df_fleet.loc[0, "Fuel_Litres"] - 45.0), df_fleet.loc[0, "Speed_KMH"]
+    df_normal != df_problem 
+
+    with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
+        if not df_normal.empty:
+            for index, row in df_normal.iterrows():
+                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
+                if row['BURS_Clearance'] == "PROCEED TO BORDER":
+                    st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+                elif "HOLD AT STAGING" in row['BURS Clearance']:
+                   st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
         else:
-            st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
-        st.divider()
+            st.caption("No nodes currently tracking inside baseline gate")
+
+    with st.expander(f"🔴 Isolated System Critcal Anomalies ({len(df_normal)} Nodes)", expanded=True):
+       if not df_problem.empty:
+           for index, row in df_problem.iterrows():
+               st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}"
+               if (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] = 0.0 and row['BURS_Clearance'] == "PROCEED TO BORDER":
+                    st.error(f"❌ Critical Telemetry Exposure.")
+                    st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+               elif (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] = 0.0 and row['BURS_Clearance'] == "HOLD AT STAGING":
+                   st.error(f"❌ Critical Telemetry Exposure.")
+                   st.success(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
+       
