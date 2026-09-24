@@ -79,6 +79,7 @@ if "trigger_transittech_activation" in st.session_state and st.session_state["tr
 
 if "trigger_gridtech_activation" in st.session_state and st.session_state["trigger_gridtech_activation"]:
     active_id = st.session_state["user_data"]["client_id"]
+    grid_token_used = st.session_state["cached_token_gridtech"]
     if grid_token_used in database.REMOTE_MUNICIPAL_GRID_JSON:
         st.session_state["DB_GRIDTECH"][active_id] = database.REMOTE_MUNICIPAL_GRID_JSON[st.session_state["cached_token_gridtech"]]
     else:
