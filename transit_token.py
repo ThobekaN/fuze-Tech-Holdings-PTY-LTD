@@ -49,8 +49,8 @@ with col_left:
 
 with col_right:
     st.subheader("🛡️ Automated Perimeter Protection Engine")
-    df_normal = df_transit[df_transit["Gate Action"] == "ACCESS APPROVED"
-    df_problem = df_transit[df_transit["Gate Action"] != "ACCESS APPROVED"
+    df_normal = df_transit[df_transit["Gate_Action"] == "ACCESS APPROVED"
+    df_problem = df_transit[df_transit["Gate_Action"] != "ACCESS APPROVED"
 
     with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
         if not df_normal.empty:
