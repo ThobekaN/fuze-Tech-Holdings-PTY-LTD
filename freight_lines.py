@@ -66,10 +66,10 @@ with col_right:
                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
                if df_log.loc[0, "Fuel_Litres"] == df_log.loc[0, "Fuel_Litres"] - 45.0 and df_log.loc[0, "Speed_KMH"] == 0.0:
                    if row['BURS_Clearance'] == "PROCEED TO BORDER":
-                       st.error("❌ Critical Telemetry Exposure.")
+                       st.error(f"❌ Critical Telemetry Exposure.")
                        st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
 
                    else:
-                       st.error("❌ Critical Telemetry Exposure.")
+                       st.error(f"❌ Critical Telemetry Exposure.")
                        st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
 
