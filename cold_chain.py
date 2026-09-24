@@ -60,7 +60,7 @@ with col_right:
     with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
         if not df_normal.empty:
             for index, row in df_normal.iterrows():
-                st.markdown(f"**🎫 Node ID:** {row['Fridge_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
+                st.markdown(f"**🎫 Node ID:** {row['Probe_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
                 st.success(f"✅ Safe Thermal Envelope. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
                 st.divider()
         else:
@@ -70,7 +70,7 @@ with col_right:
     with st.expander(f"🔴 Isolated System Critical Anomalies ({len(df_problem)} Nodes)", expanded=True):
         if not df_problem.empty:
             for index, row in df_problem.iterrows():
-                st.markdown(f"**🎫 Node ID:** {row['Fridge_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
+                st.markdown(f"**🎫 Node ID:** {row['Probe_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
                 st.error(f"❌ Thermal Excursion Detected. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
                 st.divider()
         else:
