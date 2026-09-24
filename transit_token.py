@@ -18,7 +18,7 @@ st.markdown(f"### *Multi-Tenant Transit Access Stream — Client Node: {active_i
 st.divider()
 
 if active_id not in session_state["DB_TRANSITTECH"] or not in session_state["DB_TRANSITTECH"][active_id]:
-    st.session_state["DB_TRANSITTECH"][active_id] = MOCK_HEALTH_TELEMETRY.get(active_id, [])
+    st.session_state["DB_TRANSITTECH"][active_id] = MOCK_TRANSIT_TELEMETRY.get(active_id, [])
 
 # Pull only the authenticated client's isolated transit data slice
 client_transit_logs = st.session_state["DB_TRANSITTECH"][active_id]
