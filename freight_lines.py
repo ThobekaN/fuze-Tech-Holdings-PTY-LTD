@@ -45,11 +45,11 @@ with col_left:
 
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
-    df_problem = df_log[df_log["Fuel_Litres"] == df_log[(df_log.loc[0, "Fuel_Litres"] - 45.0)]]
-    df_normal = df_log[df_log["Fuel_Litres"] != df_log[(df_log.loc[0, "Fuel_Litres"] - 45.0)]]
+    df_problem = df_log[df_log["Fuel_Litres"] == (df_log.loc[0, "Fuel_Litres"] - 45.0)]
+    df_normal = df_log[df_log["Fuel_Litres"] != (df_log.loc[0, "Fuel_Litres"] - 45.0)]
  
 
-    with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
+    with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal) - len(df_problem)} Nodes)", expanded=True):
         if not df_normal.empty:
             for index, row in df_normal.iterrows():
                 st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
