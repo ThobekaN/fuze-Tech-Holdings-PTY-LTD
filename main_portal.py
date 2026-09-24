@@ -311,6 +311,8 @@ def render_home_portal():
                         fridge_count = st.number_input("Number of physical medication fridges to protect:", min_value=1, max_value=3, value=1)
                         health_data = database.MOCK_HEALTH_TELEMETRY.copy()
                         health_data["CLIENT-000"] = health_data["CLIENT-000"][:fridge_count]
+                        for fridge in health_data["CLIENT-000"]:
+                            st.write(fridge)
                         delivery_address = st.text_input("Clinic Delivery Street Address", "10 Hospital Street, Braamfontein")
                     else:
                         st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
