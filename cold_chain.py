@@ -56,7 +56,7 @@ with col_right:
     with st.expander("🔍 Click to Expand Real-Time Node Telemetry Diagnostics", expanded=True):
         st.write("")
         for index, row in df_health.iterrows():
-            st.markdown(f"**🎫 Node ID:** {row['Fridge_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
+            st.markdown(f"**🎫 Node ID:** {row['Probe_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
             if "NORMAL" in row['Thermal_Status']:
                 st.success(f"✅ Safe Thermal Envelope. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
             else:
