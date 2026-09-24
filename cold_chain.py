@@ -18,47 +18,49 @@ st.divider()
 # Ensure the multi-tenant database slice holds initialized rows
 if active_id not in st.session_state["DB_HEALTHTECH"] or not st.session_state["DB_HEALTHTECH"][active_id]:
     st.session_state["DB_HEALTHTECH"][active_id] = [
-        {"probe_id": "PRB-9921-X", "facility": "Braamfontein Public Clinic", "current_temperature_celsius": 4.20, "thermal_slope_derivative": -0.02, "status": "NORMAL"},
-        {"probe_id": "PRB-9922-X", "facility": "Braamfontein Public Clinic", "current_temperature_celsius": 3.85, "thermal_slope_derivative": 0.04, "status": "NORMAL"},
-        {"probe_id": "PRB-9923-X", "facility": "Braamfontein Public Clinic", "current_temperature_celsius": 5.12, "thermal_slope_derivative": -0.01, "status": "NORMAL"},
+        {"Fridge_ID": "FRG-501", "Clinical_Facility": "Braamfontein Clinic", "Current_Temp_C": 4.2, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
+        {"Fridge_ID": "FRG-502", "Clinical_Facility": "Hillbrow Health Hub", "Current_Temp_C": 5.1, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
+        {"Fridge_ID": "FRG-503", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
     ]
 
 # 📊 1. MAIN TRANSACTION DATA GRID LAYER
 st.markdown("#### 🌡️ Real-Time Active Asset Transceiver Streams")
 
+# Reads keys directly from your database.py mapping file array bounds
 raw_data = st.session_state["DB_HEALTHTECH"][active_id]
 standardized_data = []
 
 for record in raw_data:
     standardized_data.append({
-        "probe_id": record.get("probe_id", "UNKNOWN"),
-        "facility": record.get("facility", record.get("clinical_facility_name", "Pharmacy Sub-Branch")),
-        "current_temperature_celsius": record.get("current_temperature_celsius", record.get("temp_c", 4.0)),
-        "thermal_slope_derivative": record.get("thermal_slope_derivative", record.get("slope", 0.0)),
-        "status": record.get("status", record.get("inventory_security_status", "NORMAL"))
+        "Fridge_ID": record.get("Fridge_ID", "UNKNOWN"),
+        "Clinical_Facility": record.get("Clinical_Facility", "Pharmacy Sub-Branch"),
+        "Current_Temp_C": record.get("Current_Temp_C", 4.0),
+        "Safety_Range": record.get("Safety_Range", "2°C - 8°C"),
+        "Thermal_Status": record.get("Thermal_Status", "NORMAL")
     })
 
 df_health = pd.DataFrame(standardized_data)
 
+# Visual Anchor KPI Metric Cards (Hardened against Column KeyErrors)
 kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
 with kpi_col1:
     st.metric(label="✅ Monitored Refrigerator Units", value=f"{len(df_health)} Probes Active")
 with kpi_col2:
-    avg_temp = round(df_health["current_temperature_celsius"].mean(), 2) if not df_health.empty else 0.0
+    avg_temp = round(df_health["Current_Temp_C"].mean(), 2) if not df_health.empty else 0.0
     st.metric(label="❄️ Group Mean Temperature", value=f"{avg_temp} °C", delta="Stable Bounds")
 with kpi_col3:
-    critical_alerts = len(df_health[df_health["status"] == "EMERGENCY SPIKE"])
-    st.metric(label="🚨 Spoilage Threats Isolated", value=f"{critical_alerts} Safe", delta="0 Operational Violations")
+    critical_alerts = len(df_health[df_health["Thermal_Status"] == "CRITICAL SPIKE"])
+    st.metric(label="🚨 Spoilage Threats Isolated", value=f"{critical_alerts} Checked")
 
 st.write("")
 st.dataframe(
     df_health, 
     column_config={
-        "probe_id": "Hardware Serial ID",
-        "facility": "Facility Branch Location",
-        "current_temperature_celsius": "Current Temperature (°C)",
-        "thermal_slope_derivative": "Thermal Trajectory Slope",
-        "status": "Operational Alarm Status"
+        "Fridge_ID": "Hardware Serial ID",
+        "Clinical_Facility": "Facility Branch Location",
+        "Current_Temp_C": "Current Temperature (°C)",
+        "Safety_Range": "Authorized Safety Limits",
+        "Thermal_Status": "Operational Alarm Status"
     },
     use_container_width=True, 
     hide_index=True
@@ -72,7 +74,6 @@ st.markdown("#### ⚡ Scale Infrastructure Footprint")
 st.caption("Incremental Billing Engine: Scale your telemetry limits and request additional hardware transceivers on the fly without interrupting running pipelines.")
 
 with st.container(border=True):
-    # FIXED: Explicitly passed the integer '2' parameter to prevent render failures
     col_input1, col_input2 = st.columns(2)
     with col_input1:
         expansion_units = st.number_input("Request Additional HaaS Probe Units:", min_value=1, max_value=50, value=15, key="num_haas_expand")
@@ -95,16 +96,16 @@ with st.container(border=True):
                 
                 new_nodes = []
                 for node_index in range(1, int(expansion_units) + 1):
-                    generated_serial = f"PRB-99{random.randint(3,9)}{random.randint(1,9)}-X"
-                    simulated_temp = round(random.uniform(3.1, 5.9), 2)
-                    simulated_slope = round(random.uniform(-0.04, 0.05), 2)
+                    generated_serial = f"FRG-{random.randint(600,999)}"
+                    simulated_temp = round(random.uniform(2.5, 5.8), 1)
                     
+                    # Appends matching database structures seamlessly
                     new_nodes.append({
-                        "probe_id": generated_serial,
-                        "facility": facility_target.strip(),
-                        "current_temperature_celsius": simulated_temp,
-                        "thermal_slope_derivative": simulated_slope,
-                        "status": "NORMAL"
+                        "Fridge_ID": generated_serial,
+                        "Clinical_Facility": facility_target.strip(),
+                        "Current_Temp_C": simulated_temp,
+                        "Safety_Range": "2°C - 8°C",
+                        "Thermal_Status": "NORMAL"
                     })
                     
                     if node_index <= 3 or node_index == int(expansion_units):
@@ -121,6 +122,7 @@ with st.container(border=True):
             
             log_box.empty()
             
+            # Commit the expansion list seamlessly down into your database model structure
             st.session_state["DB_HEALTHTECH"][active_id].extend(new_nodes)
             st.toast(f"⚡ Platform limits scaled! {int(expansion_units)} hardware serial identifiers whitelisted to client slot.", icon="🛰️")
             time.sleep(0.2)
