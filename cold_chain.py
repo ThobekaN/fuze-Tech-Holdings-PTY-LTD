@@ -119,7 +119,7 @@ with st.container(border=True):
             log_box.empty()
             
             # Commit the newly scaled list straight down into your active memory dictionary layer
-            st.session_state["DB_HEALTHTECH"][active_id].extend(new_fridges)
+            st.session_state["DB_HEALTHTECH"][active_id].extend(new_probes)
             st.toast(f"⚡ Platform limits scaled! {int(expansion_units)} hardware serial identifiers whitelisted to client slot.", icon="🛰️")
             time.sleep(0.2)
             st.rerun()
