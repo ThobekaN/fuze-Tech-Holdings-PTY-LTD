@@ -53,15 +53,28 @@ with col_left:
 
 with col_right:
     st.subheader("🛡️ Automated Perimeter Protection Engine")
-    with st.expander("🔍 Click to Expand Real-Time Node Telemetry Diagnostics", expanded=True):
-        st.write("")
-        for index, row in df_health.iterrows():
-            st.markdown(f"**🎫 Node ID:** {row['Probe_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
-            if "NORMAL" in row['Thermal_Status']:
+    df_normal = df_health[df_health["Thermal_Status"] == "NORMAL"]
+    df_problem = df_health[df_health["Thermal_Status"] != "NORMAL"]
+    
+    # 🟢 DROPDOWN 1: STABLE PROTOCOL ENVELOPES
+    with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
+        if not df_normal.empty:
+            for index, row in df_normal.iterrows():
+                st.markdown(f"**🎫 Node ID:** {row['Fridge_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
                 st.success(f"✅ Safe Thermal Envelope. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
-            else:
+                st.divider()
+        else:
+            st.caption("No nodes currently tracking inside baseline thermal fields.")
+            
+    # 🔴 DROPDOWN 2: SYSTEM CRITICAL ANOMALIES
+    with st.expander(f"🔴 Isolated System Critical Anomalies ({len(df_problem)} Nodes)", expanded=True):
+        if not df_problem.empty:
+            for index, row in df_problem.iterrows():
+                st.markdown(f"**🎫 Node ID:** {row['Fridge_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
                 st.error(f"❌ Thermal Excursion Detected. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
-            st.divider()
+                st.divider()
+        else:
+            st.caption("All operational perimeters clear. Zero excursions active.")
 
 st.divider()
 
