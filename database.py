@@ -108,22 +108,13 @@ MOCK_TRANSIT_TELEMETRY = {
         {"Scan_ID": "UKZN-703", "Student_Number / Staff_ID": "345162", "Transit_Route": "Makhabane Bus Stop -> Joosub Hall", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
     ]
 }
-# 🏥 HEALTHTECH COLD STORAGE THERMAL LOG MATRIX (Gated by client_id)
-fridges_client_000 = [
-    {"Fridge_ID": "FRG-001", "Clinical_Facility": "Braamfontein Clinic", "Current_Temp_C": 4.2, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
-    {"Fridge_ID": "FRG-002", "Clinical_Facility": "Hillbrow Health Hub", "Current_Temp_C": 5.1, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
-    {"Fridge_ID": "FRG-003", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
-]
-
-if fridge_count == 2:
-    fridges_client_000 = fridges_client_000[1:]
-
-elif fridge_count == 1:
-    fridges_client_000 = fridges_client_000[2:]
-    
+# 🏥 HEALTHTECH COLD STORAGE THERMAL LOG MATRIX (Gated by client_id)   
 MOCK_HEALTH_TELEMETRY = {
-    "CLIENT-000": fridges_client_000,
-    
+    "CLIENT-000": [
+        {"Fridge_ID": "FRG-001", "Clinical_Facility": "Braamfontein Clinic", "Current_Temp_C": 4.2, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
+        {"Fridge_ID": "FRG-002", "Clinical_Facility": "Hillbrow Health Hub", "Current_Temp_C": 5.1, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
+        {"Fridge_ID": "FRG-003", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
+    ],
     "CLIENT-881": [
         {"Fridge_ID": "FRG-301", "Clinical_Facility": "Braamfontein Clinic", "Current_Temp_C": 4.2, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
         {"Fridge_ID": "FRG-302", "Clinical_Facility": "Hillbrow Health Hub", "Current_Temp_C": 5.1, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
