@@ -32,8 +32,8 @@ simulate_thermal_breach = st.sidebar.button("🚨 Simulate Critical Thermal Brea
 metric_col1, metric_col2 = st.columns(2)
 with metric_col1:
     # Captures breach injection increments automatically
-    total_fridges = len(df_health) + (1 if simulate_thermal_breach and len(df_health) > 0 else 0)
-    st.metric(label="📊 Total Connected Nodes", value=f"{total_fridges} Units Active")
+    total_probes = len(df_health) + (1 if simulate_thermal_breach and len(df_health) > 0 else 0)
+    st.metric(label="📊 Total Connected Nodes", value=f"{total_probes} Units Active")
 with metric_col2:
     if simulate_thermal_breach:
         st.metric(label="🛡️ Thermal Integrity Status", value="BREACH CONTAINMENT ACTIVE", delta="Spoilage Intercepted", delta_color="inverse")
@@ -47,7 +47,7 @@ with col_left:
     st.subheader("📋 Medication Storage Inventory Tracker & Telemetry")
     if simulate_thermal_breach and len(df_health) > 0:
         new_probe = {"Probe_ID": "PRB-504", "Clinical_Facility": "Emergency Inventory Vault", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
-        df_health = pd.concat([df_health, pd.DataFrame([new_fridge])], ignore_index=True)
+        df_health = pd.concat([df_health, pd.DataFrame([new_probe])], ignore_index=True)
         st.error("🚨 CRITICAL METRIC ALERT: Node FRG-504 logs an ambient environment of 14.8°C! System trajectory rules isolate localized cooling system trips to guard refrigerated inventory fractions.")
     st.dataframe(df_health, use_container_width=True, hide_index=True)
 
