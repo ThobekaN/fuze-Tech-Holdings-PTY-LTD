@@ -308,18 +308,15 @@ def render_home_portal():
 
                     if "30-Day" in commercial_model:
                         st.warning("⚠️ Subscription Policy Notice: Your account will automatically transition into a standard contract at R400/fridge per month upon trial completion, unless a cancellation prompt is manually submitted.")
-                        fridge_count = st.number_input("Number of physical medication fridges to protect:", min_value=1, max_value=3, value=1)
-                        delivery_address = st.text_input("Clinic Delivery Street Address", "10 Hospital Street, Braamfontein")
                     else:
                         st.info("ℹ️ Billing Policy Notice: Corporate invoicing cycles will initialize immediately at a flat R400 per refrigeration asset per month.")
                     st.divider()
                     
                     if st.button("Authorize Payment & Initialize Dispatch", key="btn_confirm_health"):
-                        if delivery_address and fridge_count:
-                            st.session_state["trigger_healthtech_activation"] = True
-                            st.rerun()
-                        else:
-                            st.error("Fulfillment Failed: Secure delivery street parameters are strictly mandatory.")
+                        st.session_state["trigger_healthtech_activation"] = True
+                        st.rerun()
+                    else:
+                        st.error("Fulfillment Failed: Secure delivery street parameters are strictly mandatory.")
 
     with col3:
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
