@@ -37,10 +37,10 @@ col_left, col_right = st.columns(2)
 
 with col_left:
     st.subheader("📋 Isolated Client Fleet Log Registry")
-    if simulate_theft and len(df_fleet) > 0:
-        df_log.loc[0, "Fuel_Litres"] = df_fleet.loc[0, "Fuel_Litres"] - 45.0
+    if simulate_theft and len(df_log) > 0:
+        df_log.loc[0, "Fuel_Litres"] = df_log.loc[0, "Fuel_Litres"] - 45.0
         df_log.loc[0, "Speed_KMH"] = 0.0
-        st.error(f"🚨 CRITICAL TELEMETRY EXPOSURE: Sudden slope drop detected on Vehicle {df_fleet.loc[0, 'Truck_ID']} while stationary! Alarm fired.")
+        st.error(f"🚨 CRITICAL TELEMETRY EXPOSURE: Sudden slope drop detected on Vehicle {df_log.loc[0, 'Truck_ID']} while stationary! Alarm fired.")
     st.dataframe(df_log, use_container_width=True, hide_index=True)
 
 with col_right:
