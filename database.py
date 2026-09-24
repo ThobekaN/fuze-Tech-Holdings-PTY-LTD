@@ -42,17 +42,17 @@ MOCK_CLIENTS_DB = [
 # 🚚 LOGTECH VEHICLE TELEMETRY TRANSACTION REGISTRY (Gated by client_id)
 MOCK_FLEET_TELEMETRY = {
     "CLIENT-000": [
-        {"Truck_ID": "PC-01", "Driver": "Samkelo M.", "Route": "DBN -> Windhoek", "Speed_KMH": 0.0, "Fuel_Liters": 250.5, "BURS_Clearance": "PROCEED TO BORDER"},
-        {"Truck_ID": "PC-02", "Driver": "Falakhe M.", "Route": "DBN -> Windhoek", "Speed_KMH": 60.0, "Fuel_Liters": 300.0, "BURS_Clearance": "HOLD AT STAGING"}
+        {"Truck_ID": "PC-01", "Driver": "Samkelo M.", "Route": "DBN -> Windhoek", "Speed_KMH": 0.0, "Fuel_Litres": 250.5, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "PC-02", "Driver": "Falakhe M.", "Route": "DBN -> Windhoek", "Speed_KMH": 60.0, "Fuel_Litres": 300.0, "BURS_Clearance": "HOLD AT STAGING"}
     ],
     "CLIENT-881": [
-        {"Truck_ID": "LFL-001", "Driver": "Sipho M.", "Route": "JHB -> Gaborone", "Speed_KMH": 0.0, "Fuel_Liters": 280.5, "BURS_Clearance": "PROCEED TO BORDER"},
-        {"Truck_ID": "LFL-002", "Driver": "Johan B.", "Route": "JHB -> Windhoek", "Speed_KMH": 80.0, "Fuel_Liters": 300.0, "BURS_Clearance": "HOLD AT STAGING"},
+        {"Truck_ID": "LFL-001", "Driver": "Sipho M.", "Route": "JHB -> Gaborone", "Speed_KMH": 0.0, "Fuel_Litres": 280.5, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "LFL-002", "Driver": "Johan B.", "Route": "JHB -> Windhoek", "Speed_KMH": 80.0, "Fuel_Litres": 300.0, "BURS_Clearance": "HOLD AT STAGING"},
         {"Truck_ID": "LFL-003", "Driver": "Thabo N.", "Route": "JHB -> Lobatse", "Speed_KMH": 0.0, "Fuel_Liters": 195.0, "BURS_Clearance": "HOLD AT STAGING"}
     ],
     "CLIENT-442": [
-        {"Truck_ID": "IMP-901", "Driver": "Blessing T.", "Route": "DBN -> Gaborone", "Speed_KMH": 65.0, "Fuel_Liters": 410.2, "BURS_Clearance": "PROCEED TO BORDER"},
-        {"Truck_ID": "IMP-902", "Driver": "Musa Z.", "Route": "JHB -> Maseru", "Speed_KMH": 0.0, "Fuel_Liters": 380.0, "BURS_Clearance": "PROCEED TO BORDER"}
+        {"Truck_ID": "IMP-901", "Driver": "Blessing T.", "Route": "DBN -> Gaborone", "Speed_KMH": 65.0, "Fuel_Litres": 410.2, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "IMP-902", "Driver": "Musa Z.", "Route": "JHB -> Maseru", "Speed_KMH": 0.0, "Fuel_Litres": 380.0, "BURS_Clearance": "PROCEED TO BORDER"}
     ]
 }
 
