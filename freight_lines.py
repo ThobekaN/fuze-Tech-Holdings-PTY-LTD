@@ -45,7 +45,7 @@ with col_left:
 
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
-    df_problem = [(df_fleet.loc[0, "Fuel_Litres"] - 45.0), df_fleet.loc[0, "Speed_KMH"]
+    df_problem = [(df_fleet.loc[0, "Fuel_Litres"] - 45.0), df_fleet.loc[0, "Speed_KMH"] == 0.0]
     df_normal != df_problem 
 
     with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
