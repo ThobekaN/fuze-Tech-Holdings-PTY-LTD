@@ -46,7 +46,7 @@ col_left, col_right = st.columns(2)
 with col_left:
     st.subheader("📋 Medication Storage Inventory Tracker & Telemetry")
     if simulate_thermal_breach and len(df_health) > 0:
-        new_fridge = {"Fridge_ID": "FRG-504", "Clinical_Facility": "Emergency Inventory Vault", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
+        new_probe = {"Probe_ID": "PRB-504", "Clinical_Facility": "Emergency Inventory Vault", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
         df_health = pd.concat([df_health, pd.DataFrame([new_fridge])], ignore_index=True)
         st.error("🚨 CRITICAL METRIC ALERT: Node FRG-504 logs an ambient environment of 14.8°C! System trajectory rules isolate localized cooling system trips to guard refrigerated inventory fractions.")
     st.dataframe(df_health, use_container_width=True, hide_index=True)
@@ -54,7 +54,7 @@ with col_left:
 with col_right:
     st.subheader("🛡️ Automated Perimeter Protection Engine")
     for index, row in df_health.iterrows():
-        st.markdown(f"**🎫 Node ID:** {row['Fridge_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
+        st.markdown(f"**🎫 Node ID:** {row['Probe_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
         if "NORMAL" in row['Thermal_Status']:
             st.success(f"✅ Safe Thermal Envelope. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
         else:
@@ -91,13 +91,13 @@ with st.container(border=True):
                 st.code(f"🔒 WHITELISTING {int(expansion_units)} SECURITY ENVELOPE KEYS ON CENTRAL CLUSTER...", language="sql")
                 time.sleep(0.3)
                 
-                new_fridges = []
+                new_probes = []
                 for node_index in range(1, int(expansion_units) + 1):
-                    generated_fridge_id = f"FRG-{random.randint(600, 999)}"
+                    generated_probe_id = f"PRB-{random.randint(600, 999)}"
                     simulated_temp = round(random.uniform(2.5, 5.8), 1)
                     
-                    new_fridges.append({
-                        "Fridge_ID": generated_fridge_id,
+                    new_probes.append({
+                        "Probe_ID": generated_fridge_id,
                         "Clinical_Facility": facility_target.strip(),
                         "Current_Temp_C": simulated_temp,
                         "Safety_Range": "2°C - 8°C",
