@@ -17,7 +17,6 @@ st.divider()
 
 # Ensure the multi-tenant database slice holds initialized rows
 if active_id not in st.session_state["DB_HEALTHTECH"] or not st.session_state["DB_HEALTHTECH"][active_id]:
-    # Bootstrap baseline structural sample arrays matching real database footprints
     st.session_state["DB_HEALTHTECH"][active_id] = [
         {"probe_id": "PRB-9921-X", "facility": "Braamfontein Public Clinic", "current_temperature_celsius": 4.20, "thermal_slope_derivative": -0.02, "status": "NORMAL"},
         {"probe_id": "PRB-9922-X", "facility": "Braamfontein Public Clinic", "current_temperature_celsius": 3.85, "thermal_slope_derivative": 0.04, "status": "NORMAL"},
@@ -27,7 +26,6 @@ if active_id not in st.session_state["DB_HEALTHTECH"] or not st.session_state["D
 # 📊 1. MAIN TRANSACTION DATA GRID LAYER
 st.markdown("#### 🌡️ Real-Time Active Asset Transceiver Streams")
 
-# Standardize column labels to prevent Pandas Index KeyErrors across runtime states
 raw_data = st.session_state["DB_HEALTHTECH"][active_id]
 standardized_data = []
 
@@ -42,7 +40,6 @@ for record in raw_data:
 
 df_health = pd.DataFrame(standardized_data)
 
-# Visual Anchor KPI Metric Cards (Hardened against Column KeyErrors)
 kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
 with kpi_col1:
     st.metric(label="✅ Monitored Refrigerator Units", value=f"{len(df_health)} Probes Active")
@@ -54,7 +51,6 @@ with kpi_col3:
     st.metric(label="🚨 Spoilage Threats Isolated", value=f"{critical_alerts} Safe", delta="0 Operational Violations")
 
 st.write("")
-# Display clean, user-friendly headers to the selection panel
 st.dataframe(
     df_health, 
     column_config={
@@ -70,13 +66,14 @@ st.dataframe(
 st.divider()
 
 # ==============================================================================
-# ⚡ HIGH-LEVERAGE SAAS SCALING INFRASTRUCTURE LAYER (REPAIRED MECHANICS)
+# ⚡ HIGH-LEVERAGE SAAS SCALING INFRASTRUCTURE LAYER
 # ==============================================================================
 st.markdown("#### ⚡ Scale Infrastructure Footprint")
 st.caption("Incremental Billing Engine: Scale your telemetry limits and request additional hardware transceivers on the fly without interrupting running pipelines.")
 
 with st.container(border=True):
-    col_input1, col_input2 = st.columns()
+    # FIXED: Explicitly passed the integer '2' parameter to prevent render failures
+    col_input1, col_input2 = st.columns(2)
     with col_input1:
         expansion_units = st.number_input("Request Additional HaaS Probe Units:", min_value=1, max_value=50, value=15, key="num_haas_expand")
     with col_input2:
@@ -87,7 +84,6 @@ with st.container(border=True):
     if st.button("Authorize Dynamic Expansion Protocol", key="btn_trigger_haas_scale"):
         if facility_target and expansion_units:
             
-            # LIVE ENTERPRISE HAAS DROPSHIP CONSOLE LOGS
             log_box = st.empty()
             with log_box.container():
                 st.code("🔍 Intercepting incremental pro-rata telemetry request matrix...", language="sql")
@@ -125,7 +121,6 @@ with st.container(border=True):
             
             log_box.empty()
             
-            # Append new hardware blocks natively into the running state memory array cache
             st.session_state["DB_HEALTHTECH"][active_id].extend(new_nodes)
             st.toast(f"⚡ Platform limits scaled! {int(expansion_units)} hardware serial identifiers whitelisted to client slot.", icon="🛰️")
             time.sleep(0.2)
