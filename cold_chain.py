@@ -105,7 +105,7 @@ with st.container(border=True):
                     })
                     
                     if node_index <= 3 or node_index == int(expansion_units):
-                        st.code(f"📝 INSERT INTO cold_chain_probes (client_id, serial, branch) VALUES ('{active_id}', '{generated_fridge_id}', ...);", language="sql")
+                        st.code(f"📝 INSERT INTO cold_chain_probes (client_id, serial, branch) VALUES ('{active_id}', '{generated_probe_id}', ...);", language="sql")
                         time.sleep(0.1)
                     elif node_index == 4:
                         st.code("📝 [Batch Processing Remaining Node Insert Queries...]", language="sql")
