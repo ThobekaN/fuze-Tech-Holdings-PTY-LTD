@@ -59,11 +59,11 @@ MOCK_FLEET_TELEMETRY = {
 
 # ⚡ GRIDTECH SMART METER METRIC REGISTRY (Gated by client_id)
 MOCK_GRID_TELEMETRY = {
-    "Client-000": [
+    "CLIENT-000": [
         {"Meter_ID": "MTR-001", "Property_Fund": "Growthpoint Braamfontein", "Metered_Usage_kW": 4.2, "Substation_Line_Current_Amps": 18.5, "System_Status": "NORMAL"},
         {"Meter_ID": "MTR-002", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 4.1, "System_Status": "SUSPECTED BYPASS"}
     ],
-    "Client-881": [
+    "CLIENT-881": [
         {"Meter_ID": "MTR-202", "Property_Fund": "Redefine Parktown", "Metered_Usage_kW": 0.8, "Substation_Line_Current_Amps": 4.1, "System_Status": "NORMAL"},
         {"Meter_ID": "MTR-203", "Property_Fund": "Wits Student Housing", "Metered_Usage_kW": 0.0, "Substation_Line_Current_Amps": 45.2, "System_Status": "SUSPECTED BYPASS"}
     ],
@@ -76,11 +76,11 @@ MOCK_GRID_TELEMETRY = {
 
 # 🛡️ CYBERTECH PROMO TRANSACTION REGISTRY (Gated by client_id)
 MOCK_CYBER_TELEMETRY = {
-    "Client-000": [
+    "CLIENT-000": [
         {"Transaction_ID": "TXN-001", "User_Alias": "new_user_jhb", "Claimed_Email": "thabo.m@gmail.com", "Device_Hardware_Fingerprint": "HW-UUID-4401", "Promo_Code": "FIRST100", "Evaluation_Status": "TRIGGERED COORD CLUSTER"},
         {"Transaction_ID": "TXN-002", "User_Alias": "kfc_lover_22", "Claimed_Email": "lindiwe.k@outlook.com", "Device_Hardware_Fingerprint": "HW-UUID-8892", "Promo_Code": "EATSNEW50", "Evaluation_Status": "APPROVED"}
     ],
-    "Client-881": [
+    "CLIENT-881": [
         {"Transaction_ID": "TXN-202", "User_Alias": "kfc_lover_22", "Claimed_Email": "lindiwe.k@outlook.com", "Device_Hardware_Fingerprint": "HW-UUID-8892", "Promo_Code": "EATSNEW50", "Evaluation_Status": "APPROVED"},
         {"Transaction_ID": "TXN-203", "User_Alias": "disposable_acc_7", "Claimed_Email": "x7291@tempmail.io", "Device_Hardware_Fingerprint": "HW-UUID-1105", "Promo_Code": "FIRST100", "Evaluation_Status": "TRIGGERED COORD CLUSTER"}
     ],
