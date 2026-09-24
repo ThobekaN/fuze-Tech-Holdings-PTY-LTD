@@ -65,7 +65,7 @@ with col_right:
         if not df_normal.empty:
             for index, row in df_normal.iterrows():
                 st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Number / Staff_ID']}")
-                st.success(f"✅ Verified Entry. Status: **{row['Gate_Action']} {row['Card_State']}**")
+                st.success(f"✅ Verified Entry. Status: **{row['Gate_Action']} ({row['Card_State']})**")
         else:
             st.caption("No nodes currently tracking inside baseline gate fields")
 
@@ -74,12 +74,8 @@ with col_right:
             for index, row in df_problem.iterrows():
                 st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Number / Staff_ID']}")
                 if "ANTI-PASSBACK" in row['Gate_Action']:
-                    st.warning(f"⚠️ Anti-Passback Violation. Status: **{row['Gate_Action']} {row['Card_State']}**")
+                    st.warning(f"⚠️ Anti-Passback Violation. Status: **{row['Gate_Action']} ({row['Card_State']})**")
                 else:
                     st.error(f"❌ Access Denied. Status: **{row['Gate_Action']} ({"ALREADY " + row['Card_State']})**")
         else:
             st.caption("All operational perimeters clear. Zero excursions active")
-            
-st.divider()
-
-
