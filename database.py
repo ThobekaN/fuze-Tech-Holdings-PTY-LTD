@@ -94,19 +94,19 @@ MOCK_CYBER_TELEMETRY = {
 # 🚌 TRANSITTECH ENTRY/EXIT SHUTTLE GATEWAY REGISTRY (Gated by client_id)
 MOCK_TRANSIT_TELEMETRY = {
     "CLIENT-000": [
-        {"Scan_ID": "WITS-001", "Student_Number": "2653844", "Transit_Route": "Amic -> Noswal -> WEC", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "WITS-002", "Student_Number": "2869006", "Transit_Route": "Amic -> WEC -> Wits Junction", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "WITS-003", "Student_Number": "2814103", "Transit_Route": "Knockando -> EOH -> Amic", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
+        {"Scan_ID": "WITS-001", "Student_Number / Staff_ID": "2653844", "Transit_Route": "Amic -> Noswal -> WEC", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "WITS-002", "Student_Number / Staff_ID": "2869006", "Transit_Route": "Amic -> WEC -> Wits Junction", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "WITS-003", "Student_Number / Staff_ID": "2814103", "Transit_Route": "Knockando -> EOH -> Amic", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
     ],
     "CLIENT-881": [
-        {"Scan_ID": "UJ-001", "Student_Number": "1597532", "Transit_Route": "APB -> APK", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "UJ-002", "Student_Number": "2049100", "Transit_Route": "APK -> DFC", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "UJ-003", "Student_Number": "4852713", "Transit_Route": "APK -> SWC", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
+        {"Scan_ID": "UJ-001", "Student_Number / Staff_ID": "1597532", "Transit_Route": "APB -> APK", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UJ-002", "Student_Number / Staff_ID": "2049100", "Transit_Route": "APK -> DFC", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UJ-003", "Student_Number / Staff_ID": "4852713", "Transit_Route": "APK -> SWC", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
     ],
     "CLIENT-442": [
-        {"Scan_ID": "UKZN-701", "Student_Number": "224537", "Transit_Route": "Joosub Hall -> Makhabane Bus Stop", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "UKZN-702", "Student_Number": "145723", "Transit_Route": "Joosub Hall -> Makhabane Bus Stop", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
-        {"Scan_ID": "UKZN-703", "Student_Number": "345162", "Transit_Route": "Makhabane Bus Stop -> Joosub Hall", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
+        {"Scan_ID": "UKZN-701", "Student_Number / Staff_ID": "224537", "Transit_Route": "Joosub Hall -> Makhabane Bus Stop", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UKZN-702", "Student_Number / Staff_ID": "145723", "Transit_Route": "Joosub Hall -> Makhabane Bus Stop", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
+        {"Scan_ID": "UKZN-703", "Student_Number / Staff_ID": "345162", "Transit_Route": "Makhabane Bus Stop -> Joosub Hall", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
     ]
 }
 
