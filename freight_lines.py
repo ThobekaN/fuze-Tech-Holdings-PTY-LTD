@@ -68,9 +68,8 @@ with col_right:
                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
                if fuel_check and speed_check:
                    if row['BURS_Clearance'] == "PROCEED TO BORDER":
-                       st.error("❌ Critical Telemetry Exposure.")
-                       st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+                       st.error("❌ Critical Telemetry Exposure. ✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+
                    elif row['BURS_Clearance'] == "HOLD AT STAGING":
-                       st.error("❌ Critical Telemetry Exposure.")
-                       st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
+                       st.error("❌ Critical Telemetry Exposure. ⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
        
