@@ -63,10 +63,10 @@ with col_right:
        if not df_problem.empty:
            for index, row in df_problem.iterrows():
                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
-               if (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] = 0.0 and row['BURS_Clearance'] == "PROCEED TO BORDER":
+               if (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "PROCEED TO BORDER":
                     st.error(f"❌ Critical Telemetry Exposure.")
                     st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
-               elif (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] = 0.0 and row['BURS_Clearance'] == "HOLD AT STAGING":
+               elif (df_fleet.loc[0, "Fuel_Litres"] - 45.0) and df_fleet.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "HOLD AT STAGING":
                    st.error(f"❌ Critical Telemetry Exposure.")
                    st.success(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
        
