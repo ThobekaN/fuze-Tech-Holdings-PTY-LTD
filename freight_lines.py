@@ -73,3 +73,5 @@ with col_right:
                    elif row['BURS_Clearance'] == "HOLD AT STAGING":
                        st.error("❌ Critical Telemetry Exposure. ⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
        
+         else:
+            st.caption("All operational perimeters clear. Zero excursions active")
