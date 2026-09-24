@@ -45,8 +45,11 @@ with col_left:
 
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
-    df_problem = df_log[df_log["Fuel_Litres"] == (df_log.loc[0, "Fuel_Litres"] - 45.0)]
+    fuel_check = df_log.loc[0, "Fuel_Litres"] == df_log.loc[0, "Fuel_Litres"] - 45.0
+    speed_check = df_log.loc[0, "Speed_KMH"] == 0.0
+    df_problem = df_log[fuel_check]
     df_normal = df_log[df_log["Fuel_Litres"] != (df_log.loc[0, "Fuel_Litres"] - 45.0)]
+ 
 
     with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
         if not df_normal.empty:
@@ -63,10 +66,10 @@ with col_right:
        if not df_problem.empty:
            for index, row in df_problem.iterrows():
                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
-               if (df_log.loc[0, "Fuel_Litres"] - 45.0) and df_log.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "PROCEED TO BORDER":
-                    st.error(f"❌ Critical Telemetry Exposure.")
-                    st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
-               elif (df_log.loc[0, "Fuel_Litres"] - 45.0) and df_log.loc[0, "Speed_KMH"] == 0.0 and row['BURS_Clearance'] == "HOLD AT STAGING":
-                   st.error(f"❌ Critical Telemetry Exposure.")
-                   st.success(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
+               if fuel_check and speed_check:
+                   st.error("❌ Critical Telemetry Exposure.")
+                   if row['BURS_Clearance'] == "PROCEED TO BORDER":
+                       st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+                   elif row['BURS_Clearance'] == "HOLD AT STAGING":
+                       st.success(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
        
