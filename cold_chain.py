@@ -53,13 +53,15 @@ with col_left:
 
 with col_right:
     st.subheader("🛡️ Automated Perimeter Protection Engine")
-    for index, row in df_health.iterrows():
-        st.markdown(f"**🎫 Node ID:** {row['Probe_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
-        if "NORMAL" in row['Thermal_Status']:
-            st.success(f"✅ Safe Thermal Envelope. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
-        else:
-            st.error(f"❌ Thermal Excursion Detected. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
-        st.divider()
+    with st.expander("🔍 Click to Expand Real-Time Node Telemetry Diagnostics", expanded=True):
+        st.write("")
+        for index, row in df_health.iterrows():
+            st.markdown(f"**🎫 Node ID:** {row['Fridge_ID']} | **🏥 Facility:** {row['Clinical_Facility']}")
+            if "NORMAL" in row['Thermal_Status']:
+                st.success(f"✅ Safe Thermal Envelope. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
+            else:
+                st.error(f"❌ Thermal Excursion Detected. Status: **{row['Thermal_Status']} ({row['Current_Temp_C']}°C)**")
+            st.divider()
 
 st.divider()
 
