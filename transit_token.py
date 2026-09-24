@@ -1,8 +1,14 @@
 import streamlit as st
 import pandas as pd
+import random 
+import time
 
 # 🔄 AUTOMATED DATA LAYER INTEGRATION
 from database import MOCK_TRANSIT_TELEMETRY
+
+if "authenticated" not in st.session_state or not st.session_state["authenticated"]:
+    st.error("🔒 Unauthorized Session Scope: Explicit parent portal token authorization required.")
+    st.stop()
 
 user_profile = st.session_state["user_data"]
 active_id = user_profile["client_id"]
@@ -11,15 +17,19 @@ st.title("🚌 LEGACY TRANSIT TOKEN — B2B TransitTech Platform")
 st.markdown(f"### *Multi-Tenant Transit Access Stream — Client Node: {active_id}*")
 st.divider()
 
+if active_id not in session_state["DB_TRANSITTECH"] or not in session_state["DB_TRANSITTECH"][active_id]:
+    st.session_state["DB_TRANSITTECH"][active_id] = MOCK_HEALTH_TELEMETRY.get(active_id, [])
+
 # Pull only the authenticated client's isolated transit data slice
-client_transit_logs = MOCK_TRANSIT_TELEMETRY.get(active_id, [])
+client_transit_logs = st.session_state["DB_TRANSITTECH"][active_id]
 df_transit = pd.DataFrame(client_transit_logs)
 
 simulate_screenshot_fraud = st.sidebar.button("🚨 Simulate Static Screenshot Fraud")
 
 metric_col1, metric_col2 = st.columns(2)
 with metric_col1:
-    st.metric(label="📊 Total Access Scans", value=f"{len(df_transit)} Active Checks")
+    total_scans = len(df_transit) + (1 if simulate_screenshot_fraud and len(df_transit) > 0 else 0)
+    st.metric(label="📊 Total Access Scans", value=f"{total_scans} Active Checks")
 with metric_col2:
     if simulate_screenshot_fraud:
         st.metric(label="🛡️ Gate Perimeter Status", value="CONTAINMENT ACTIVE", delta="Static Capture Defeated", delta_color="inverse")
@@ -39,12 +49,28 @@ with col_left:
 
 with col_right:
     st.subheader("🛡️ Automated Perimeter Protection Engine")
-    for index, row in df_transit.iterrows():
-        st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Number / Staff_ID']}")
-        if "APPROVED" in row['Gate_Action']:
-            st.success(f"✅ Verified Entry. Status: **{row['Gate_Action']}**")
-        elif "ANTI-PASSBACK" in row['Gate_Action']:
-            st.warning(f"⚠️ Anti-Passback Violation. Status: **{row['Gate_Action']}**")
+    df_normal = df_transit[df_transit["Gate Action"] == "NORMAL"
+    df_problem = df_transit[df_transit["Gate Action"] != "NORMAL"
+
+    with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
+        if not df_normal.empty:
+            for index, row in df_normal.iterrows():
+                st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Number / Staff_ID']}")
+                st.success(f"✅ Verified Entry. Status: **{row['Gate_Action']} {row['Card_State']}**")
         else:
-            st.error(f"❌ Access Denied. Status: **{row['Gate_Action']}**")
-        st.divider()
+            st.caption("No nodes currently tracking inside baseline gate fields")
+
+   with st.expander(f"🟢 Stable Infrastructure Envelopes ({len(df_normal)} Nodes)", expanded=True):
+        if not df_problem.empty:
+            for index, row in df_problem.iterrows():
+                st.markdown(f"**🎫 Scan ID:** {row['Scan_ID']} | **👤 Identity:** {row['Student_Number / Staff_ID']}")
+                if "ANTI-PASSBACK" in row['Gate_Action']:
+                    st.warning(f"⚠️ Anti-Passback Violation. Status: **{row['Gate_Action']} {row['Card_State'])**")
+                else:
+                    st.error(f"❌ Access Denied. Status: **{row['Gate_Action']} {row['Card_State']}**")
+        else:
+            st.caption("All operational perimeters clear. Zero excursions active")
+            
+st.divider()
+
+
