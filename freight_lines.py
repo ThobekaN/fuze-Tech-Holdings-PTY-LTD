@@ -54,7 +54,7 @@ with col_right:
                 st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
                 if row['BURS_Clearance'] == "PROCEED TO BORDER":
                     st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
-                elif "HOLD AT STAGING" in row['BURS Clearance']:
+                elif "HOLD AT STAGING" in row['BURS_Clearance']:
                    st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
         else:
             st.caption("No nodes currently tracking inside baseline gate")
