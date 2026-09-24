@@ -42,6 +42,10 @@ MOCK_CLIENTS_DB = [
 
 # 🚚 LOGTECH VEHICLE TELEMETRY TRANSACTION REGISTRY (Gated by client_id)
 MOCK_FLEET_TELEMETRY = {
+    "CLIENT-000": [
+        {"Truck_ID": "PC-01", "Driver": "Samkelo M.", "Route": "DBN -> Windhoek", "Speed_KMH": 0.0, "Fuel_Liters": 250.5, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "PC-02", "Driver": "Falakhe M.", "Route": "DBN -> Windhoek", "Speed_KMH": 60.0, "Fuel_Liters": 300.0, "BURS_Clearance": "HOLD AT STAGING"}
+    ]
     "CLIENT-881": [
         {"Truck_ID": "LFL-001", "Driver": "Sipho M.", "Route": "JHB -> Gaborone", "Speed_KMH": 0.0, "Fuel_Liters": 280.5, "BURS_Clearance": "PROCEED TO BORDER"},
         {"Truck_ID": "LFL-002", "Driver": "Johan B.", "Route": "JHB -> Windhoek", "Speed_KMH": 80.0, "Fuel_Liters": 300.0, "BURS_Clearance": "HOLD AT STAGING"},
@@ -92,6 +96,10 @@ MOCK_HEALTH_TELEMETRY = {
 # EXTERNAL TELEMATICS PROVIDER CLOUD SERVERS (Simulating Third-Party Tracking APIs)
 # ==============================================================================
 REMOTE_TRACKING_SERVERS_JSON = {
+    "cartrack_oauth2_token_000": [
+        {"Truck_ID": "PC-01", "Driver": "Samkelo M.", "Route": "DBN -> Windhoek", "Speed_KMH": 0.0, "Fuel_Liters": 250.5, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "PC-02", "Driver": "Falakhe M.", "Route": "DBN -> Windhoek", "Speed_KMH": 60.0, "Fuel_Liters": 300.0, "BURS_Clearance": "HOLD AT STAGING"}
+    ]
     "cartrack_oauth2_token_881": [
         {"Truck_ID": "ND-882-901", "Driver": "Sipho Khumalo", "Route": "JHB -> Gaborone", "Speed_KMH": 0.0, "Fuel_Liters": 280.5, "BURS_Clearance": "PROCEED TO BORDER"},
         {"Truck_ID": "ND-104-552", "Driver": "Johan Burger", "Route": "JHB -> Windhoek", "Speed_KMH": 82.0, "Fuel_Liters": 310.0, "BURS_Clearance": "HOLD AT STAGING"},
