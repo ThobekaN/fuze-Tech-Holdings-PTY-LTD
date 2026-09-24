@@ -131,17 +131,17 @@ MOCK_HEALTH_TELEMETRY = {
 # ==============================================================================
 REMOTE_TRACKING_SERVERS_JSON = {
     "cartrack_oauth2_token_000": [
-        {"Truck_ID": "PC-01", "Driver": "Samkelo M.", "Route": "DBN -> Windhoek", "Speed_KMH": 0.0, "Fuel_Liters": 250.5, "BURS_Clearance": "PROCEED TO BORDER"},
-        {"Truck_ID": "PC-02", "Driver": "Falakhe M.", "Route": "DBN -> Windhoek", "Speed_KMH": 60.0, "Fuel_Liters": 300.0, "BURS_Clearance": "HOLD AT STAGING"}
+        {"Truck_ID": "PC-01", "Driver": "Samkelo M.", "Route": "DBN -> Windhoek", "Speed_KMH": 0.0, "Fuel_Litres": 250.5, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "PC-02", "Driver": "Falakhe M.", "Route": "DBN -> Windhoek", "Speed_KMH": 60.0, "Fuel_Litres": 300.0, "BURS_Clearance": "HOLD AT STAGING"}
     ],
     "cartrack_oauth2_token_881": [
-        {"Truck_ID": "ND-882-901", "Driver": "Sipho Khumalo", "Route": "JHB -> Gaborone", "Speed_KMH": 0.0, "Fuel_Liters": 280.5, "BURS_Clearance": "PROCEED TO BORDER"},
-        {"Truck_ID": "ND-104-552", "Driver": "Johan Burger", "Route": "JHB -> Windhoek", "Speed_KMH": 82.0, "Fuel_Liters": 310.0, "BURS_Clearance": "HOLD AT STAGING"},
-        {"Truck_ID": "ND-773-441", "Driver": "Thabo Ncube", "Route": "JHB -> Lobatse", "Speed_KMH": 0.0, "Fuel_Liters": 195.0, "BURS_Clearance": "HOLD AT STAGING"}
+        {"Truck_ID": "ND-882-901", "Driver": "Sipho Khumalo", "Route": "JHB -> Gaborone", "Speed_KMH": 0.0, "Fuel_Litres": 280.5, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "ND-104-552", "Driver": "Johan Burger", "Route": "JHB -> Windhoek", "Speed_KMH": 82.0, "Fuel_Litres": 310.0, "BURS_Clearance": "HOLD AT STAGING"},
+        {"Truck_ID": "ND-773-441", "Driver": "Thabo Ncube", "Route": "JHB -> Lobatse", "Speed_KMH": 0.0, "Fuel_Litres": 195.0, "BURS_Clearance": "HOLD AT STAGING"}
     ],
     "ctrack_secure_key_442": [
-        {"Truck_ID": "NC-551-209", "Driver": "Blessing Tau", "Route": "DBN -> Gaborone", "Speed_KMH": 65.0, "Fuel_Liters": 410.2, "BURS_Clearance": "PROCEED TO BORDER"},
-        {"Truck_ID": "NC-992-881", "Driver": "Musa Zwane", "Route": "JHB -> Maseru", "Speed_KMH": 0.0, "Fuel_Liters": 380.0, "BURS_Clearance": "PROCEED TO BORDER"}
+        {"Truck_ID": "NC-551-209", "Driver": "Blessing Tau", "Route": "DBN -> Gaborone", "Speed_KMH": 65.0, "Fuel_Litres": 410.2, "BURS_Clearance": "PROCEED TO BORDER"},
+        {"Truck_ID": "NC-992-881", "Driver": "Musa Zwane", "Route": "JHB -> Maseru", "Speed_KMH": 0.0, "Fuel_Litres": 380.0, "BURS_Clearance": "PROCEED TO BORDER"}
     ]
 }
 
