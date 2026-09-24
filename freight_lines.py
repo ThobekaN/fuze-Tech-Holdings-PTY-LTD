@@ -45,8 +45,6 @@ with col_left:
 
 with col_right:
     st.subheader("🚧 Automated Border Compliance Status") 
-    fuel_check = df_log.loc[0, "Fuel_Litres"] == df_log.loc[0, "Fuel_Litres"] - 45.0
-    speed_check = df_log.loc[0, "Speed_KMH"] == 0.0
     df_problem = df_log[df_log["Fuel_Litres"] == (df_log.loc[0, "Fuel_Litres"] - 45.0)]
     df_normal = df_log[df_log["Fuel_Litres"] != (df_log.loc[0, "Fuel_Litres"] - 45.0)]
  
@@ -66,10 +64,12 @@ with col_right:
        if not df_problem.empty:
            for index, row in df_problem.iterrows():
                st.markdown(f"**🆔 Vehicle ID:** {row['Truck_ID']} | **👤 Operator:** {row['Driver']}")
-               if fuel_check and speed_check:
+               if df_log.loc[0, "Fuel_Litres"] == df_log.loc[0, "Fuel_Litres"] - 45.0 and df_log.loc[0, "Speed_KMH"] == 0.0:
                    if row['BURS_Clearance'] == "PROCEED TO BORDER":
-                       st.error("❌ Critical Telemetry Exposure. ✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
+                       st.error("❌ Critical Telemetry Exposure.")
+                       st.success(f"✅ BURS Clearance Approved. Status: **{row['BURS_Clearance']}**")
 
                    else:
-                       st.error("❌ Critical Telemetry Exposure. ⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
+                       st.error("❌ Critical Telemetry Exposure.")
+                       st.warning(f"⚠️ BURS Clearance Blocked. Status: **{row['BURS_Clearance']}**")
 
