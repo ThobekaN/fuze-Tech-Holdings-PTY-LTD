@@ -236,11 +236,12 @@ def render_home_portal():
                     st.divider()
                     
                     st.markdown("### 📡 API Gateway Handshake")
-                    st.caption("Presentation Hint: Type `wits_campus_transit_loop_key` into the field below.")
+                    st.caption("Presentation Hint: Type `campus_transit_loop_key` into the field below.")
                     input_transit_token = st.text_input("Enter Institutional Access Key ID", key="tk_transit")
                     
                     if st.button("Establish Campus Network API Link", key="btn_confirm_transit"):
-                        if input_transit_token == "wits_campus_transit_loop_key":
+                        if input_transit_token == "campus_transit_loop_key":
+                            st.session_state["cached_token_transittech"] = input_transit_token
                             st.session_state["trigger_transittech_activation"] = True
                             st.rerun()
                         else:
