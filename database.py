@@ -97,7 +97,7 @@ MOCK_TRANSIT_TELEMETRY = {
         {"Scan_ID": "WITS-001", "Student_Number": "2653844", "Transit_Route": "Amic -> Noswal -> WEC", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
         {"Scan_ID": "WITS-002", "Student_Number": "2869006", "Transit_Route": "Amic -> WEC -> Junction", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
         {"Scan_ID": "WITS-003", "Student_Number": "2814103", "Transit_Route": "Knockando -> EOH -> Amic", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
-    ]
+    ],
     "CLIENT-881": [
         {"Scan_ID": "UJ-001", "Student_Number": "1597532", "Transit_Route": "APB -> APK", "Card_State": "DEBOARDED", "Token_Age_Sec": 12, "Gate_Action": "ACCESS APPROVED"},
         {"Scan_ID": "UJ-002", "Student_Number": "2049100", "Transit_Route": "APK -> DFC", "Card_State": "OUTSIDE_SYSTEM", "Token_Age_Sec": 8, "Gate_Action": "ACCESS APPROVED"},
