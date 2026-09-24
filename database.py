@@ -2,7 +2,6 @@
 # FUZE TECH HOLDINGS — RECOVERY & ANALYTICS DATA UTILITY HUB
 # Centralized Multi-Tenant Production Data Schema
 # ==============================================================================
-import main_portal
 # 👥 USER AUTHENTICATION & ACCESS REGISTRY TABLE
 MOCK_CLIENTS_DB = [
     {
