@@ -10,7 +10,7 @@ MOCK_CLIENTS_DB = [
         "password": "password123",
         "account_name": "Prospective Client (Lead-Tier Account)",
         "client_id": "CLIENT-000",
-        "is_logtech_active": False,
+        "is_logtech_active": True,
         "is_gridtech_active": False,
         "is_cybertech_active": False,
         "is_transittech_active": False,
