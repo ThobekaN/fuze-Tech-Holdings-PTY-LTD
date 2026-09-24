@@ -93,7 +93,7 @@ if "trigger_gridtech_activation" in st.session_state and st.session_state["trigg
 
 if "trigger_healthtech_activation" in st.session_state and st.session_state["trigger_healthtech_activation"]:
     active_id = st.session_state["user_data"]["client_id"]
-    st.session_state["DB_HEALTHTECH"][active_id] = database.MOCK_HEALTH_TELEMETRY.get("client_id", [])
+    st.session_state["DB_HEALTHTECH"][active_id] = database.MOCK_HEALTH_TELEMETRY.get("CLIENT-442", [])
     st.session_state["user_data"]["is_healthtech_active"] = True
     for record in st.session_state["DB_CLIENTS"]:
         if record["client_id"] == active_id:
