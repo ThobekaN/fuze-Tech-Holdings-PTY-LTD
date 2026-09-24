@@ -315,8 +315,6 @@ def render_home_portal():
                     if st.button("Authorize Payment & Initialize Dispatch", key="btn_confirm_health"):
                         st.session_state["trigger_healthtech_activation"] = True
                         st.rerun()
-                    else:
-                        st.error("Fulfillment Failed: Secure delivery street parameters are strictly mandatory.")
 
     with col3:
         # 🛡️ 3. CYBERTECH DYNAMIC ACTIVATION CARD
