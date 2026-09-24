@@ -112,18 +112,18 @@ MOCK_TRANSIT_TELEMETRY = {
 
 # 🏥 HEALTHTECH COLD STORAGE THERMAL LOG MATRIX (Gated by client_id)
 MOCK_HEALTH_TELEMETRY = {
-    if fridge_count = 3: 
+    if fridge_count == 3: 
         "CLIENT-000": [
             {"Fridge_ID": "FRG-001", "Clinical_Facility": "Braamfontein Clinic", "Current_Temp_C": 4.2, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
             {"Fridge_ID": "FRG-002", "Clinical_Facility": "Hillbrow Health Hub", "Current_Temp_C": 5.1, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
             {"Fridge_ID": "FRG-003", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
         ],
-    elif fridge_count = 2:
+    elif fridge_count == 2:
         "CLIENT-000": [
             {"Fridge_ID": "FRG-002", "Clinical_Facility": "Hillbrow Health Hub", "Current_Temp_C": 5.1, "Safety_Range": "2°C - 8°C", "Thermal_Status": "NORMAL"},
             {"Fridge_ID": "FRG-003", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
         ],
-    elif fridge_count = 1:
+    elif fridge_count == 1:
         "CLIENT-000": [
             {"Fridge_ID": "FRG-003", "Clinical_Facility": "Parktown Pharmacy", "Current_Temp_C": 14.8, "Safety_Range": "2°C - 8°C", "Thermal_Status": "CRITICAL SPIKE"}
         ],   
