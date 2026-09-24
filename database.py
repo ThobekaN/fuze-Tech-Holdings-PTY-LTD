@@ -2,7 +2,7 @@
 # FUZE TECH HOLDINGS — RECOVERY & ANALYTICS DATA UTILITY HUB
 # Centralized Multi-Tenant Production Data Schema
 # ==============================================================================
-
+import main_portal
 # 👥 USER AUTHENTICATION & ACCESS REGISTRY TABLE
 MOCK_CLIENTS_DB = [
     {
@@ -109,7 +109,6 @@ MOCK_TRANSIT_TELEMETRY = {
         {"Scan_ID": "UKZN-703", "Student_Number / Staff_ID": "345162", "Transit_Route": "Makhabane Bus Stop -> Joosub Hall", "Card_State": "IN_TRANSIT", "Token_Age_Sec": 4, "Gate_Action": "REJECTED - ANTI-PASSBACK"}
     ]
 }
-
 # 🏥 HEALTHTECH COLD STORAGE THERMAL LOG MATRIX (Gated by client_id)
 MOCK_HEALTH_TELEMETRY = {
     if fridge_count == 3: 
