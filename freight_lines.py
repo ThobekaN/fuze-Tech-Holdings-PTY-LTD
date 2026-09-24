@@ -48,7 +48,7 @@ with col_left:
         st.error(f"⚙️ Data Schema Mismatch. Missing critical column metrics: {missing_cols}")
     else:
         # Code only runs if the columns actually exist and data is present
-        if simulate_theft:
+        if simulate_theft and len(df_log) > 0:
             df_log.loc[0, "Fuel_Litres"] = df_log.loc[0, "Fuel_Litres"] - 45.0
             df_log.loc[0, "Speed_KMH"] = 0.0
             st.error(f"🚨 CRITICAL TELEMETRY EXPOSURE: Sudden slope drop detected on Vehicle {df_log.loc[0, 'Truck_ID']} while stationary! Alarm fired.")
